@@ -1,0 +1,31 @@
+@import "../../sass/utils/mixins";
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  background-color: var(--color-hero-bg);
+
+  &_container {
+    @include container;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3px;
+
+    @media screen and (min-width: 744px) {
+      padding-top: 0;
+      height: 70px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      left: calc((100vw - 1440px) / 2);
+    }
+  }
+
+  &_btn {
+    @include button;
+    width: 167px;
+  }
+}

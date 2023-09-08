@@ -1,0 +1,53 @@
+@import "../utils/mixins";
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+body {
+  color: var(--color-text-main);
+  background-color: var(--color-background);
+  font-family: var(--font-family--roboto-mono);
+  font-size: var(--font-size--body-mob);
+
+  @media screen and (min-width: 744px) {
+    font-size: var(--font-size--body-tab);
+  }
+  @media screen and (min-width: 1440px) {
+    font-size: var(--font-size--body-web);
+  }
+}
+
+main {
+  height: calc(100vh - 41px);
+
+  @media screen and (min-width: 744px) {
+    height: calc(100vh - 51px);
+  }
+  @media screen and (min-width: 1440px) {
+    height: calc(100vh - 59px);
+  }
+}
+
+button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+p,
+input {
+  @include paragraph;
+}

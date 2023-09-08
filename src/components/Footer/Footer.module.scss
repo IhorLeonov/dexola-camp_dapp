@@ -1,0 +1,38 @@
+@import "../../sass/utils/mixins";
+
+.footer {
+  border-top: 1px solid var(--color-accent);
+  background-color: inherit;
+
+  &_container {
+    @include container;
+
+    display: flex;
+    justify-content: space-between;
+    padding-top: 8px;
+
+    height: 40px;
+
+    @media screen and (min-width: 744px) {
+      align-items: center;
+      height: 50px;
+      padding-top: 0;
+    }
+
+    @media screen and (min-width: 744px) {
+      height: 58px;
+      padding-top: 16px;
+      padding-bottom: 24px;
+    }
+  }
+
+  p {
+    font-size: 11px;
+    letter-spacing: -0.22px;
+
+    @media screen and (min-width: 744px) {
+      font-size: 14px;
+      letter-spacing: -0.28px;
+    }
+  }
+}

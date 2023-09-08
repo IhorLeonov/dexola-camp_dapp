@@ -1,0 +1,12 @@
+.hero {
+  background-color: var(--color-hero-bg);
+
+  height: 227px;
+
+  @media screen and (min-width: 744px) {
+    height: 278px;
+  }
+  @media screen and (min-width: 1440px) {
+    height: 271px;
+  }
+}

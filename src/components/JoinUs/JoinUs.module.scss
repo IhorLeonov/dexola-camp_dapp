@@ -1,0 +1,235 @@
+@import "../../sass//utils/mixins";
+
+.join_section {
+  padding-top: 65px;
+  padding-bottom: 69px;
+
+  @media screen and (min-width: 744px) {
+    padding-top: 90px;
+    padding-bottom: 76px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding-top: 126px;
+    padding-bottom: 125px;
+  }
+}
+
+.join {
+  @include container;
+
+  padding-top: 27px;
+
+  @media screen and (min-width: 744px) {
+    padding-top: 56px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding-top: 90px;
+    display: flex;
+  }
+
+  &_wrapper {
+    @media screen and (min-width: 1440px) {
+      width: 538px;
+      padding-top: 20px;
+    }
+  }
+
+  &_title {
+    @include sub-title;
+
+    @media screen and (min-width: 1440px) {
+      line-height: 1.33 !important;
+      letter-spacing: 0.48px !important;
+    }
+  }
+
+  &_description {
+    padding-top: 12px;
+
+    @media screen and (min-width: 1440px) {
+      margin-top: 16px;
+    }
+  }
+
+  &_arrow_img {
+    margin-top: 16px;
+    width: 44px;
+    height: 44px;
+
+    @media screen and (max-width: 1439px) {
+      display: none;
+    }
+  }
+
+  &_form {
+    position: relative;
+
+    margin-top: 32px;
+    padding: 24px 16px;
+
+    :nth-child(2) input {
+      padding-left: 46px;
+    }
+
+    :nth-child(1) .join_form_marker {
+      top: 32px;
+      @media screen and (min-width: 744px) {
+        top: 63px;
+      }
+    }
+
+    :nth-child(3) .join_form_marker {
+      top: 200px;
+      @media screen and (min-width: 744px) {
+        top: 231px;
+      }
+    }
+
+    :nth-child(4) .join_form_marker {
+      top: 285px;
+
+      @media screen and (min-width: 744px) {
+        top: 315px;
+      }
+    }
+
+    :nth-child(4) .join_form_password_btn {
+      top: 284px;
+
+      @media screen and (min-width: 744px) {
+        top: 314px;
+      }
+    }
+
+    @media screen and (min-width: 744px) {
+      margin-top: 56px;
+      padding: 54px 40px;
+    }
+
+    @media screen and (min-width: 870px) {
+      margin-left: auto;
+      width: 599px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      margin-top: 0;
+    }
+
+    border: 1px solid var(--color-accent);
+
+    &_label {
+      display: flex;
+      flex-wrap: wrap;
+      height: 68px;
+      margin-bottom: 16px;
+    }
+
+    &_input {
+      padding-left: 30px;
+      padding-top: 8px;
+      padding-bottom: 14px;
+      height: 40px;
+
+      color: var(--color-text-main);
+      border-bottom: 1px solid var(--color-text-main);
+
+      @media screen and (min-width: 744px) {
+        padding-bottom: 11px;
+      }
+
+      @media screen and (min-width: 1440px) {
+        padding-bottom: 8px;
+      }
+
+      transition: all 0.2s ease-in-out;
+
+      &:hover,
+      &:focus {
+        border-color: var(--color-accent);
+      }
+    }
+
+    &_marker {
+      position: absolute;
+      font-size: 16px;
+      left: 16px;
+      color: var(--color-warning);
+
+      @media screen and (min-width: 744px) {
+        left: 40px;
+      }
+    }
+
+    &_flagicon {
+      position: absolute;
+
+      width: 30px;
+      height: 30px;
+
+      @media screen and (min-width: 744px) {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    &_password_btn {
+      position: absolute;
+      margin-top: auto;
+      top: 200px;
+      right: 16px;
+
+      @media screen and (min-width: 744px) {
+        right: 40px;
+        top: 231px;
+      }
+
+      &:hover {
+        svg {
+          fill: var(--color-accent);
+        }
+      }
+    }
+
+    &_eye_icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    &_error_box {
+      height: 24px;
+      margin-top: 4px;
+    }
+
+    &_error {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.8;
+      letter-spacing: 0.26px;
+      color: var(--color-warning);
+    }
+
+    &_btn {
+      @include button;
+
+      @media screen and (max-width: 743px) {
+        text-transform: uppercase;
+        width: 100%;
+      }
+
+      &::before {
+        content: "";
+        background-color: var(--color-text-main);
+        width: 22.6px;
+        height: 1.5px;
+        margin-right: 10.5px;
+
+        @media screen and (min-width: 744px) {
+          margin-right: 11.2px;
+          width: 24px;
+        }
+      }
+    }
+  }
+}

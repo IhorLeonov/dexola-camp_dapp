@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Legendary Artifact",
+    "rarity": "Legendary",
+    "total": 189,
+    "won": 125,
+    "price": 2.5,
+    "image": "/src/assets/images/topNfts/legendary-artifact.jpg",
+    "avatar": "https://dl.dropboxusercontent.com/scl/fi/e33506ck623i0y6gk5h34/legendary-artifact.jpg?rlkey=qyqmhy5o9pmkpdxh5jrt5gbht&dl=0"
+  },
+  {
+    "id": 2,
+    "name": "Epic Warrior",
+    "rarity": "Rare",
+    "total": 134,
+    "won": 100,
+    "price": 1.5,
+    "image": "/src/assets/images/topNfts/epic-warrior.jpg",
+    "avatar": "https://dl.dropboxusercontent.com/scl/fi/7fkjmyaltik9myzdct12q/epic-warrior.jpg?rlkey=kqnwibmzeoidhi6jm6ou0kcgs&dl=0"
+  },
+  {
+    "id": 3,
+    "name": "Mystic Spellbook",
+    "rarity": "Common",
+    "total": 133,
+    "won": 43,
+    "price": 1.2,
+    "image": "/src/assets/images/topNfts/mystic-spellbook.jpg",
+    "avatar": "https://dl.dropboxusercontent.com/scl/fi/ypp1pjd1t4x9s0yjcd60w/mystic-spellbook.jpg?rlkey=us5hrafvestl9bo17nr4ondtz&dl=0"
+  },
+  {
+    "id": 4,
+    "name": "Common Potion",
+    "rarity": "Heroic",
+    "total": 87,
+    "won": 23,
+    "price": 2.8,
+    "image": "/src/assets/images/topNfts/common-potion.jpg",
+    "avatar": "https://dl.dropboxusercontent.com/scl/fi/7fe3rr7uoetg3k42g9re2/common-potion.jpg?rlkey=zkrsferxqy54p87135nj0ci8k&dl=0"
+  },
+  {
+    "id": 5,
+    "name": "Heroic Blade",
+    "rarity": "Epic",
+    "total": 56,
+    "won": 15,
+    "price": 0.5,
+    "image": "/src/assets/images/topNfts/heroic-blade.jpg",
+    "avatar": "https://dl.dropboxusercontent.com/scl/fi/a65lz75khmzthpiyrj9xv/heroic-blade.jpg?rlkey=rfnb2r1dk4k1j9jsrtzfm5t53&dl=0"
+  }
+]
