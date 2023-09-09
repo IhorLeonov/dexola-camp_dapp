@@ -3,14 +3,19 @@
   transition: fill 0.2s ease-in-out;
 }
 
-.warning_input {
-  border-color: var(--color-warning) !important;
-}
+// .warning_input {
+//   border-color: var(--color-warning) !important;
+// }
 
-.typed_input {
-  border-color: var(--color-accent);
-}
+// .typed_input {
+//   border-color: var(--color-accent);
+// }
 
-.show {
-  display: flex;
+// .show {
+//   display: flex;
+// }
+
+.active_link {
+  border-color: var(--color-accent) !important;
+  color: #ffffff;
 }

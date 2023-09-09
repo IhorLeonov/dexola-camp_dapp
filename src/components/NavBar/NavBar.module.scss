@@ -1,0 +1,26 @@
+.nav_bar {
+  display: flex;
+
+  width: 100%;
+  color: var(--color-text-desc);
+
+  @media screen and (max-width: 743px) {
+    padding-left: 24px;
+    padding-right: 24px;
+    justify-content: space-between;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    // flex: 1;
+    border-bottom: 5px solid transparent;
+
+    @media screen and (min-width: 744px) {
+      font-size: 16px;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  }
+}

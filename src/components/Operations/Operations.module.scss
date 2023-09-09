@@ -1,0 +1,29 @@
+.operations {
+  padding-top: 16px;
+
+  @media screen and (min-width: 744px) {
+    padding-top: 43px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding-top: 40px;
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+
+  &_wrapper {
+    padding-top: 29px;
+    padding-left: 24px;
+    padding-right: 24px;
+    border-top: 1px solid var(--color-accent);
+
+    @media screen and (min-width: 744px) {
+      padding-top: 32px;
+      border: 1px solid var(--color-accent);
+
+      height: 341px;
+    }
+  }
+}
