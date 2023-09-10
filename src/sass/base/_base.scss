@@ -1,4 +1,5 @@
 @import "../utils/mixins";
+@import "../utils/variables";
 
 html {
   box-sizing: border-box;
@@ -10,33 +11,16 @@ html {
   box-sizing: inherit;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 body {
   color: var(--color-text-main);
-  background-color: var(--color-background);
+  background-color: var(--color-hero-bg);
   font-family: var(--font-family--roboto-mono);
   font-size: var(--font-size--body-mob);
+  letter-spacing: -0.28px;
 
-  @media screen and (min-width: 744px) {
+  @media screen and (min-width: $tablet) {
     font-size: var(--font-size--body-tab);
-  }
-  @media screen and (min-width: 1440px) {
-    font-size: var(--font-size--body-web);
-  }
-}
-
-main {
-  height: calc(100vh - 41px);
-
-  @media screen and (min-width: 744px) {
-    height: calc(100vh - 51px);
-  }
-  @media screen and (min-width: 1440px) {
-    height: calc(100vh - 59px);
+    letter-spacing: -0.32px;
   }
 }
 
@@ -47,7 +31,7 @@ button {
   cursor: pointer;
 }
 
-p,
-input {
-  @include paragraph;
-}
+// p,
+// input {
+//   @include paragraph;
+// }

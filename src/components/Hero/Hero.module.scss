@@ -1,12 +1,120 @@
+@import "../../sass/utils/variables";
+@import "../../sass/utils/mixins";
+
 .hero {
-  background-color: var(--color-hero-bg);
+  @include container;
 
   height: 227px;
+  padding-top: 65px;
 
-  @media screen and (min-width: 744px) {
+  @media screen and (min-width: $tablet) {
     height: 278px;
+    padding-top: 102px;
   }
-  @media screen and (min-width: 1440px) {
+
+  @media screen and (min-width: $desktop) {
     height: 271px;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 94px;
+  }
+
+  &_title {
+    width: 224px;
+
+    font-family: var(--font-family--kanit-regular);
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: normal;
+
+    // @media screen and (min-width: 500px) {
+    //   width: 100%;
+    // }
+
+    @media screen and (min-width: $tablet) {
+      width: 100%;
+      font-size: 40px;
+      line-height: 1.4;
+    }
+
+    @media screen and (min-width: $desktop) {
+      font-size: 48px;
+    }
+  }
+
+  &_info_list {
+    display: flex;
+    margin-top: 26px;
+
+    @media screen and (min-width: $tablet) {
+      margin-top: 18px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      margin-top: 16px;
+    }
+
+    :nth-child(1) {
+      width: 102px;
+
+      @media screen and (min-width: $tablet) {
+        width: 170px;
+      }
+    }
+
+    :nth-child(2),
+    :nth-child(3) {
+      width: 41.5px;
+
+      @media screen and (min-width: $tablet) {
+        width: 88px;
+      }
+    }
+
+    :nth-child(4) {
+      width: 93px;
+      margin-right: 0;
+
+      @media screen and (min-width: $tablet) {
+        width: 244px;
+        padding-right: 150px;
+      }
+    }
+  }
+
+  &_info_item {
+    font-size: 12px;
+    letter-spacing: -0.24px;
+    margin-right: 20px;
+    // height: 44px;
+    @media screen and (min-width: $tablet) {
+      font-size: 16px;
+    }
+  }
+
+  &_accent_word {
+    font-size: 18px;
+    font-family: var(--font-family--roboto-mono-bold);
+    letter-spacing: -0.36px;
+    // margin-bottom: 4px;
+
+    @media screen and (min-width: $tablet) {
+      font-size: 28px;
+      line-height: 1.7;
+      letter-spacing: normal;
+    }
+
+    @media screen and (min-width: $desktop) {
+      font-size: 36px;
+      line-height: 1.33;
+    }
+  }
+
+  &_info_desc {
+    line-height: 24px;
+    // margin-top: 4px;
+    @media screen and (min-width: $tablet) {
+      // line-height: 24px;
+    }
   }
 }

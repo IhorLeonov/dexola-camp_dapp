@@ -11,6 +11,14 @@ $swiss-path: "/fonts/Swiss";
 }
 
 @font-face {
+  src: url($roboto-path + "/RobotoMono-Bold.ttf") format("truetype");
+
+  font-family: "Roboto Mono Bold";
+  font-weight: 700;
+  font-display: fallback;
+}
+
+@font-face {
   src: url($kanit-path + "/Kanit-Regular.ttf") format("truetype");
 
   font-family: "Kanit Regular";
