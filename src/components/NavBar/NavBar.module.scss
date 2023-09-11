@@ -2,14 +2,23 @@
 
 .nav_bar {
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
 
   width: 100%;
   color: var(--color-text-desc);
 
   @media screen and (max-width: $max-mobile) {
-    padding-left: 24px;
-    padding-right: 24px;
-    justify-content: space-between;
+    @media screen and (max-width: 379px) {
+      padding-left: 24px;
+      padding-right: 24px;
+      justify-content: space-between;
+    }
+    justify-content: space-around;
+  }
+
+  @media screen and (min-width: $desktop) {
+    max-width: 1200px;
   }
 
   a {

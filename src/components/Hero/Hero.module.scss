@@ -4,19 +4,20 @@
 .hero {
   @include container;
 
-  height: 227px;
   padding-top: 65px;
+  height: 227px;
 
   @media screen and (min-width: $tablet) {
-    height: 278px;
     padding-top: 102px;
+    height: 278px;
   }
 
   @media screen and (min-width: $desktop) {
-    height: 271px;
     padding-left: 120px;
     padding-right: 120px;
     padding-top: 94px;
+
+    height: 271px;
   }
 
   &_title {
@@ -27,12 +28,9 @@
     line-height: 1.2;
     letter-spacing: normal;
 
-    // @media screen and (min-width: 500px) {
-    //   width: 100%;
-    // }
-
     @media screen and (min-width: $tablet) {
       width: 100%;
+
       font-size: 40px;
       line-height: 1.4;
     }
@@ -45,13 +43,26 @@
   &_info_list {
     display: flex;
     margin-top: 26px;
+    gap: 20px;
 
     @media screen and (min-width: $tablet) {
       margin-top: 18px;
+      gap: 24px;
     }
 
     @media screen and (min-width: $desktop) {
       margin-top: 16px;
+      gap: 40px;
+    }
+
+    & > li {
+      position: relative;
+      font-size: 12px;
+      letter-spacing: -0.24px;
+
+      @media screen and (min-width: $tablet) {
+        font-size: 16px;
+      }
     }
 
     :nth-child(1) {
@@ -60,35 +71,82 @@
       @media screen and (min-width: $tablet) {
         width: 170px;
       }
+
+      @media screen and (min-width: $desktop) {
+        width: 309px;
+      }
+
+      & > .question_mark {
+        left: 81px;
+
+        @media screen and (min-width: $tablet) {
+          left: 121px;
+        }
+        @media screen and (min-width: $desktop) {
+          left: 283px;
+        }
+      }
     }
 
     :nth-child(2),
     :nth-child(3) {
-      width: 41.5px;
+      width: 40.5px;
 
       @media screen and (min-width: $tablet) {
         width: 88px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        width: 153px;
+      }
+
+      & > .hero_accent_word {
+        @media screen and (min-width: $tablet) and (max-width: $max-tablet) {
+          margin-right: 30px;
+        }
+      }
+
+      & > .question_mark {
+        left: 37px;
+
+        @media screen and (min-width: $tablet) {
+          left: 58px;
+        }
+        @media screen and (min-width: $desktop) {
+          left: 111px;
+        }
+      }
+    }
+
+    :nth-child(3) {
+      @media screen and (min-width: $desktop) {
+        width: 72px;
       }
     }
 
     :nth-child(4) {
       width: 93px;
-      margin-right: 0;
 
       @media screen and (min-width: $tablet) {
-        width: 244px;
         padding-right: 150px;
+        width: 244px;
       }
-    }
-  }
 
-  &_info_item {
-    font-size: 12px;
-    letter-spacing: -0.24px;
-    margin-right: 20px;
-    // height: 44px;
-    @media screen and (min-width: $tablet) {
-      font-size: 16px;
+      @media screen and (min-width: $desktop) {
+        padding-right: 0;
+        width: 179px;
+      }
+
+      & > .question_mark {
+        left: 50px;
+
+        @media screen and (min-width: $tablet) {
+          left: 71px;
+        }
+        @media screen and (min-width: $desktop) {
+          left: 152px;
+        }
+      }
     }
   }
 
@@ -96,7 +154,6 @@
     font-size: 18px;
     font-family: var(--font-family--roboto-mono-bold);
     letter-spacing: -0.36px;
-    // margin-bottom: 4px;
 
     @media screen and (min-width: $tablet) {
       font-size: 28px;
@@ -111,10 +168,24 @@
   }
 
   &_info_desc {
-    line-height: 24px;
-    // margin-top: 4px;
-    @media screen and (min-width: $tablet) {
-      // line-height: 24px;
+    line-height: 26px;
+
+    @media screen and (max-width: 371px) {
+      font-size: 10px;
     }
+  }
+}
+
+.question_mark {
+  position: absolute;
+  top: 4px;
+  max-width: 14px;
+
+  @media screen and (min-width: $tablet) {
+    top: 18px;
+    max-width: 18px;
+  }
+  @media screen and (min-width: $desktop) {
+    top: 22px;
   }
 }

@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom";
 import s from "./NavBar.module.scss";
 
 export const NavBar = () => {
-  const isActive = ({ isActive }) => (isActive ? "active_link" : "");
+  // adding blue border to active tab
+  const isActive = ({ isActive }) => (isActive ? "active_tab" : "");
 
   return (
     <nav className={s.nav_bar}>
