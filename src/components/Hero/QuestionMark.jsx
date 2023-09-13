@@ -7,7 +7,7 @@ export const QuestionMark = ({ name, handler }) => {
       // onMouseEnter={() => handler(name)}
       // onMouseLeave={() => handler("")}
       onTouchStart={() => handler(name)}
-      onClick={() => handler(name)}
+      // onClick={() => handler(name)}
     >
       <svg
         className={s.question_icon}
