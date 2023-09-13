@@ -26,6 +26,14 @@ body {
 }
 main {
   padding-top: 227px;
+
+  @media screen and (min-width: $tablet) {
+    padding-top: 278px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    padding-top: 281px;
+  }
 }
 
 button {
