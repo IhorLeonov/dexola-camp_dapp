@@ -10,7 +10,7 @@ export const Prompt = ({ promptClass, name, handler }) => {
   return (
     <div
       onTouchStart={() => handler("")}
-      // onClick={() => handler("")}
+      onClick={() => handler("")}
       className={s.prompt + " " + promptClass}
     >
       <h3 className={s.prompt_title}>{name}</h3>

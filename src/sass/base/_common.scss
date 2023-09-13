@@ -1,5 +1,11 @@
 @import "../utils/variables";
 
+@keyframes move {
+  100% {
+    transform: translateY(calc(100vh + 58px - 175px));
+  }
+}
+
 .svg {
   fill: #ffffff;
   transition: fill 0.2s ease-in-out;
@@ -23,8 +29,10 @@
 }
 
 .balance_prompt {
-  display: block;
-  // transform: translateY(calc(90vh + 58px - 175px));
+  // display: block;
+
+  animation: move 1s linear;
+  animation-fill-mode: forwards;
 
   @media screen and (min-width: $desktop) {
     // left: 201px;
@@ -34,7 +42,9 @@
 
 .apr_prompt {
   display: block;
-  // transform: translateY(calc(90vh + 58px - 175px));
+
+  animation: move 1s linear;
+  animation-fill-mode: forwards;
 
   @media screen and (min-width: $desktop) {
     // left: -67.5px;
@@ -44,7 +54,9 @@
 
 .rewards_prompt {
   display: block;
-  transform: translateY(calc(90vh + 58px - 175px));
+
+  animation: move 1s linear;
+  animation-fill-mode: forwards;
 
   @media screen and (min-width: $desktop) {
     // left: 65px;
