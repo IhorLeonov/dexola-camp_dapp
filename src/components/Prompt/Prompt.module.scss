@@ -1,11 +1,5 @@
 @import "../../sass/utils/variables";
 
-// @keyframes moven {
-//   100% {
-//     transform: translateY(calc(100vh + 58px));
-//   }
-// }
-
 .prompt {
   position: absolute;
   display: none;
@@ -21,21 +15,16 @@
   @media screen and (max-width: $max-tablet) {
     padding: 24px 16px 0px 16px;
     width: 100vw;
-    height: 175px;
+    height: 275px;
+
     font-family: var(--font-family--roboto-mono);
-    background-color: #ffffff;
-    transform: translateY(calc(100vh + 58px));
-
-    // animation: moven 1s linear;
-    // animation-fill-mode: forwards;
-
     border-radius: 8px 8px 0px 0px;
-    // top: calc(100vh + 175px);
-    // right: -62vw;
-    // left: 0;
+    background-color: #ffffff;
+    transform: translateY(calc(100vh + 275px + 8px));
 
     &_title {
       margin-bottom: 16px;
+
       text-align: center;
       font-size: 16px;
       font-family: var(--font-family--roboto-mono-bold);

@@ -6,11 +6,11 @@ const aprSecondString =
   "Interest rate is calculated for each amount of tokens.";
 const rewardsString = "Rewards get allocated every second";
 
-export const Prompt = ({ promptClass, name, handler }) => {
+export const Prompt = ({ name, promptClass, onHidePrompt }) => {
   return (
     <div
-      onTouchStart={() => handler("")}
-      onClick={() => handler("")}
+      onTouchStart={onHidePrompt}
+      onClick={onHidePrompt}
       className={s.prompt + " " + promptClass}
     >
       <h3 className={s.prompt_title}>{name}</h3>

@@ -4,9 +4,12 @@
 .hero {
   @include container;
   position: relative;
+  background-color: var(--color-hero-bg); //
 
-  padding-top: 65px;
-  height: 227px;
+  // padding-top: 65px;
+  padding-top: 22px; //
+  // height: 227px;
+  height: 184px; //
 
   @media screen and (min-width: $tablet) {
     padding-top: 102px;
@@ -57,7 +60,6 @@
     }
 
     & > li {
-      // position: relative;
       display: flex;
       flex-wrap: wrap;
       align-items: end;

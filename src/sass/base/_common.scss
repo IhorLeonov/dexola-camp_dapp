@@ -2,7 +2,7 @@
 
 @keyframes move {
   100% {
-    transform: translateY(calc(100vh + 58px - 175px));
+    transform: translateY(calc(100vh - 125px));
   }
 }
 
@@ -11,27 +11,15 @@
   transition: fill 0.2s ease-in-out;
 }
 
-// .warning_input {
-//   border-color: var(--color-warning) !important;
-// }
-
-// .typed_input {
-//   border-color: var(--color-accent);
-// }
-
-// .show {
-//   display: flex;
-// }
-
 .active_tab {
   border-color: var(--color-accent) !important;
   color: var(--color-text-main);
 }
 
 .balance_prompt {
-  // display: block;
+  display: block;
 
-  animation: move 1s linear;
+  animation: move 300ms linear;
   animation-fill-mode: forwards;
 
   @media screen and (min-width: $desktop) {
@@ -43,7 +31,7 @@
 .apr_prompt {
   display: block;
 
-  animation: move 1s linear;
+  animation: move 300ms linear;
   animation-fill-mode: forwards;
 
   @media screen and (min-width: $desktop) {
@@ -55,7 +43,7 @@
 .rewards_prompt {
   display: block;
 
-  animation: move 1s linear;
+  animation: move 300ms linear;
   animation-fill-mode: forwards;
 
   @media screen and (min-width: $desktop) {

@@ -12,6 +12,7 @@ html {
 }
 
 body {
+  position: relative;
   color: var(--color-text-main);
   background-color: var(--color-hero-bg);
   font-family: var(--font-family--roboto-mono);
@@ -22,6 +23,9 @@ body {
     font-size: var(--font-size--body-tab);
     letter-spacing: -0.32px;
   }
+}
+main {
+  padding-top: 227px;
 }
 
 button {

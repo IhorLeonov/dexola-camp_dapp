@@ -1,13 +1,13 @@
 import s from "./Hero.module.scss";
 
-export const QuestionMark = ({ name, handler }) => {
+export const QuestionMark = ({ name, onShowPrompt, onHidePrompt }) => {
   return (
     <div
       className={s.question_mark}
-      // onMouseEnter={() => handler(name)}
-      // onMouseLeave={() => handler("")}
-      onTouchStart={() => handler(name)}
-      onClick={() => handler(name)}
+      onMouseEnter={() => onShowPrompt(name)}
+      onTouchStart={() => onShowPrompt(name)}
+      onClick={() => onShowPrompt(name)}
+      onMouseLeave={onHidePrompt}
     >
       <svg
         className={s.question_icon}

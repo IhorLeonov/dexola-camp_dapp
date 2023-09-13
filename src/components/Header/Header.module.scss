@@ -8,6 +8,7 @@
 
   &_container {
     @include container;
+    background-color: var(--color-hero-bg);
 
     display: flex;
     justify-content: space-between;

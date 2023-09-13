@@ -1,5 +1,6 @@
 import styles from "./Header.module.scss";
 import { Icon } from "../../helpers/IconSelector";
+import { Hero } from "../Hero/Hero";
 
 export const Header = () => {
   return (
@@ -12,6 +13,7 @@ export const Header = () => {
           Connect wallet
         </button>
       </div>
+      <Hero />
     </header>
   );
 };
