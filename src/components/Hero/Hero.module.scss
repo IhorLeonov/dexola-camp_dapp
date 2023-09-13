@@ -185,26 +185,3 @@
     width: 18px;
   }
 }
-
-.balance_prompt {
-  @media screen and (min-width: $desktop) {
-    // left: 201px;
-    width: 165px;
-  }
-}
-
-.apr_prompt {
-  @media screen and (min-width: $desktop) {
-    // left: -67.5px;
-    width: 360px;
-  }
-}
-
-.rewards_prompt {
-  @media screen and (min-width: $desktop) {
-    // left: 65px;
-    width: 176px;
-    text-align: center;
-    transform: translateY(calc(90vh + 58px - 175px));
-  }
-}

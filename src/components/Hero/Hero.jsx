@@ -6,10 +6,12 @@ import { useState } from "react";
 export const Hero = () => {
   const [showPrompt, setShowPrompt] = useState(false);
   const [promptName, setPromptName] = useState("");
+  const [promptClass, setPromptClass] = useState(null);
 
   const handleShowPrompt = (name) => {
     setShowPrompt(!showPrompt);
     setPromptName(name);
+    setPromptClass(`${name}_prompt`);
   };
 
   return (
@@ -41,13 +43,13 @@ export const Hero = () => {
           <span className={s.hero_info_desc}>Rewards</span>
         </li>
       </ul>
-      {showPrompt && (
-        <Prompt
-          promptClass={s[`${promptName}_prompt`]}
-          name={promptName}
-          handler={handleShowPrompt}
-        />
-      )}
+      {/* {showPrompt && ( */}
+      <Prompt
+        promptClass={promptClass}
+        name={promptName}
+        handler={handleShowPrompt}
+      />
+      {/* )} */}
     </section>
   );
 };

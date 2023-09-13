@@ -2,6 +2,7 @@
 
 .prompt {
   position: absolute;
+  display: none;
 
   z-index: 10;
   top: 0;
@@ -17,9 +18,9 @@
     height: 175px;
     font-family: var(--font-family--roboto-mono);
     background-color: #ffffff;
-    transform: translateY(calc(90vh + 58px));
+    transform: translateY(calc(100vh + 58px));
+    // transition: transform 3s;
     // transform: translateY(calc(100vh + 58px - 175px));
-    transition: transform var(--main-animation);
     border-radius: 8px 8px 0px 0px;
     // top: calc(100vh + 175px);
     // right: -62vw;

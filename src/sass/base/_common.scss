@@ -1,3 +1,5 @@
+@import "../utils/variables";
+
 .svg {
   fill: #ffffff;
   transition: fill 0.2s ease-in-out;
@@ -18,4 +20,35 @@
 .active_tab {
   border-color: var(--color-accent) !important;
   color: var(--color-text-main);
+}
+
+.balance_prompt {
+  display: block;
+  // transform: translateY(calc(90vh + 58px - 175px));
+
+  @media screen and (min-width: $desktop) {
+    // left: 201px;
+    width: 165px;
+  }
+}
+
+.apr_prompt {
+  display: block;
+  // transform: translateY(calc(90vh + 58px - 175px));
+
+  @media screen and (min-width: $desktop) {
+    // left: -67.5px;
+    width: 360px;
+  }
+}
+
+.rewards_prompt {
+  display: block;
+  transform: translateY(calc(90vh + 58px - 175px));
+
+  @media screen and (min-width: $desktop) {
+    // left: 65px;
+    width: 176px;
+    text-align: center;
+  }
 }
