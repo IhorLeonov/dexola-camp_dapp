@@ -1,5 +1,5 @@
 import { Header } from "../Header/Header";
-// import { Hero } from "../Hero/Hero";
+import { Hero } from "../Hero/Hero";
 import { Footer } from "../Footer/Footer";
 import { Operations } from "../Operations/Operations";
 
@@ -8,7 +8,7 @@ export const Layout = () => {
     <>
       <Header />
       <main>
-        {/* <Hero /> */}
+        <Hero />
         <Operations />
       </main>
       <Footer />

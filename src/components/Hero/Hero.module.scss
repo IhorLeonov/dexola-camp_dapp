@@ -3,8 +3,9 @@
 
 .hero {
   @include container;
-  position: relative;
+  position: fixed;
   background-color: var(--color-hero-bg); //
+  top: 40px;
 
   // padding-top: 65px;
   padding-top: 22px; //
