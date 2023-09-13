@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { NavBar } from "../NavBar/NavBar";
 import s from "./Operations.module.scss";
 import { useEffect } from "react";
+// import { Prompt } from "../Prompt/Prompt";
 
 export const Operations = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export const Operations = () => {
           <Outlet />
         </Suspense>
       </div>
+      {/* <Prompt promptClass={s.rewards_prompt} name={"Rewards"} /> */}
     </div>
   );
 };

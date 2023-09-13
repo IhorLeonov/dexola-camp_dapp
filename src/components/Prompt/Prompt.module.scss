@@ -1,0 +1,71 @@
+@import "../../sass/utils/variables";
+
+.prompt {
+  position: absolute;
+
+  z-index: 10;
+  top: 0;
+  left: 0;
+
+  color: black;
+  font-size: 14px;
+  line-height: 1.14;
+
+  @media screen and (max-width: $max-tablet) {
+    padding: 24px 16px 0px 16px;
+    width: 100vw;
+    height: 175px;
+    font-family: var(--font-family--roboto-mono);
+    background-color: #ffffff;
+    transform: translateY(calc(90vh + 58px));
+    // transform: translateY(calc(100vh + 58px - 175px));
+    transition: transform var(--main-animation);
+    border-radius: 8px 8px 0px 0px;
+    // top: calc(100vh + 175px);
+    // right: -62vw;
+    // left: 0;
+
+    &_title {
+      margin-bottom: 16px;
+      text-align: center;
+      font-size: 16px;
+      font-family: var(--font-family--roboto-mono-bold);
+      text-transform: uppercase;
+
+      &::before {
+        content: "";
+        position: absolute;
+        border-radius: 2.5px;
+        background-color: #b3b3b3;
+
+        width: 36px;
+        height: 5px;
+        left: calc(50% - 17px);
+        top: 8px;
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktop) {
+    // bottom: 30px;
+    padding: 8px 12px;
+    font-family: Inter;
+    background-color: var(--color-accent);
+
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: var(--color-accent); // inherit
+
+      width: 10px;
+      height: 10px;
+      left: 50%;
+      bottom: -5px;
+      transform: rotate(45deg);
+    }
+
+    &_title {
+      display: none;
+    }
+  }
+}

@@ -3,6 +3,7 @@
 
 .hero {
   @include container;
+  position: relative;
 
   padding-top: 65px;
   height: 227px;
@@ -40,33 +41,48 @@
     }
   }
 
-  &_info_list {
+  &_info {
     display: flex;
     margin-top: 26px;
-    gap: 20px;
+    height: 44px;
 
     @media screen and (min-width: $tablet) {
       margin-top: 18px;
-      gap: 24px;
+      height: 72px;
     }
 
     @media screen and (min-width: $desktop) {
       margin-top: 16px;
-      gap: 40px;
+      height: 56px;
     }
 
     & > li {
-      position: relative;
+      // position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      margin-right: 18px;
+      gap: 4px;
+
       font-size: 12px;
       letter-spacing: -0.24px;
 
       @media screen and (min-width: $tablet) {
         font-size: 16px;
+        margin-right: 24px;
+        gap: 8px;
+      }
+      @media screen and (min-width: $desktop) {
+        margin-right: 40px;
       }
     }
 
-    :nth-child(1) {
-      width: 102px;
+    & > :last-child {
+      margin-right: 0;
+    }
+
+    &_balance {
+      width: 108px;
 
       @media screen and (min-width: $tablet) {
         width: 170px;
@@ -75,22 +91,10 @@
       @media screen and (min-width: $desktop) {
         width: 309px;
       }
-
-      & > .question_mark {
-        left: 81px;
-
-        @media screen and (min-width: $tablet) {
-          left: 121px;
-        }
-        @media screen and (min-width: $desktop) {
-          left: 283px;
-        }
-      }
     }
 
-    :nth-child(2),
-    :nth-child(3) {
-      width: 40.5px;
+    &_apr {
+      width: 52.5px;
 
       @media screen and (min-width: $tablet) {
         width: 88px;
@@ -99,93 +103,108 @@
       @media screen and (min-width: $desktop) {
         width: 153px;
       }
+    }
 
-      & > .hero_accent_word {
+    &_days {
+      display: flex;
+      align-items: start;
+      width: 40.5px;
+
+      @media screen and (min-width: $tablet) {
+        width: 88px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        width: 72px;
+      }
+
+      & > .hero_info_desc {
         @media screen and (min-width: $tablet) and (max-width: $max-tablet) {
           margin-right: 30px;
         }
       }
-
-      & > .question_mark {
-        left: 37px;
-
-        @media screen and (min-width: $tablet) {
-          left: 58px;
-        }
-        @media screen and (min-width: $desktop) {
-          left: 111px;
-        }
-      }
     }
 
-    :nth-child(3) {
-      @media screen and (min-width: $desktop) {
-        width: 72px;
-      }
-    }
-
-    :nth-child(4) {
-      width: 93px;
+    &_rewards {
+      width: 83px;
 
       @media screen and (min-width: $tablet) {
-        padding-right: 150px;
-        width: 244px;
+        width: 144px;
       }
 
       @media screen and (min-width: $desktop) {
-        padding-right: 0;
         width: 179px;
-      }
-
-      & > .question_mark {
-        left: 50px;
-
-        @media screen and (min-width: $tablet) {
-          left: 71px;
-        }
-        @media screen and (min-width: $desktop) {
-          left: 152px;
-        }
       }
     }
   }
 
-  &_accent_word {
+  &_amount {
     font-size: 18px;
     font-family: var(--font-family--roboto-mono-bold);
     letter-spacing: -0.36px;
 
     @media screen and (min-width: $tablet) {
       font-size: 28px;
-      line-height: 1.7;
       letter-spacing: normal;
     }
 
     @media screen and (min-width: $desktop) {
       font-size: 36px;
-      line-height: 1.33;
+    }
+  }
+
+  &_stru {
+    line-height: 17px;
+
+    @media screen and (min-width: $tablet) {
+      line-height: 21px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      line-height: 26px;
     }
   }
 
   &_info_desc {
-    line-height: 26px;
-
-    @media screen and (max-width: 371px) {
-      font-size: 10px;
+    @media screen and (min-width: $desktop) {
+      line-height: 26px;
     }
   }
 }
 
 .question_mark {
-  position: absolute;
-  top: 4px;
-  max-width: 14px;
+  @media screen and (min-width: $desktop) {
+    order: 1;
+  }
+}
+
+.question_icon {
+  width: 14px;
 
   @media screen and (min-width: $tablet) {
-    top: 18px;
-    max-width: 18px;
+    width: 18px;
   }
+}
+
+.balance_prompt {
   @media screen and (min-width: $desktop) {
-    top: 22px;
+    // left: 201px;
+    width: 165px;
+  }
+}
+
+.apr_prompt {
+  @media screen and (min-width: $desktop) {
+    // left: -67.5px;
+    width: 360px;
+  }
+}
+
+.rewards_prompt {
+  @media screen and (min-width: $desktop) {
+    // left: 65px;
+    width: 176px;
+    text-align: center;
+    transform: translateY(calc(90vh + 58px - 175px));
   }
 }
