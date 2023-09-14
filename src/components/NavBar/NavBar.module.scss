@@ -8,6 +8,22 @@
   @media screen and (max-width: $max-mobile) {
     border-radius: 16px 16px 0 0;
   }
+
+  @media screen and (min-width: $desktop) {
+    position: static; //
+  }
+
+  @media screen and (min-width: $tablet) {
+    padding-top: 43px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    // padding-top: 40px;
+    padding-left: calc((100vw - 1200px) / 2);
+    padding-right: calc((100vw - 1200px) / 2);
+  }
 }
 
 .nav_bar {
@@ -18,12 +34,13 @@
   width: 100%;
   color: var(--color-text-desc);
   background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-accent);
 
   @media screen and (max-width: $max-mobile) {
     margin-top: 16px;
     padding-left: 24px;
     padding-right: 24px;
-    border-bottom: 1px solid var(--color-accent);
+    // border-bottom: 1px solid var(--color-accent);
 
     @media screen and (max-width: 599px) {
       justify-content: space-between;
@@ -31,17 +48,17 @@
     justify-content: space-around;
   }
 
-  @media screen and (min-width: $tablet) {
-    padding-top: 43px;
-    padding-left: 48px;
-    padding-right: 48px;
-  }
+  // @media screen and (min-width: $tablet) {
+  //   padding-top: 43px;
+  //   padding-left: 48px;
+  //   padding-right: 48px;
+  // }
 
-  @media screen and (min-width: $desktop) {
-    padding-top: 40px;
-    padding-left: calc((100vw - 1200px) / 2);
-    padding-right: calc((100vw - 1200px) / 2);
-  }
+  // @media screen and (min-width: $desktop) {
+  //   // padding-top: 40px;
+  //   padding-left: calc((100vw - 1200px) / 2);
+  //   padding-right: calc((100vw - 1200px) / 2);
+  // }
 
   a {
     display: flex;
