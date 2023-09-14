@@ -7,8 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <BrowserRouter basename="/dexola-camp_dapp"> */}
-    <BrowserRouter>
+    <BrowserRouter basename="/dexola-camp_dapp">
+      {/* <BrowserRouter> */}
       <App />
     </BrowserRouter>
   </React.StrictMode>
