@@ -1,5 +1,5 @@
 import s from "./Hero.module.scss";
-import { QuestionMark } from "./QuestionMark";
+import { QuestionMark } from "../QuestionMark/QuestionMark";
 import { Prompt } from "../Prompt/Prompt";
 import { useState } from "react";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";

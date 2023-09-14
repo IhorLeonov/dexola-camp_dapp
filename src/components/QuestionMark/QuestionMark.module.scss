@@ -1,0 +1,15 @@
+@import "../../sass/utils/variables";
+
+.question_mark {
+  @media screen and (min-width: $desktop) {
+    order: 1;
+  }
+}
+
+.question_icon {
+  width: 14px;
+
+  @media screen and (min-width: $tablet) {
+    width: 18px;
+  }
+}

@@ -1,4 +1,4 @@
-import s from "./Hero.module.scss";
+import s from "./QuestionMark.module.scss";
 
 export const QuestionMark = ({ name, onShowPrompt, onHidePrompt }) => {
   return (
