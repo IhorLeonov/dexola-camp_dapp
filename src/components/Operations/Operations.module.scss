@@ -18,12 +18,10 @@
   }
 
   @media screen and (min-width: $desktop) {
-    // margin-top: 90px;
-    margin-top: 0px; //
+    margin-top: 0px;
 
     padding-left: 120px;
     padding-right: 120px;
-    height: calc(100vh - 271px);
   }
 
   &_wrapper {

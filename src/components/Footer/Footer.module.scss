@@ -4,6 +4,7 @@
 .footer {
   border-top: 1px solid var(--color-accent);
   background-color: var(--color-background);
+  color: var(--color-text-desc);
 
   &_container {
     @include container;

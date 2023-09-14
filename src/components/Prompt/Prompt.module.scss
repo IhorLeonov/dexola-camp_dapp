@@ -54,7 +54,7 @@
     &::after {
       content: "";
       position: absolute;
-      background-color: var(--color-accent); // inherit
+      background-color: inherit;
 
       width: 10px;
       height: 10px;
