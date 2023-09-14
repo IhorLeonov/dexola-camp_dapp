@@ -1,10 +1,6 @@
 @import "../utils/variables";
-
-@keyframes move {
-  100% {
-    transform: translateY(calc(100vh - 250px));
-  }
-}
+@import "../utils/keyframes";
+@import "../utils/mixins";
 
 .svg {
   fill: #ffffff;
@@ -19,36 +15,48 @@
 .balance_prompt {
   display: block;
 
-  animation: move 300ms linear;
-  animation-fill-mode: forwards;
+  @media screen and (max-width: $max-tablet) {
+    animation: move 300ms linear;
+    animation-fill-mode: forwards;
+  }
 
   @media screen and (min-width: $desktop) {
-    // left: 201px;
     width: 165px;
+    left: calc(((100vw - 1200px) / 2 + 200px));
+    animation: expand-bounce 300ms;
+    animation-fill-mode: forwards;
   }
 }
 
 .apr_prompt {
   display: block;
 
-  animation: move 300ms linear;
-  animation-fill-mode: forwards;
+  @media screen and (max-width: $max-tablet) {
+    animation: move 300ms linear;
+    animation-fill-mode: forwards;
+  }
 
   @media screen and (min-width: $desktop) {
-    // left: -67.5px;
     width: 360px;
+    left: calc(((100vw - 1200px) / 2 + 282px));
+    animation: expand-bounce 300ms;
+    animation-fill-mode: forwards;
   }
 }
 
 .rewards_prompt {
   display: block;
 
-  animation: move 300ms linear;
-  animation-fill-mode: forwards;
+  @media screen and (max-width: $max-tablet) {
+    animation: move 300ms linear;
+    animation-fill-mode: forwards;
+  }
 
   @media screen and (min-width: $desktop) {
-    // left: 65px;
     width: 176px;
     text-align: center;
+    left: calc(((100vw - 1200px) / 2 + 718px));
+    animation: expand-bounce 300ms;
+    animation-fill-mode: forwards;
   }
 }

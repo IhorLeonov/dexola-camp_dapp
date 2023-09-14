@@ -1,6 +1,7 @@
 @import "../../sass/utils/variables";
 
 .question_mark {
+  cursor: pointer;
   @media screen and (min-width: $desktop) {
     order: 1;
   }
