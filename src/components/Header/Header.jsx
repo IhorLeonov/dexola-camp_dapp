@@ -2,22 +2,24 @@ import s from "./Header.module.scss";
 import { Icon } from "../../utils/IconSelector";
 import ethLogo from "../../assets/icons/eth-logo.svg";
 // import useCheckIsMobile from "../../hooks/useCheckMobileDevice";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount, useConnect, useBalance } from "wagmi";
 
 const deepLinkURL =
   "https://metamask.app.link/dapp/dexola-camp-dapp.vercel.app/";
 
 export const Header = () => {
-  const { connect, connectors, isLoading } = useConnect();
+  const { connect, connectors, error, isLoading } = useConnect();
   const { isConnected, address } = useAccount();
-
-  // const { data } = useBalance({ addressOrName: address });
-
+  const { data } = useBalance({ address: address });
   const userAddress = (address?.slice(0, 17) + "...").toUpperCase();
 
-  // console.log(data);
+  console.log("balance", data);
 
-  console.log(window.ethereum);
+  const handleConnect = () => {
+    window.ethereum
+      ? connect({ connector: connectors[0] })
+      : window.open(deepLinkURL);
+  };
 
   return (
     <header className={s.header}>
@@ -34,14 +36,7 @@ export const Header = () => {
           <button
             type="button"
             className={s.header_btn}
-            onClick={
-              // isMobile
-              //   ? window.open(deepLinkURL)
-              //   :
-              window.ethereum
-                ? () => connect({ connector: connectors[0] })
-                : window.open(deepLinkURL)
-            }
+            onClick={handleConnect}
           >
             {isLoading ? "(connecting)" : "Connect wallet"}
           </button>
