@@ -1,5 +1,5 @@
 import s from "./Hero.module.scss";
-import { QuestionMark } from "../QuestionMark/QuestionMark";
+import { HelpBtn } from "../HelpBtn/HelpBtn";
 import { Prompt } from "../Prompt/Prompt";
 import { useState } from "react";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
@@ -29,7 +29,7 @@ export const Hero = () => {
           <li className={s.hero_info_balance}>
             <span className={s.hero_amount}>0.00</span>
             <span className={s.hero_stru}>STRU</span>{" "}
-            <QuestionMark
+            <HelpBtn
               name="balance"
               onShowPrompt={handleShowPrompt}
               onHidePrompt={handleHidePrompt}
@@ -39,7 +39,7 @@ export const Hero = () => {
 
           <li className={s.hero_info_apr}>
             <span className={s.hero_amount}>≈8%</span>
-            <QuestionMark
+            <HelpBtn
               name="apr"
               onShowPrompt={handleShowPrompt}
               onHidePrompt={handleHidePrompt}
@@ -55,7 +55,7 @@ export const Hero = () => {
           <li className={s.hero_info_rewards}>
             <span className={s.hero_amount}>0</span>{" "}
             <span className={s.hero_stru}>STRU</span>{" "}
-            <QuestionMark
+            <HelpBtn
               name="rewards"
               onShowPrompt={handleShowPrompt}
               onHidePrompt={handleHidePrompt}

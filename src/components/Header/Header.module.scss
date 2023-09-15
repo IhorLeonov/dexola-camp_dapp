@@ -14,6 +14,7 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 3px;
+    height: 40px;
 
     @media screen and (min-width: $tablet) {
       padding-top: 0;
@@ -34,4 +35,17 @@
     @include button;
     width: 167px;
   }
+}
+
+.wallet_info {
+  display: flex;
+  align-items: center;
+}
+
+.eth_logo {
+  @media screen and (min-width: $tablet) {
+    width: 32px;
+    height: 32px;
+  }
+  margin-right: 8px;
 }

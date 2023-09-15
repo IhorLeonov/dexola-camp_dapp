@@ -1,9 +1,10 @@
-import s from "./QuestionMark.module.scss";
+import s from "./HelpBtn.module.scss";
 
-export const QuestionMark = ({ name, onShowPrompt, onHidePrompt }) => {
+export const HelpBtn = ({ name, onShowPrompt, onHidePrompt }) => {
   return (
-    <div
-      className={s.question_mark}
+    <button
+      type="button"
+      className={s.help_btn}
       onMouseEnter={() => onShowPrompt(name)}
       onTouchStart={() => onShowPrompt(name)}
       onClick={() => onShowPrompt(name)}
@@ -23,6 +24,6 @@ export const QuestionMark = ({ name, onShowPrompt, onHidePrompt }) => {
           strokeLinejoin="round"
         />
       </svg>
-    </div>
+    </button>
   );
 };
