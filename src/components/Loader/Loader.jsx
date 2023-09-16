@@ -1,9 +1,9 @@
-import { LoaderBox } from "./Loader.styled.jsx";
+import s from "./Loader.module.scss";
 import { RotatingLines } from "react-loader-spinner";
 
-export const Loader = ({ style, width, color = "#CAE8FF" }) => {
+export const Loader = ({ style, width, color = "white" }) => {
   return (
-    <LoaderBox style={style}>
+    <div className={s.loader_box} style={style}>
       <RotatingLines
         strokeColor={color}
         strokeWidth="5"
@@ -11,6 +11,6 @@ export const Loader = ({ style, width, color = "#CAE8FF" }) => {
         width={width}
         visible={true}
       />
-    </LoaderBox>
+    </div>
   );
 };

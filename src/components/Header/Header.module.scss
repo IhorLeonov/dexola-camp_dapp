@@ -40,6 +40,24 @@
 .wallet_info {
   display: flex;
   align-items: center;
+  gap: 8px;
+
+  font-family: var(--font-family--kanit-medium);
+  font-size: 12px;
+  letter-spacing: 0.12px;
+
+  @media screen and (min-width: $tablet) {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 114;
+    text-transform: uppercase;
+  }
+}
+
+.wallet_adress {
+  @media screen and (max-width: $max-mobile) {
+    display: none;
+  }
 }
 
 .eth_logo {
@@ -47,5 +65,4 @@
     width: 32px;
     height: 32px;
   }
-  margin-right: 8px;
 }

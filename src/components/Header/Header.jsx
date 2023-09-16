@@ -1,25 +1,30 @@
 import s from "./Header.module.scss";
-import { Icon } from "../../utils/IconSelector";
 import ethLogo from "../../assets/icons/eth-logo.svg";
-// import useCheckIsMobile from "../../hooks/useCheckMobileDevice";
+
+import { Icon } from "../../utils/IconSelector";
+import { Loader } from "../Loader/Loader";
+import { useEffect } from "react";
 import { useAccount, useConnect, useBalance } from "wagmi";
 
-const deepLinkURL =
-  "https://metamask.app.link/dapp/dexola-camp-dapp.vercel.app/";
-
 export const Header = () => {
-  const { connect, connectors, error, isLoading } = useConnect();
+  const { connect, connectors, isLoading } = useConnect();
   const { isConnected, address } = useAccount();
-  const { data } = useBalance({ address: address });
-  const userAddress = (address?.slice(0, 17) + "...").toUpperCase();
+  const { data: balance } = useBalance({ address: address });
 
-  console.log("balance", data);
+  const deepLinkUrl =
+    "https://metamask.app.link/dapp/dexola-camp-dapp.vercel.app/";
 
   const handleConnect = () => {
     window.ethereum
       ? connect({ connector: connectors[0] })
-      : window.open(deepLinkURL);
+      : window.open(deepLinkUrl);
   };
+
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", handleConnect);
+    }
+  });
 
   return (
     <header className={s.header}>
@@ -30,7 +35,11 @@ export const Header = () => {
         {isConnected ? (
           <div className={s.wallet_info}>
             <img className={s.eth_logo} src={ethLogo} alt="Ethereum logo" />
-            {userAddress}
+            {balance?.formatted} {balance?.symbol}
+            <span className={s.wallet_adress}>|</span>
+            <span className={s.wallet_adress}>
+              {address?.slice(0, 17) + "..."}
+            </span>
           </div>
         ) : (
           <button
@@ -38,10 +47,9 @@ export const Header = () => {
             className={s.header_btn}
             onClick={handleConnect}
           >
-            {isLoading ? "(connecting)" : "Connect wallet"}
+            {isLoading ? <Loader width={24} /> : "Connect wallet"}
           </button>
         )}
-
         {/* {error && <div>{error.message}</div>} */}
       </div>
     </header>
