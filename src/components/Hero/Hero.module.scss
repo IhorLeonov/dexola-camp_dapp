@@ -27,7 +27,7 @@
   }
 
   @media screen and (min-width: $desktop) {
-    position: relative; //
+    position: static; //
     top: 0px; //
     padding-top: 94px; //
     // height: 211px;
@@ -126,7 +126,7 @@
       }
 
       @media screen and (min-width: $desktop) {
-        width: 72px;
+        width: auto;
       }
 
       & > .hero_info_desc {

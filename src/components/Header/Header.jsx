@@ -1,7 +1,7 @@
 import s from "./Header.module.scss";
 import ethLogo from "../../assets/icons/eth-logo.svg";
 
-import { Icon } from "../../utils/IconSelector";
+import { Icon } from "../../utils/selectorIcons";
 import { Loader } from "../Loader/Loader";
 import { useEffect } from "react";
 

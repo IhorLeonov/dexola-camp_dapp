@@ -8,7 +8,8 @@ import {
   useGetStakedBalance,
   useGetNumberOfRewards,
   useGetTotalAmountOfStakes,
-} from "../../utils/readContract";
+  useGetTimeStampOfTheEnd,
+} from "../../utils/contractRead";
 
 export const Hero = () => {
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
@@ -17,8 +18,14 @@ export const Hero = () => {
   const { address } = useAccount();
   const numberOfRewards = useGetNumberOfRewards();
   const totalAmountOfStakes = useGetTotalAmountOfStakes();
+
   const stru = useGetStakedBalance(address);
   const apr = Math.round((numberOfRewards * 100) / totalAmountOfStakes);
+
+  const timestamp = useGetTimeStampOfTheEnd();
+  const dateNow = Date.now() / 1000;
+  const oneDay = 86400;
+  const completionTime = Math.round((timestamp - dateNow) / oneDay);
 
   return (
     <section className={s.hero}>
@@ -47,7 +54,9 @@ export const Hero = () => {
           </li>
 
           <li className={s.hero_info_days}>
-            <span className={s.hero_amount}>0</span>{" "}
+            <span className={s.hero_amount}>
+              {completionTime ? completionTime : 0}
+            </span>{" "}
             <span className={s.hero_info_desc}>Days</span>
           </li>
 

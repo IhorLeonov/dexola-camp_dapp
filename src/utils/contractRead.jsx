@@ -1,4 +1,4 @@
-import contractABI from "../utils/contractABI.json";
+import contractABI from "./contractABI.json";
 import { useContractRead } from "wagmi";
 
 const contractAddress = "0x2F112ED8A96327747565f4d4b4615be8fb89459d";
@@ -30,6 +30,16 @@ export const useGetTotalAmountOfStakes = () => {
     address: contractAddress,
     abi: contractABI,
     functionName: "totalSupply",
+  });
+  return Number(data);
+};
+
+// reading the timestamp of the end of the reward distribution period
+export const useGetTimeStampOfTheEnd = () => {
+  const { data } = useContractRead({
+    address: contractAddress,
+    abi: contractABI,
+    functionName: "periodFinish",
   });
   return Number(data);
 };
