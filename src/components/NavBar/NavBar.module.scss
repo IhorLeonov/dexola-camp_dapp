@@ -4,6 +4,7 @@
   position: fixed;
   width: 100vw;
   background-color: var(--color-background);
+  z-index: 10;
 
   @media screen and (max-width: $max-mobile) {
     border-radius: 16px 16px 0 0;

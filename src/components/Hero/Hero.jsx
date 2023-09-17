@@ -1,25 +1,24 @@
 import s from "./Hero.module.scss";
 import { HelpBtn } from "../HelpBtn/HelpBtn";
 import { Prompt } from "../Prompt/Prompt";
-import { useState } from "react";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { usePrompt } from "../../hooks/usePrompt";
+import { useAccount } from "wagmi";
+
+import {
+  useGetStakedBalance,
+  useGetNumberOfRewards,
+  useGetTotalAmountOfStakes,
+} from "../../utils/readContract";
 
 export const Hero = () => {
-  const [promptName, setPromptName] = useState(null);
-  const [promptClass, setPromptClass] = useState(null);
-  const body = document.querySelector("body");
+  const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
+    usePrompt();
 
-  const handleShowPrompt = (name) => {
-    setPromptName(name);
-    setPromptClass(`${name}_prompt`);
-    disableBodyScroll(body);
-  };
-
-  const handleHidePrompt = () => {
-    setPromptName(null);
-    setPromptClass(null);
-    enableBodyScroll(body);
-  };
+  const { address } = useAccount();
+  const numberOfRewards = useGetNumberOfRewards();
+  const totalAmountOfStakes = useGetTotalAmountOfStakes();
+  const stru = useGetStakedBalance(address);
+  const apr = Math.round((numberOfRewards * 100) / totalAmountOfStakes);
 
   return (
     <section className={s.hero}>
@@ -27,7 +26,7 @@ export const Hero = () => {
         <h1 className={s.hero_title}>StarRunner Token staking</h1>
         <ul className={s.hero_info}>
           <li className={s.hero_info_balance}>
-            <span className={s.hero_amount}>0.00</span>
+            <span className={s.hero_amount}>{stru ? stru : "0.00"}</span>
             <span className={s.hero_stru}>STRU</span>{" "}
             <HelpBtn
               name="balance"
@@ -38,13 +37,13 @@ export const Hero = () => {
           </li>
 
           <li className={s.hero_info_apr}>
-            <span className={s.hero_amount}>≈8%</span>
+            <span className={s.hero_amount}>{apr ? "≈" + apr + "%" : "0"}</span>{" "}
+            <span className={s.hero_info_desc}>APR</span>
             <HelpBtn
               name="apr"
               onShowPrompt={handleShowPrompt}
               onHidePrompt={handleHidePrompt}
-            />{" "}
-            <span className={s.hero_info_desc}>APR</span>
+            />
           </li>
 
           <li className={s.hero_info_days}>

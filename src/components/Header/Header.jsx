@@ -4,12 +4,14 @@ import ethLogo from "../../assets/icons/eth-logo.svg";
 import { Icon } from "../../utils/IconSelector";
 import { Loader } from "../Loader/Loader";
 import { useEffect } from "react";
-import { useAccount, useConnect, useBalance } from "wagmi";
+
+import { useAccount, useConnect, useBalance, useDisconnect } from "wagmi";
 
 export const Header = () => {
   const { connect, connectors, isLoading } = useConnect();
   const { isConnected, address } = useAccount();
-  const { data: balance } = useBalance({ address: address });
+  const { disconnect } = useDisconnect();
+  const { data: balance } = useBalance({ address });
 
   const deepLinkUrl =
     "https://metamask.app.link/dapp/dexola-camp-dapp.vercel.app/";
@@ -21,25 +23,27 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", handleConnect);
-    }
-  });
+    if (window.ethereum) window.ethereum.on("accountsChanged", handleConnect);
+  }, [window.ethereum]);
 
   return (
     <header className={s.header}>
       <div className={s.header_container}>
         <a href="https://dexola.com/" target="_blank" rel="noreferrer">
-          <Icon id="logo" />
+          <Icon name="logo" width={35} height={20} />
         </a>
         {isConnected ? (
           <div className={s.wallet_info}>
             <img className={s.eth_logo} src={ethLogo} alt="Ethereum logo" />
-            {balance?.formatted} {balance?.symbol}
+            {balance ? Number(balance?.formatted).toFixed(1) : "0.00"}{" "}
+            {balance?.symbol}
             <span className={s.wallet_adress}>|</span>
             <span className={s.wallet_adress}>
-              {address?.slice(0, 17) + "..."}
+              {address ? address?.slice(0, 17) + "..." : "unknown"}
             </span>
+            <button onClick={disconnect}>
+              <Icon name="logout" width={16} height={16} />
+            </button>
           </div>
         ) : (
           <button

@@ -2,7 +2,7 @@ import s from "./HelpBtn.module.scss";
 
 export const HelpBtn = ({ name, onShowPrompt, onHidePrompt }) => {
   return (
-    <button
+    <div
       type="button"
       className={s.help_btn}
       onMouseEnter={() => onShowPrompt(name)}
@@ -24,6 +24,6 @@ export const HelpBtn = ({ name, onShowPrompt, onHidePrompt }) => {
           strokeLinejoin="round"
         />
       </svg>
-    </button>
+    </div>
   );
 };

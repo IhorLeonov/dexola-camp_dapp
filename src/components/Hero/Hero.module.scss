@@ -105,14 +105,14 @@
     }
 
     &_apr {
-      width: 52.5px;
+      width: 62.5px;
 
       @media screen and (min-width: $tablet) {
-        width: 88px;
+        width: 100px;
       }
 
       @media screen and (min-width: $desktop) {
-        width: 153px;
+        width: auto;
       }
     }
 
