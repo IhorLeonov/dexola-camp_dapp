@@ -4,7 +4,6 @@ import ethLogo from "../../assets/icons/eth-logo.svg";
 import { Icon } from "../../utils/selectorIcons";
 import { Loader } from "../Loader/Loader";
 import { useEffect } from "react";
-
 import { useAccount, useConnect, useBalance, useDisconnect } from "wagmi";
 
 export const Header = () => {
