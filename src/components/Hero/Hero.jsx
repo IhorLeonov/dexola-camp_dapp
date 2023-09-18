@@ -3,12 +3,14 @@ import { HelpBtn } from "../HelpBtn/HelpBtn";
 import { Prompt } from "../Prompt/Prompt";
 import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
+import { calcPercent, calcEndingTime } from "../../utils/mathHelpers";
 
 import {
   useGetStakedBalance,
   useGetNumberOfRewards,
   useGetTotalAmountOfStakes,
   useGetTimeStampOfTheEnd,
+  useGetUserRewards,
 } from "../../utils/contractRead";
 
 export const Hero = () => {
@@ -17,13 +19,13 @@ export const Hero = () => {
 
   const { address } = useAccount();
   const numberOfRewards = useGetNumberOfRewards();
-  const totalAmountOfStakes = useGetTotalAmountOfStakes();
-  const stru = useGetStakedBalance(address);
-  const apr = Math.round((numberOfRewards * 100) / totalAmountOfStakes);
-  const timestamp = useGetTimeStampOfTheEnd();
-  const dateNow = Date.now() / 1000;
-  const oneDay = 86400;
-  const completionTime = Math.round((timestamp - dateNow) / oneDay);
+  const totalAmount = useGetTotalAmountOfStakes();
+  const timeStamp = useGetTimeStampOfTheEnd();
+
+  const stakedBalance = useGetStakedBalance(address);
+  const percent = calcPercent(numberOfRewards, totalAmount);
+  const completionTime = calcEndingTime(timeStamp);
+  const userRewards = useGetUserRewards(address);
 
   return (
     <section className={s.hero}>
@@ -31,7 +33,9 @@ export const Hero = () => {
         <h1 className={s.hero_title}>StarRunner Token staking</h1>
         <ul className={s.hero_info}>
           <li className={s.hero_info_balance}>
-            <span className={s.hero_amount}>{stru ? stru : "0.00"}</span>
+            <span className={s.hero_amount}>
+              {stakedBalance ? stakedBalance : "0.00"}
+            </span>
             <span className={s.hero_stru}>STRU</span>{" "}
             <HelpBtn
               name="balance"
@@ -42,7 +46,7 @@ export const Hero = () => {
           </li>
 
           <li className={s.hero_info_apr}>
-            <span className={s.hero_amount}>{apr ? "≈" + apr + "%" : "0"}</span>{" "}
+            <span className={s.hero_amount}>≈{percent ? percent : "0"}%</span>{" "}
             <span className={s.hero_info_desc}>APR</span>
             <HelpBtn
               name="apr"
@@ -59,7 +63,9 @@ export const Hero = () => {
           </li>
 
           <li className={s.hero_info_rewards}>
-            <span className={s.hero_amount}>0</span>{" "}
+            <span className={s.hero_amount}>
+              {userRewards ? userRewards : "0"}
+            </span>{" "}
             <span className={s.hero_stru}>STRU</span>{" "}
             <HelpBtn
               name="rewards"

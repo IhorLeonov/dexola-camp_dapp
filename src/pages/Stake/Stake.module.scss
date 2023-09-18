@@ -1,4 +1,35 @@
 @import "../../sass/utils/variables";
+@import "../../sass/utils/mixins";
 
 .stake {
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #2f2f2f;
+  }
+
+  &_form {
+    margin-top: 24px;
+  }
+
+  &_form_label {
+    height: 60px;
+  }
+
+  &_form_input {
+    padding: 8px 0;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  &_available {
+    margin-top: 12px;
+  }
+
+  &_form_btn {
+    @include button;
+    margin-top: 24px; // fix
+    color: #ffffff;
+  }
 }
