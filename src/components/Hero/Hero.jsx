@@ -16,6 +16,7 @@ export const Hero = () => {
     usePrompt();
 
   const { address } = useAccount();
+
   const numberOfRewards = useGetNumberOfRewards();
   const totalAmountOfStakes = useGetTotalAmountOfStakes();
 

@@ -19,6 +19,7 @@
     @media screen and (min-width: $tablet) {
       padding-top: 0;
       height: 70px;
+      line-height: 1.14;
     }
 
     @media screen and (min-width: $desktop) {
@@ -27,7 +28,7 @@
       max-width: 100%;
       padding-left: calc((100vw - 1360px) / 2);
       padding-right: calc((100vw - 1360px) / 2);
-      background-color: transparent; //
+      background-color: transparent;
     }
   }
 
@@ -41,7 +42,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 70px;
 
   font-family: var(--font-family--kanit-medium);
   font-size: 12px;
@@ -50,7 +50,6 @@
   @media screen and (min-width: $tablet) {
     font-size: 14px;
     font-weight: 600;
-    line-height: 114;
     text-transform: uppercase;
   }
 }

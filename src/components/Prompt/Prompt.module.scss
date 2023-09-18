@@ -3,23 +3,22 @@
 .prompt {
   position: absolute;
   // display: none;
-
-  z-index: 10;
   top: 0;
-  left: 0;
+  z-index: 10;
 
   color: black;
   font-size: 14px;
   line-height: 1.14;
+  background-color: #ffffff;
 
   @media screen and (max-width: $max-tablet) {
+    left: 0;
     padding: 24px 16px 0px 16px;
     width: 100vw;
     height: 275px;
 
     font-family: var(--font-family--roboto-mono);
     border-radius: 8px 8px 0px 0px;
-    background-color: #ffffff;
     transform: translateY(calc(100vh + 275px + 8px));
 
     &_title {
@@ -45,10 +44,10 @@
   }
 
   @media screen and (min-width: $desktop) {
-    top: 154px;
+    top: 60px;
     padding: 8px 12px;
     font-family: Inter;
-    background-color: var(--color-accent);
+
     transform: scale(0);
 
     &::after {

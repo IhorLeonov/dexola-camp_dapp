@@ -12,8 +12,7 @@
 }
 
 .balance_prompt {
-  display: block;
-
+  // display: block;
   @media screen and (max-width: $max-tablet) {
     animation: move 300ms linear;
     animation-fill-mode: forwards;
@@ -21,40 +20,35 @@
 
   @media screen and (min-width: $desktop) {
     width: 165px;
-    left: calc(((100vw - 1200px) / 2 + 200px));
+    left: 320px;
     animation: expand-bounce 300ms;
     animation-fill-mode: forwards;
   }
 }
 
 .apr_prompt {
-  display: block;
-
+  // display: block;
   @media screen and (max-width: $max-tablet) {
     animation: move 300ms linear;
     animation-fill-mode: forwards;
   }
-
   @media screen and (min-width: $desktop) {
     width: 360px;
-    left: calc(((100vw - 1200px) / 2 + 282px));
+    left: 445px;
     animation: expand-bounce 300ms;
     animation-fill-mode: forwards;
   }
 }
-
 .rewards_prompt {
-  display: block;
-
+  // display: block;
   @media screen and (max-width: $max-tablet) {
     animation: move 300ms linear;
     animation-fill-mode: forwards;
   }
-
   @media screen and (min-width: $desktop) {
     width: 176px;
     text-align: center;
-    left: calc(((100vw - 1200px) / 2 + 718px));
+    left: 873px;
     animation: expand-bounce 300ms;
     animation-fill-mode: forwards;
   }
