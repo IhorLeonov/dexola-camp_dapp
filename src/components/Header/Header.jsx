@@ -1,10 +1,16 @@
 import s from "./Header.module.scss";
 import ethLogo from "../../assets/icons/eth-logo.svg";
+import struLogo from "../../assets/images/stru-logo.png";
 
 import { Icon } from "../../utils/selectorIcons";
 import { Loader } from "../Loader/Loader";
 import { useEffect } from "react";
 import { useAccount, useConnect, useBalance, useDisconnect } from "wagmi";
+import { useGetSTRUBalance } from "../../utils/contractRead";
+import { fromWei } from "../../utils/mathHelpers";
+
+const deepLinkUrl =
+  "https://metamask.app.link/dapp/dexola-camp-dapp.vercel.app/";
 
 export const Header = () => {
   const { connect, connectors, isLoading } = useConnect();
@@ -12,8 +18,9 @@ export const Header = () => {
   const { disconnect } = useDisconnect();
   const { data: balance } = useBalance({ address });
 
-  const deepLinkUrl =
-    "https://metamask.app.link/dapp/dexola-camp-dapp.vercel.app/";
+  const walletBalance = Number(balance?.formatted).toFixed(1);
+  const struBalance = fromWei(useGetSTRUBalance(address));
+  const formattedAddress = address?.slice(0, 17) + "...";
 
   const handleConnect = () => {
     window.ethereum
@@ -33,15 +40,16 @@ export const Header = () => {
         </a>
         {isConnected ? (
           <div className={s.wallet_info}>
+            <img className={s.stru_logo} src={struLogo} alt="STRU logo" />
+            {struBalance ? struBalance : "0.00"} STRU
             <img className={s.eth_logo} src={ethLogo} alt="Ethereum logo" />
-            {balance ? Number(balance?.formatted).toFixed(1) : "0.00"}{" "}
-            {balance?.symbol}
+            {balance ? walletBalance : "0.00"} {balance?.symbol}
             <span className={s.wallet_adress}>|</span>
             <span className={s.wallet_adress}>
-              {address ? address?.slice(0, 17) + "..." : "unknown"}
+              {address ? formattedAddress : "unknown"}
             </span>
             <button onClick={disconnect}>
-              <Icon name="logout" width={16} height={16} />
+              <Icon name="logout" width={18} height={18} />
             </button>
           </div>
         ) : (

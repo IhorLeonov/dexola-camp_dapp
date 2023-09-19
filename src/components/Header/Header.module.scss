@@ -46,11 +46,11 @@
   font-family: var(--font-family--kanit-medium);
   font-size: 12px;
   letter-spacing: 0.12px;
+  text-transform: uppercase;
 
   @media screen and (min-width: $tablet) {
     font-size: 14px;
     font-weight: 600;
-    text-transform: uppercase;
   }
 }
 
@@ -61,8 +61,18 @@
 }
 
 .eth_logo {
+  margin-left: 4px;
   @media screen and (min-width: $tablet) {
+    margin-left: 8px;
     width: 32px;
     height: 32px;
+  }
+}
+
+.stru_logo {
+  border-radius: 50%;
+  @media screen and (max-width: $max-mobile) {
+    width: 24px;
+    height: 24px;
   }
 }

@@ -8,3 +8,7 @@ export const calcPercent = (numberOfRewards, totalAmount) => {
 export const calcEndingTime = (timeStamp) => {
   return Math.round((timeStamp - dateNow) / oneDay);
 };
+
+export const fromWei = (numb) => {
+  return numb / 10 ** 18;
+};
