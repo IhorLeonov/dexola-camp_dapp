@@ -11,7 +11,7 @@ import {
   useGetTotalAmountOfStakes,
   useGetTimeStampOfTheEnd,
   useGetUserRewards,
-} from "../../utils/contractRead";
+} from "../../utils/contractMethods";
 
 export const Hero = () => {
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =

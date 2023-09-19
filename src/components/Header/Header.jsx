@@ -6,8 +6,9 @@ import { Icon } from "../../utils/selectorIcons";
 import { Loader } from "../Loader/Loader";
 import { useEffect } from "react";
 import { useAccount, useConnect, useBalance, useDisconnect } from "wagmi";
-import { useGetSTRUBalance } from "../../utils/contractRead";
+import { useGetSTRUBalance } from "../../utils/contractMethods";
 import { fromWei } from "../../utils/mathHelpers";
+import { MyContext } from "../../context/context";
 
 const deepLinkUrl =
   "https://metamask.app.link/dapp/dexola-camp-dapp.vercel.app/";
@@ -17,6 +18,7 @@ export const Header = () => {
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: balance } = useBalance({ address });
+  const { setStruToken } = MyContext();
 
   const walletBalance = Number(balance?.formatted).toFixed(1);
   const struBalance = fromWei(useGetSTRUBalance(address));
@@ -27,6 +29,10 @@ export const Header = () => {
       ? connect({ connector: connectors[0] })
       : window.open(deepLinkUrl);
   };
+
+  useEffect(() => {
+    setStruToken(struBalance);
+  }, [setStruToken, struBalance]);
 
   useEffect(() => {
     if (window.ethereum) window.ethereum.on("accountsChanged", handleConnect);
@@ -48,16 +54,12 @@ export const Header = () => {
             <span className={s.wallet_adress}>
               {address ? formattedAddress : "unknown"}
             </span>
-            <button onClick={disconnect}>
+            <button type="button" className={s.dcnnct_btn} onClick={disconnect}>
               <Icon name="logout" width={18} height={18} />
             </button>
           </div>
         ) : (
-          <button
-            type="button"
-            className={s.header_btn}
-            onClick={handleConnect}
-          >
+          <button type="button" className={s.cnnct_btn} onClick={handleConnect}>
             {isLoading ? <Loader width={24} /> : "Connect wallet"}
           </button>
         )}

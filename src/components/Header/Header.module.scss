@@ -31,11 +31,6 @@
       background-color: transparent;
     }
   }
-
-  &_btn {
-    @include button;
-    width: 167px;
-  }
 }
 
 .wallet_info {
@@ -52,6 +47,11 @@
     font-size: 14px;
     font-weight: 600;
   }
+}
+
+.cnnct_btn {
+  @include button;
+  width: 167px;
 }
 
 .wallet_adress {
@@ -74,5 +74,12 @@
   @media screen and (max-width: $max-mobile) {
     width: 24px;
     height: 24px;
+  }
+}
+
+.dcnnct_btn {
+  margin-left: 4px;
+  @media screen and (min-width: $tablet) {
+    margin-left: 8px;
   }
 }

@@ -1,12 +1,19 @@
 import s from "./Stake.module.scss";
 import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
-
-const handleSubmit = (amount) => {
-  console.log("amount", amount);
-};
+import { MyContext } from "../../context/context";
+// import { useState } from "react";s
+import { useStake } from "../../utils/contractMethods";
 
 export const Stake = () => {
+  const { struToken } = MyContext();
+  // const [stakeAmount, setStakeAmount] = useState();
+  const { write } = useStake();
+
+  const handleSubmit = (amount) => {
+    write({ args: [amount] });
+  };
+
   return (
     <div className={s.stake}>
       <div className={s.stake_header}>
@@ -35,8 +42,8 @@ export const Stake = () => {
             />
           </label>
           <p className={s.stake_available}>
-            Available: <span>354</span>
-            <span>STRU</span>
+            Available: <span>{struToken}</span>
+            <span> STRU</span>
           </p>
           <button className={s.stake_form_btn} type="submit">
             Stake

@@ -1,6 +1,6 @@
-import stakeABI from "./stakeABI.json";
-import struABI from "./stakeABI.json";
-import { useContractRead } from "wagmi";
+import stakeABI from "./abis/stakeABI.json";
+import struABI from "./abis/stakeABI.json";
+import { useContractRead, useContractWrite } from "wagmi";
 
 const struAddress = "0x59Ec26901B19fDE7a96f6f7f328f12d8f682CB83";
 const stakeAddress = "0x2F112ED8A96327747565f4d4b4615be8fb89459d";
@@ -66,4 +66,31 @@ export const useGetUserRewards = (address) => {
     args: [`${address}`],
   });
   return Number(data);
+};
+
+// send STRU token to stake
+export const useStake = () => {
+  const { data, isLoading, isSuccess, write } = useContractWrite({
+    address: stakeAddress,
+    abi: stakeABI,
+    functionName: "stake",
+  });
+  return { write, data, isLoading, isSuccess };
+
+  // (
+  //   <div>
+  //     <button onClick={() => write()}>Feed</button>
+  //     {isLoading && <div>Check Wallet</div>}
+  //     {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
+  //   </div>
+  // );
+};
+
+export const useAprove = () => {
+  const { write } = useContractWrite({
+    address: stakeAddress,
+    abi: stakeABI,
+    functionName: "stake",
+  });
+  return { write };
 };
