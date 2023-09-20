@@ -1,7 +1,7 @@
-@import "../../sass/utils/variables";
-@import "../../sass/utils/mixins";
+@import "../sass/utils/variables";
+@import "../sass/utils/mixins";
 
-.stake {
+.page {
   &_header {
     display: flex;
     justify-content: space-between;

@@ -21,7 +21,7 @@ export const Header = () => {
   const { setStruToken, setUserAddress } = MyContext();
 
   const walletBalance = Number(balance?.formatted).toFixed(1);
-  const struBalance = fromWei(useGetSTRUBalance(address));
+  const struBalance = Math.round(fromWei(useGetSTRUBalance(address)));
   const formattedAddress = address?.slice(0, 17) + "...";
 
   const handleConnect = () => {
@@ -31,8 +31,10 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    setStruToken(struBalance);
-    setUserAddress(address);
+    if (isConnected) {
+      setStruToken(struBalance);
+      setUserAddress(address);
+    }
   }, [struBalance, address]);
 
   useEffect(() => {

@@ -67,6 +67,27 @@ export const useGetUserRewards = (address) => {
     abi: stakeABI,
     functionName: "earned",
     args: [`${address}`],
+    watch: true,
+  });
+  return Number(data);
+};
+
+// reading reward rate
+export const useGetRewardRate = () => {
+  const { data } = useContractRead({
+    address: stakeAddress,
+    abi: stakeABI,
+    functionName: "rewardRate",
+  });
+  return Number(data);
+};
+
+// reading reward rate
+export const useGetTotalSupply = () => {
+  const { data } = useContractRead({
+    address: stakeAddress,
+    abi: stakeABI,
+    functionName: "totalSupply",
   });
   return Number(data);
 };
@@ -108,7 +129,7 @@ export const useApproveToken = () => {
   return { writeApprove, data, isLoading, isSuccess, status };
 };
 
-// send STRU token to stake
+// send STRU token to stake, pass amount of staked token in args
 export const useStakeToken = () => {
   const { setStatus } = MyContext();
   const {
@@ -130,4 +151,24 @@ export const useStakeToken = () => {
     },
   });
   return { writeStake, data, isLoading, isSuccess, status };
+};
+
+// get STRU token from stake, pass desired amount of token in args
+export const useWithdraw = () => {
+  const { data, isLoading, isSuccess, write } = useContractWrite({
+    address: stakeAddress,
+    abi: stakeABI,
+    functionName: "withdraw",
+  });
+  return { write, data, isLoading, isSuccess };
+};
+
+// get rewards from stake
+export const useClaimRewards = () => {
+  const { data, isLoading, isSuccess, write } = useContractWrite({
+    address: stakeAddress,
+    abi: stakeABI,
+    functionName: "claimReward",
+  });
+  return { write, data, isLoading, isSuccess };
 };

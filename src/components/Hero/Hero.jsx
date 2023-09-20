@@ -5,6 +5,7 @@ import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
 import { calcPercent, calcEndingTime } from "../../utils/mathHelpers";
 import { fromWei } from "../../utils/mathHelpers";
+// import { MyContext } from "../../context/context";
 
 import {
   useGetStakedBalance,
@@ -15,6 +16,7 @@ import {
 } from "../../utils/contractMethods";
 
 export const Hero = () => {
+  // const { userAddress } = MyContext();
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
     usePrompt();
 
@@ -65,7 +67,7 @@ export const Hero = () => {
 
           <li className={s.hero_info_rewards}>
             <span className={s.hero_amount}>
-              {userRewards ? userRewards : "0"}
+              {!isNaN(userRewards) ? userRewards : "0"}
             </span>{" "}
             <span className={s.hero_stru}>STRU</span>{" "}
             <HelpBtn
