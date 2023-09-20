@@ -5,11 +5,21 @@ const Context = createContext();
 export const MyContext = () => useContext(Context);
 
 export const ContextProvider = ({ children }) => {
-  // const [address, setAddress] = useState(null);
+  const [userAddress, setUserAddress] = useState(null);
   const [struToken, setStruToken] = useState(null);
+  const [status, setStatus] = useState(null);
 
   return (
-    <Context.Provider value={{ struToken, setStruToken }}>
+    <Context.Provider
+      value={{
+        struToken,
+        setStruToken,
+        status,
+        setStatus,
+        userAddress,
+        setUserAddress,
+      }}
+    >
       {children}
     </Context.Provider>
   );

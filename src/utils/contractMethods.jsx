@@ -1,9 +1,10 @@
 import stakeABI from "./abis/stakeABI.json";
-import struABI from "./abis/stakeABI.json";
+import struABI from "./abis/struABI.json";
 import { useContractRead, useContractWrite } from "wagmi";
+import { MyContext } from "../context/context";
 
-const struAddress = "0x59Ec26901B19fDE7a96f6f7f328f12d8f682CB83";
-const stakeAddress = "0x2F112ED8A96327747565f4d4b4615be8fb89459d";
+export const stakeAddress = "0x2F112ED8A96327747565f4d4b4615be8fb89459d";
+export const struAddress = "0x59Ec26901B19fDE7a96f6f7f328f12d8f682CB83";
 
 // reading STRU token balance, takes user address in args
 export const useGetSTRUBalance = (address) => {
@@ -12,6 +13,7 @@ export const useGetSTRUBalance = (address) => {
     abi: struABI,
     functionName: "balanceOf",
     args: [`${address}`],
+    watch: true,
   });
   return Number(data);
 };
@@ -23,6 +25,7 @@ export const useGetStakedBalance = (address) => {
     abi: stakeABI,
     functionName: "balanceOf",
     args: [`${address}`],
+    watch: true,
   });
   return Number(data);
 };
@@ -68,29 +71,63 @@ export const useGetUserRewards = (address) => {
   return Number(data);
 };
 
-// send STRU token to stake
-export const useStake = () => {
-  const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: stakeAddress,
-    abi: stakeABI,
-    functionName: "stake",
+// checking allowance before staking, gets owner and spender address in args
+export const useCheckAllowance = (userAddress) => {
+  const { data } = useContractRead({
+    address: struAddress,
+    abi: struABI,
+    functionName: "allowance",
+    args: [userAddress, stakeAddress],
+    watch: true,
   });
-  return { write, data, isLoading, isSuccess };
-
-  // (
-  //   <div>
-  //     <button onClick={() => write()}>Feed</button>
-  //     {isLoading && <div>Check Wallet</div>}
-  //     {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
-  //   </div>
-  // );
+  return Number(data);
 };
 
-export const useAprove = () => {
-  const { write } = useContractWrite({
+// approving token amount before staking, gets stake address and token amount in args
+export const useApproveToken = () => {
+  const { setStatus } = MyContext();
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    write: writeApprove,
+    status,
+  } = useContractWrite({
+    address: struAddress,
+    abi: struABI,
+    functionName: "approve",
+
+    onSuccess() {
+      setStatus("Approving successfull");
+    },
+    onError() {
+      setStatus("Approving error");
+    },
+  });
+
+  return { writeApprove, data, isLoading, isSuccess, status };
+};
+
+// send STRU token to stake
+export const useStakeToken = () => {
+  const { setStatus } = MyContext();
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    write: writeStake,
+    status,
+  } = useContractWrite({
     address: stakeAddress,
     abi: stakeABI,
     functionName: "stake",
+
+    onSuccess() {
+      setStatus("Staking successfull");
+    },
+    onError() {
+      setStatus("Staking error");
+    },
   });
-  return { write };
+  return { writeStake, data, isLoading, isSuccess, status };
 };

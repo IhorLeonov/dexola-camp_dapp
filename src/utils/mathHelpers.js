@@ -12,3 +12,5 @@ export const calcEndingTime = (timeStamp) => {
 export const fromWei = (numb) => {
   return numb / 10 ** 18;
 };
+
+export const decimalWei = 10 ** 18;

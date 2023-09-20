@@ -18,7 +18,7 @@ export const Header = () => {
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: balance } = useBalance({ address });
-  const { setStruToken } = MyContext();
+  const { setStruToken, setUserAddress } = MyContext();
 
   const walletBalance = Number(balance?.formatted).toFixed(1);
   const struBalance = fromWei(useGetSTRUBalance(address));
@@ -32,7 +32,8 @@ export const Header = () => {
 
   useEffect(() => {
     setStruToken(struBalance);
-  }, [setStruToken, struBalance]);
+    setUserAddress(address);
+  }, [struBalance, address]);
 
   useEffect(() => {
     if (window.ethereum) window.ethereum.on("accountsChanged", handleConnect);

@@ -4,6 +4,7 @@ import { Prompt } from "../Prompt/Prompt";
 import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
 import { calcPercent, calcEndingTime } from "../../utils/mathHelpers";
+import { fromWei } from "../../utils/mathHelpers";
 
 import {
   useGetStakedBalance,
@@ -22,10 +23,10 @@ export const Hero = () => {
   const totalAmount = useGetTotalAmountOfStakes();
   const timeStamp = useGetTimeStampOfTheEnd();
 
-  const stakedBalance = useGetStakedBalance(address);
+  const stakedBalance = fromWei(useGetStakedBalance(address));
   const percent = calcPercent(numberOfRewards, totalAmount);
   const completionTime = calcEndingTime(timeStamp);
-  const userRewards = useGetUserRewards(address);
+  const userRewards = fromWei(useGetUserRewards(address)).toFixed(2);
 
   return (
     <section className={s.hero}>

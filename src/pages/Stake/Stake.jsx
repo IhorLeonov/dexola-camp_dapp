@@ -2,16 +2,29 @@ import s from "./Stake.module.scss";
 import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { MyContext } from "../../context/context";
-// import { useState } from "react";s
-import { useStake } from "../../utils/contractMethods";
+import { decimalWei } from "../../utils/mathHelpers";
+import { stakeAddress } from "../../utils/contractMethods";
+import { useAccount } from "wagmi";
+
+import {
+  useCheckAllowance,
+  useStakeToken,
+  useApproveToken,
+} from "../../utils/contractMethods";
 
 export const Stake = () => {
-  const { struToken } = MyContext();
-  // const [stakeAmount, setStakeAmount] = useState();
-  const { write } = useStake();
+  const { struToken, status } = MyContext();
+  const { address: userAddress } = useAccount();
+
+  const { writeApprove } = useApproveToken();
+  const { writeStake, isLoading } = useStakeToken();
+  const allowance = useCheckAllowance(userAddress);
 
   const handleSubmit = (amount) => {
-    write({ args: [amount] });
+    const payload = amount * decimalWei;
+    if (allowance < payload) {
+      writeApprove({ args: [stakeAddress, payload] });
+    } else writeStake({ args: [payload] });
   };
 
   return (
@@ -45,6 +58,7 @@ export const Stake = () => {
             Available: <span>{struToken}</span>
             <span> STRU</span>
           </p>
+          {isLoading && <p className={s.stake_available}>Loading</p>}
           <button className={s.stake_form_btn} type="submit">
             Stake
           </button>
