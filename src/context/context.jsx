@@ -5,9 +5,9 @@ const Context = createContext();
 export const MyContext = () => useContext(Context);
 
 export const ContextProvider = ({ children }) => {
-  const [userAddress, setUserAddress] = useState(null);
-  const [struToken, setStruToken] = useState(null);
-  const [status, setStatus] = useState(null);
+  const [userAddress, setUserAddress] = useState("");
+  const [struToken, setStruToken] = useState(0);
+  const [status, setStatus] = useState("");
 
   return (
     <Context.Provider

@@ -2,19 +2,19 @@
 @import "../../sass/utils/variables";
 
 .header {
-  position: fixed;
+  // position: fixed;
   width: 100%;
   z-index: 10;
 
   &_container {
     @include container;
-    background-color: var(--color-hero-bg);
+    // background-color: var(--color-hero-bg);
 
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 3px;
-    height: 40px;
+    height: 43px;
 
     @media screen and (min-width: $tablet) {
       padding-top: 0;

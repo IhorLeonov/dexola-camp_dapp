@@ -2,10 +2,10 @@ import s from "../pages.module.scss";
 import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { MyContext } from "../../context/context";
-import { decimalWei } from "../../utils/mathHelpers";
 import { stakeAddress } from "../../utils/contractMethods";
 import { useAccount } from "wagmi";
-import { fromWei } from "../../utils/mathHelpers";
+import { fromWei, decimalWei } from "../../utils/mathHelpers";
+import { useState } from "react";
 
 import {
   useCheckAllowance,
@@ -19,6 +19,8 @@ import {
 
 export const Stake = () => {
   const { struToken, status } = MyContext();
+  const [inputValue, setInputValue] = useState(0);
+
   const { address: userAddress } = useAccount();
   const { writeApprove } = useApproveToken();
   const { writeStake, isLoading } = useStakeToken();
@@ -30,9 +32,11 @@ export const Stake = () => {
   const rewardRate = useGetRewardRate();
   const totalAvailble = remaining * rewardRate;
   const totalSupply = useGetTotalSupply();
-  const stakedBalance = fromWei(useGetStakedBalance(userAddress));
+  const stakedBalance = useGetStakedBalance(userAddress);
+  const userInput = inputValue * decimalWei;
+
   const totalRate = Math.round(
-    (stakedBalance * totalAvailble) / totalSupply + stakedBalance
+    fromWei((stakedBalance * totalAvailble) / totalSupply + userInput)
   );
 
   const handleSubmit = (amount) => {
@@ -40,6 +44,10 @@ export const Stake = () => {
     if (allowance < payload) {
       writeApprove({ args: [stakeAddress, payload] });
     } else writeStake({ args: [payload] });
+  };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
   };
 
   return (
@@ -59,7 +67,7 @@ export const Stake = () => {
           actions.resetForm();
         }}
       >
-        <Form className={s.page_form}>
+        <Form className={s.page_form} onChange={handleInputChange}>
           <label className={s.page_form_label}>
             <Input
               className={s.page_form_input}
@@ -70,7 +78,7 @@ export const Stake = () => {
             />
           </label>
           <p className={s.page_available}>
-            Available: <span>{!isNaN(struToken) ? struToken : "0"}</span>
+            Available: <span>{struToken ? struToken : "0"}</span>
             <span> STRU</span>
           </p>
           {isLoading && <p className={s.page_available}>Loading</p>}

@@ -28,7 +28,7 @@ export const Hero = () => {
   const stakedBalance = fromWei(useGetStakedBalance(address));
   const percent = calcPercent(numberOfRewards, totalAmount);
   const completionTime = calcEndingTime(timeStamp);
-  const userRewards = fromWei(useGetUserRewards(address)).toFixed(2);
+  const userRewards = fromWei(useGetUserRewards(address)).toFixed(1);
 
   return (
     <section className={s.hero}>
@@ -50,12 +50,12 @@ export const Hero = () => {
 
           <li className={s.hero_info_apr}>
             <span className={s.hero_amount}>≈{percent ? percent : "0"}%</span>{" "}
-            <span className={s.hero_info_desc}>APR</span>
             <HelpBtn
               name="apr"
               onShowPrompt={handleShowPrompt}
               onHidePrompt={handleHidePrompt}
             />
+            <span className={s.hero_info_desc}>APR</span>
           </li>
 
           <li className={s.hero_info_days}>

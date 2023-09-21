@@ -12,7 +12,7 @@
 }
 
 .balance_prompt {
-  // display: block;
+  display: block;
   @media screen and (max-width: $max-tablet) {
     animation: move 300ms linear;
     animation-fill-mode: forwards;
@@ -27,7 +27,7 @@
 }
 
 .apr_prompt {
-  // display: block;
+  display: block;
   @media screen and (max-width: $max-tablet) {
     animation: move 300ms linear;
     animation-fill-mode: forwards;
@@ -40,7 +40,7 @@
   }
 }
 .rewards_prompt {
-  // display: block;
+  display: block;
   @media screen and (max-width: $max-tablet) {
     animation: move 300ms linear;
     animation-fill-mode: forwards;

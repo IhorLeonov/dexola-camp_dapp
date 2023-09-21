@@ -8,32 +8,33 @@
       // max-width: 100vw;
       // padding-left: calc((100vw - 1200px) / 2);
       // padding-right: calc((100vw - 1200px) / 2);
-      position: relative;
+      // position: relative;
       padding-left: 120px;
       padding-right: 120px;
     }
   }
 
-  position: fixed;
-  top: 40px;
+  // position: fixed; //
+  // top: 40px; //
   padding-top: 22px;
-  padding-bottom: 16px;
+  // padding-top: 65px;
+  // padding-bottom: 16px;
 
   width: 100%;
-  height: 200px;
+  height: 184px;
   background-color: var(--color-hero-bg);
 
   @media screen and (min-width: $tablet) {
-    top: 70px;
+    // top: 70px; //
     padding-top: 32px;
     height: 208px;
   }
 
   @media screen and (min-width: $desktop) {
-    position: static;
+    // position: static; //
     // top: 0px;
-    padding-top: 94px;
-    height: 281px;
+    padding-top: 24px;
+    height: 211px;
   }
 
   &_title {
@@ -74,11 +75,15 @@
       display: flex;
       flex-wrap: wrap;
       align-items: end;
-      margin-right: 18px;
+      margin-right: 10px;
       gap: 4px;
 
       font-size: 12px;
       letter-spacing: -0.24px;
+
+      @media screen and (min-width: 400px) {
+        margin-right: 20px;
+      }
 
       @media screen and (min-width: $tablet) {
         font-size: 16px;
@@ -95,7 +100,7 @@
     }
 
     &_balance {
-      width: 108px;
+      width: 98px;
 
       @media screen and (min-width: $tablet) {
         width: 170px;
@@ -107,10 +112,10 @@
     }
 
     &_apr {
-      width: 62.5px;
+      width: 72px;
 
       @media screen and (min-width: $tablet) {
-        width: 100px;
+        width: 120px;
       }
 
       @media screen and (min-width: $desktop) {
@@ -121,7 +126,7 @@
     &_days {
       display: flex;
       align-items: start;
-      width: 40.5px;
+      width: 30px;
 
       @media screen and (min-width: $tablet) {
         width: 88px;
@@ -139,14 +144,14 @@
     }
 
     &_rewards {
-      width: 83px;
+      width: 93px;
 
       @media screen and (min-width: $tablet) {
         width: 144px;
       }
 
       @media screen and (min-width: $desktop) {
-        width: 179px;
+        width: 260px;
       }
     }
   }
