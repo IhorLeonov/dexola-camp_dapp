@@ -1,4 +1,4 @@
-import s from "../pages.module.scss";
+import s from "./Pages.module.scss";
 import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { useAccount } from "wagmi";
@@ -29,25 +29,33 @@ export const Withdraw = () => {
           actions.resetForm();
         }}
       >
-        <Form className={s.page_form}>
-          <label className={s.page_form_label}>
-            <Input
-              className={s.page_form_input}
-              type="number"
-              name="amount"
-              placeholder="Enter stake amount"
-              autoComplete="off"
-            />
-          </label>
+        <Form id="form" className={s.page_form}>
+          <Input
+            className={s.page_form_input}
+            type="number"
+            name="amount"
+            placeholder="Enter stake amount"
+            autoComplete="off"
+          />
+          <div className={s.page_form_error_box}>
+            <p className={s.page_form_error}></p>
+          </div>
           <p className={s.page_available}>
-            Available: <span>{available ? available : "0"}</span>
+            Available:{" "}
+            <span className={s.page_available_value}>
+              {available ? available : "0"}
+            </span>
             <span> STRU</span>
           </p>
-          <button className={s.page_form_btn} type="submit">
-            Withdraw
-          </button>
         </Form>
       </Formik>
+      <button
+        form="form"
+        className={s.page_form_btn + " " + s.withdraw_btn}
+        type="submit"
+      >
+        Withdraw
+      </button>
     </div>
   );
 };

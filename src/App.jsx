@@ -1,9 +1,9 @@
 // import { JoinUs } from "./components/JoinUs/JoinUs";
 import { Layout } from "./components/Layout/Layout";
 import { Routes, Route } from "react-router-dom";
-import { Stake } from "./pages/Stake/Stake";
-import { Withdraw } from "./pages/Withdraw/Withdraw";
-import { ClaimRewards } from "./pages/ClaimRewards/ClaimRewards";
+import { Stake } from "./components/Pages/Stake";
+import { Withdraw } from "./components/Pages/Withdraw";
+import { ClaimRewards } from "./components/Pages/ClaimRewards";
 
 function App() {
   return (

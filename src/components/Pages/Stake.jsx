@@ -1,4 +1,4 @@
-import s from "../pages.module.scss";
+import s from "./Pages.module.scss";
 import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { MyContext } from "../../context/context";
@@ -54,9 +54,12 @@ export const Stake = () => {
     <div className={s.page}>
       <div className={s.page_header}>
         <h2 className={s.page_title}>Stake</h2>
-        <p className={s.page_rate}>
-          Reward rate:
-          <span> {totalRate ? totalRate : "0"} STRU/week</span>
+        <p>
+          <span className={s.page_rate_title}>Reward rate: </span>
+          <span className={s.page_rate_value}>
+            {totalRate ? totalRate : "0"}
+          </span>
+          <span className={s.page_rate_desc}> STRU/WEEK</span>
         </p>
       </div>
       <Formik
@@ -67,26 +70,34 @@ export const Stake = () => {
           actions.resetForm();
         }}
       >
-        <Form className={s.page_form} onChange={handleInputChange}>
-          <label className={s.page_form_label}>
-            <Input
-              className={s.page_form_input}
-              type="number"
-              name="amount"
-              placeholder="Enter stake amount"
-              autoComplete="off"
-            />
-          </label>
+        <Form id="form" className={s.page_form} onChange={handleInputChange}>
+          <Input
+            className={s.page_form_input}
+            type="number"
+            name="amount"
+            placeholder="Enter stake amount"
+            autoComplete="off"
+          />
+          <div className={s.page_form_error_box}>
+            <p className={s.page_form_error}></p>
+          </div>
           <p className={s.page_available}>
-            Available: <span>{struToken ? struToken : "0"}</span>
+            Available:{" "}
+            <span className={s.page_available_value}>
+              {struToken ? struToken : "0"}{" "}
+            </span>
             <span> STRU</span>
           </p>
-          {isLoading && <p className={s.page_available}>Loading</p>}
-          <button className={s.page_form_btn} type="submit">
-            Stake
-          </button>
+          {/* {isLoading && <p className={s.page_available}>Loading</p>} */}
         </Form>
       </Formik>
+      <button
+        form="form"
+        className={s.page_form_btn + " " + s.stake_btn}
+        type="submit"
+      >
+        Stake
+      </button>
     </div>
   );
 };
