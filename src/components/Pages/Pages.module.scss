@@ -100,11 +100,6 @@
   &_form_btn {
     @include button;
     margin-top: auto;
-
-    @media screen and (min-width: $tablet) {
-      // width: auto;
-      // padding: 0 40px;
-    }
   }
 }
 

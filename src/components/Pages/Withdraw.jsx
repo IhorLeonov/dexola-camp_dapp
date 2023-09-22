@@ -36,6 +36,7 @@ export const Withdraw = () => {
             name="amount"
             placeholder="Enter stake amount"
             autoComplete="off"
+            min="0"
           />
           <div className={s.page_form_error_box}>
             <p className={s.page_form_error}></p>

@@ -18,7 +18,7 @@ export const Header = () => {
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: balance } = useBalance({ address });
-  const { setStruToken, setUserAddress } = MyContext();
+  const { setStruBalance, setUserAddress } = MyContext();
 
   const walletBalance = Number(balance?.formatted).toFixed(1);
   const struBalance = Math.round(fromWei(useGetSTRUBalance(address)));
@@ -32,7 +32,7 @@ export const Header = () => {
 
   useEffect(() => {
     if (isConnected) {
-      setStruToken(struBalance);
+      setStruBalance(struBalance);
       setUserAddress(address);
     }
   }, [struBalance, address]);

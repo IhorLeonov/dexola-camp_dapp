@@ -105,70 +105,64 @@ export const useCheckAllowance = (userAddress) => {
 };
 
 // approving token amount before staking, gets stake address and token amount in args
-export const useApproveToken = () => {
+export const useApproveStaking = () => {
   const { setStatus } = MyContext();
   const {
-    data,
-    isLoading,
-    isSuccess,
+    data: apprData,
+    isLoading: apprWriteLoading,
+    isError: apprWriteError,
     write: writeApprove,
-    status,
   } = useContractWrite({
     address: struAddress,
     abi: struABI,
     functionName: "approve",
 
-    onSuccess() {
-      setStatus("Approving successfull");
-    },
-    onError() {
-      setStatus("Approving error");
+    onError(error) {
+      console.log("Error write approve", error.message);
+      setStatus("error");
     },
   });
 
-  return { writeApprove, data, isLoading, isSuccess, status };
+  return { writeApprove, apprData, apprWriteLoading, apprWriteError };
 };
 
 // send STRU token to stake, pass amount of staked token in args
 export const useStakeToken = () => {
   const { setStatus } = MyContext();
   const {
-    data,
-    isLoading,
-    isSuccess,
+    data: stakeData,
+    isLoading: stakeWriteLoading,
+    isError: stakeWriteError,
     write: writeStake,
-    status,
   } = useContractWrite({
     address: stakeAddress,
     abi: stakeABI,
     functionName: "stake",
 
-    onSuccess() {
-      setStatus("Staking successfull");
-    },
-    onError() {
-      setStatus("Staking error");
+    onError(error) {
+      console.log("Error write stake", error.message);
+      setStatus("error");
     },
   });
-  return { writeStake, data, isLoading, isSuccess, status };
+  return { writeStake, stakeData, stakeWriteLoading, stakeWriteError };
 };
 
 // get STRU token from stake, pass desired amount of token in args
 export const useWithdraw = () => {
-  const { data, isLoading, isSuccess, write } = useContractWrite({
+  const { data, isLoading, write } = useContractWrite({
     address: stakeAddress,
     abi: stakeABI,
     functionName: "withdraw",
   });
-  return { write, data, isLoading, isSuccess };
+  return { write, data, isLoading };
 };
 
 // get rewards from stake
 export const useClaimRewards = () => {
-  const { data, isLoading, isSuccess, write } = useContractWrite({
+  const { data, isLoading, write } = useContractWrite({
     address: stakeAddress,
     abi: stakeABI,
     functionName: "claimReward",
   });
-  return { write, data, isLoading, isSuccess };
+  return { write, data, isLoading };
 };
