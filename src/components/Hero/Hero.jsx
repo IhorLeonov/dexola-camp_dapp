@@ -13,7 +13,7 @@ import {
   useGetTotalAmountOfStakes,
   useGetTimeStampOfTheEnd,
   useGetUserRewards,
-} from "../../utils/contractMethods";
+} from "../../utils/contractRead";
 
 export const Hero = () => {
   // const { userAddress } = MyContext();

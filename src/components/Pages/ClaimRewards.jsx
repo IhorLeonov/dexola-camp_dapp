@@ -1,9 +1,7 @@
 import s from "./Pages.module.scss";
 import { useAccount } from "wagmi";
-import {
-  useGetUserRewards,
-  useClaimRewards,
-} from "../../utils/contractMethods";
+import { useGetUserRewards } from "../../utils/contractRead";
+import { useClaimRewards } from "../../utils/contractWrite";
 import { fromWei } from "../../utils/mathHelpers";
 
 export const ClaimRewards = () => {

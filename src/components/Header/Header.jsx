@@ -6,7 +6,7 @@ import { Icon } from "../../utils/selectorIcons";
 import { Loader } from "../Loader/Loader";
 import { useEffect } from "react";
 import { useAccount, useConnect, useBalance, useDisconnect } from "wagmi";
-import { useGetSTRUBalance } from "../../utils/contractMethods";
+import { useGetSTRUBalance } from "../../utils/contractRead";
 import { fromWei } from "../../utils/mathHelpers";
 import { MyContext } from "../../context/context";
 

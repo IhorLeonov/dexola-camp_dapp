@@ -2,30 +2,40 @@ import s from "./Pages.module.scss";
 import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { MyContext } from "../../context/context";
-import { stakeAddress } from "../../utils/contractMethods";
 import { useAccount } from "wagmi";
 import { fromWei, decimalWei } from "../../utils/mathHelpers";
 import { useEffect, useState } from "react";
-import { useWaitForTransaction } from "wagmi";
 import { Loader } from "../Loader/Loader";
+import { Notification } from "../Notification/Notification";
 
 import {
   useCheckAllowance,
-  useStakeToken,
-  useApproveStaking,
   useGetTimeStampOfTheEnd,
   useGetRewardRate,
   useGetTotalSupply,
   useGetStakedBalance,
+} from "../../utils/contractRead";
+
+import {
+  stakeAddress,
+  useStakeToken,
+  useApproveStaking,
   useWaitForApprove,
-} from "../../utils/contractMethods";
+  useWaitForStake,
+} from "../../utils/contractWrite";
 
 export const Stake = () => {
-  const [inputValue, setInputValue] = useState(0);
-  const [payload, setPayload] = useState(0);
+  const [inputValue, setInputValue] = useState("");
 
-  const { struBalance, status, setStatus, statusMessage, setStatusMessage } =
-    MyContext();
+  const {
+    // status,
+    // statusMessage,
+    // setStatusMessage,
+    struBalance,
+    setStatus,
+    payload,
+    setPayload,
+  } = MyContext();
   const { address: userAddress } = useAccount();
 
   const allowance = useCheckAllowance(userAddress);
@@ -43,56 +53,14 @@ export const Stake = () => {
 
   const { writeApprove, apprWriteLoading, apprData } = useApproveStaking();
   const { writeStake, stakeWriteLoading, stakeData } = useStakeToken();
-
   const { apprLoading } = useWaitForApprove(apprData, writeStake, payload);
+  const { stakeLoading } = useWaitForStake(stakeData);
 
-  // const { isLoading: apprLoading } = useWaitForTransaction({
-  //   hash: apprData?.hash,
-  //   onSuccess() {
-  //     setStatus("success");
-  //     setStatusMessage(`${fromWei(payload)} STRU successfully approved`);
-  //     writeStake({ args: [payload] });
-  //   },
-  //   onError() {
-  //     setStatus("error");
-  //     setStatusMessage("Connection Error. Please try again");
-  //   },
-  // });
-
-  const { isLoading: stakeLoading } = useWaitForTransaction({
-    hash: stakeData?.hash,
-    onSuccess(data) {
-      setStatus("success");
-      setStatusMessage(
-        `${fromWei(payload)} STRU successfully added to Staking`
-      );
-      console.log("Success stake", data);
-    },
-    onError() {
-      setStatus("error");
-      setStatusMessage("Connection Error. Please try again");
-    },
-  });
-
+  // hook for adding messages to notification
   useEffect(() => {
-    if (apprLoading) {
-      setStatus("loading");
-      setStatusMessage(`Approving ${fromWei(payload)} STRU`);
-    }
-    if (stakeLoading) {
-      setStatus("loading");
-      setStatusMessage(`Adding ${fromWei(payload)} STRU to Staking`);
-    }
+    if (apprLoading) setStatus("approve_loading");
+    if (stakeLoading) setStatus("stake_loading");
   }, [apprLoading, stakeLoading]);
-
-  useEffect(() => {
-    if (status === "success" || status === "error") {
-      setTimeout(() => {
-        setStatus("");
-        setStatusMessage("");
-      }, 5000);
-    }
-  }, [status]);
 
   const handleSubmit = (amount) => {
     const payload = amount * decimalWei;
@@ -146,9 +114,10 @@ export const Stake = () => {
             </span>
             <span> STRU</span>
           </p>
-          {<p className={s.page_available}>{statusMessage}</p>}
+          {/* {<p className={s.page_available}>{statusMessage}</p>} */}
         </Form>
       </Formik>
+      <Notification />
       <button
         form="form"
         className={s.page_form_btn + " " + s.stake_btn}

@@ -2,7 +2,8 @@ import s from "./Pages.module.scss";
 import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { useAccount } from "wagmi";
-import { useGetStakedBalance, useWithdraw } from "../../utils/contractMethods";
+import { useGetStakedBalance } from "../../utils/contractRead";
+import { useWithdraw } from "../../utils/contractWrite";
 import { fromWei } from "../../utils/mathHelpers";
 import { decimalWei } from "../../utils/mathHelpers";
 
