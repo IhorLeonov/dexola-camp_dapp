@@ -17,13 +17,15 @@ import {
   useGetRewardRate,
   useGetTotalSupply,
   useGetStakedBalance,
+  useWaitForApprove,
 } from "../../utils/contractMethods";
 
 export const Stake = () => {
   const [inputValue, setInputValue] = useState(0);
   const [payload, setPayload] = useState(0);
 
-  const { struBalance, status, setStatus } = MyContext();
+  const { struBalance, status, setStatus, statusMessage, setStatusMessage } =
+    MyContext();
   const { address: userAddress } = useAccount();
 
   const allowance = useCheckAllowance(userAddress);
@@ -42,37 +44,55 @@ export const Stake = () => {
   const { writeApprove, apprWriteLoading, apprData } = useApproveStaking();
   const { writeStake, stakeWriteLoading, stakeData } = useStakeToken();
 
-  const { isLoading: apprLoading } = useWaitForTransaction({
-    hash: apprData?.hash,
-    onSuccess(data) {
-      console.log("Success approve", data);
-      setStatus("success");
-      writeStake({ args: [payload] });
-    },
-    onError(error) {
-      console.log("Error approve", error.message);
-      setStatus("error");
-    },
-  });
+  const { apprLoading } = useWaitForApprove(apprData, writeStake, payload);
+
+  // const { isLoading: apprLoading } = useWaitForTransaction({
+  //   hash: apprData?.hash,
+  //   onSuccess() {
+  //     setStatus("success");
+  //     setStatusMessage(`${fromWei(payload)} STRU successfully approved`);
+  //     writeStake({ args: [payload] });
+  //   },
+  //   onError() {
+  //     setStatus("error");
+  //     setStatusMessage("Connection Error. Please try again");
+  //   },
+  // });
 
   const { isLoading: stakeLoading } = useWaitForTransaction({
     hash: stakeData?.hash,
     onSuccess(data) {
-      console.log("Success stake", data);
       setStatus("success");
+      setStatusMessage(
+        `${fromWei(payload)} STRU successfully added to Staking`
+      );
+      console.log("Success stake", data);
     },
-    onError(error) {
-      console.log("Error stake", error.message);
+    onError() {
       setStatus("error");
+      setStatusMessage("Connection Error. Please try again");
     },
   });
 
   useEffect(() => {
-    if (apprLoading) setStatus("approve_loading");
-    if (stakeLoading) setStatus("stake_loading");
+    if (apprLoading) {
+      setStatus("loading");
+      setStatusMessage(`Approving ${fromWei(payload)} STRU`);
+    }
+    if (stakeLoading) {
+      setStatus("loading");
+      setStatusMessage(`Adding ${fromWei(payload)} STRU to Staking`);
+    }
+  }, [apprLoading, stakeLoading]);
 
-    return () => {};
-  }, [apprLoading, stakeLoading, setStatus]);
+  useEffect(() => {
+    if (status === "success" || status === "error") {
+      setTimeout(() => {
+        setStatus("");
+        setStatusMessage("");
+      }, 5000);
+    }
+  }, [status]);
 
   const handleSubmit = (amount) => {
     const payload = amount * decimalWei;
@@ -126,7 +146,7 @@ export const Stake = () => {
             </span>
             <span> STRU</span>
           </p>
-          {<p className={s.page_available}>STATUS: {status}</p>}
+          {<p className={s.page_available}>{statusMessage}</p>}
         </Form>
       </Formik>
       <button

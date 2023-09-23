@@ -8,6 +8,7 @@ export const ContextProvider = ({ children }) => {
   const [userAddress, setUserAddress] = useState("");
   const [struBalance, setStruBalance] = useState(0);
   const [status, setStatus] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
 
   return (
     <Context.Provider
@@ -18,6 +19,8 @@ export const ContextProvider = ({ children }) => {
         setStatus,
         userAddress,
         setUserAddress,
+        statusMessage,
+        setStatusMessage,
       }}
     >
       {children}
