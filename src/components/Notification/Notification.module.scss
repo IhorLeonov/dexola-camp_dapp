@@ -2,10 +2,24 @@
 @import "../../sass/utils/keyframes";
 
 .notify {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: auto;
+
+  @media screen and (max-width: $max-mobile) {
+    bottom: 126px;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+  }
+
+  @media screen and (min-width: $tablet) {
+    height: 48px;
+    bottom: 32px;
+    right: 24px;
+  }
 }
 
 .notify_desc {

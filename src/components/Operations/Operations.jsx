@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { Suspense } from "react";
 import s from "./Operations.module.scss";
 import { useEffect } from "react";
+import { Notification } from "../Notification/Notification";
 
 export const Operations = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export const Operations = () => {
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>
+        <Notification />
       </div>
     </section>
   );

@@ -6,6 +6,7 @@ import { useGetStakedBalance } from "../../utils/contractRead";
 import { useWithdraw } from "../../utils/contractWrite";
 import { fromWei } from "../../utils/mathHelpers";
 import { decimalWei } from "../../utils/mathHelpers";
+import { Notification } from "../Notification/Notification";
 
 export const Withdraw = () => {
   const { address: userAddress } = useAccount();

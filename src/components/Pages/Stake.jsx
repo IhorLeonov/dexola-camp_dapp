@@ -6,7 +6,6 @@ import { useAccount } from "wagmi";
 import { fromWei, decimalWei } from "../../utils/mathHelpers";
 import { useEffect, useState } from "react";
 import { Loader } from "../Loader/Loader";
-import { Notification } from "../Notification/Notification";
 
 import {
   useCheckAllowance,
@@ -115,7 +114,6 @@ export const Stake = () => {
           </p>
         </Form>
       </Formik>
-      <Notification />
       <button
         form="form"
         className={s.page_form_btn + " " + s.stake_btn}

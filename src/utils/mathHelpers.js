@@ -1,5 +1,5 @@
 const dateNow = Date.now() / 1000;
-const oneDay = 86400; //sec
+const oneDay = 86400;
 
 export const calcPercent = (numberOfRewards, totalAmount) => {
   return Math.round((numberOfRewards * 100) / totalAmount);
