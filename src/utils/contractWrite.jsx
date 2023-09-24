@@ -183,7 +183,7 @@ export const useWaitTakeAll = (data) => {
     onSuccess(data) {
       setIsLoadingTransaction("");
       setStatus("success_exit");
-      console.log("Successful getting all balance", data);
+      console.log("Successful getting all staked balance", data);
     },
     onError() {
       setIsLoadingTransaction("");

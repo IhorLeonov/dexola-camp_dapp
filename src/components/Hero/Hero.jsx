@@ -5,7 +5,6 @@ import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
 import { calcPercent, calcEndingTime } from "../../utils/mathHelpers";
 import { fromWei } from "../../utils/mathHelpers";
-// import { MyContext } from "../../context/context";
 
 import {
   useGetStakedBalance,
@@ -16,7 +15,6 @@ import {
 } from "../../utils/contractRead";
 
 export const Hero = () => {
-  // const { userAddress } = MyContext();
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
     usePrompt();
 
@@ -28,7 +26,7 @@ export const Hero = () => {
   const stakedBalance = fromWei(useGetStakedBalance(address));
   const percent = calcPercent(numberOfRewards, totalAmount);
   const completionTime = calcEndingTime(timeStamp);
-  const userRewards = fromWei(useGetUserRewards(address)).toFixed(1);
+  const userRewards = Math.round(fromWei(useGetUserRewards(address)));
 
   return (
     <section className={s.hero}>

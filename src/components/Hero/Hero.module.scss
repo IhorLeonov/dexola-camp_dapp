@@ -65,7 +65,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: end;
-      margin-right: 10px;
+      margin-right: 12px;
       gap: 4px;
 
       font-size: 12px;
@@ -134,7 +134,7 @@
     }
 
     &_rewards {
-      width: 93px;
+      width: 85px;
 
       @media screen and (min-width: $tablet) {
         width: 144px;

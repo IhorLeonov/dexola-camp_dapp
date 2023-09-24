@@ -51,101 +51,80 @@ export const Notification = () => {
       )}
       <p className={s.notify_desc}>
         {/* showing transaction in process messages */}
-        {(() => {
-          switch (isLoadingTransaction) {
-            case "approve_loading":
-              return (
-                <>
-                  Approving{" "}
-                  <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
-                  <span className={s.notify_string}>before Staking</span>
-                </>
-              );
-            case "stake_loading":
-              return (
-                <>
-                  Adding <span className={s.notify_accent}>{tokenAmount}</span>{" "}
-                  STRU to Staking
-                </>
-              );
-            case "withdraw_loading":
-              return (
-                <>
-                  Adding <span className={s.notify_accent}>{tokenAmount}</span>{" "}
-                  STRU to wallet
-                </>
-              );
-            case "exit_loading":
-              return <>Adding all staked balance to wallet</>;
-            case "claim_loading":
-              return (
-                <>
-                  {" "}
-                  Adding <span className={s.notify_accent}>
-                    {tokenAmount}
-                  </span>{" "}
-                  STRU to wallet
-                </>
-              );
-            default:
-              return;
-          }
-        })()}
+        {isLoadingTransaction === "approve_loading" && (
+          <>
+            Approving{" "}
+            <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
+            <span className={s.notify_string}>before Staking</span>
+          </>
+        )}
+        {isLoadingTransaction === "stake_loading" && (
+          <>
+            Adding <span className={s.notify_accent}>{tokenAmount}</span> STRU
+            to Staking
+          </>
+        )}
+        {isLoadingTransaction === "withdraw_loading" && (
+          <>
+            Adding <span className={s.notify_accent}>{tokenAmount}</span> STRU
+            to wallet
+          </>
+        )}
+        {isLoadingTransaction === "exit_loading" && (
+          <>
+            Adding <span className={s.notify_accent}>{tokenAmount}</span> STRU
+            to wallet
+          </>
+        )}
+        {isLoadingTransaction === "claim_loading" && (
+          <>
+            Adding <span className={s.notify_accent}>{tokenAmount}</span> STRU
+            to wallet
+          </>
+        )}
         {/* showing error and success messages */}
-        {(() => {
-          switch (status) {
-            case "success_approve":
-              return (
-                <>
-                  <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
-                  successfully approved
-                </>
-              );
-            case "success_stake":
-              return (
-                <>
-                  <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
-                  successfully{" "}
-                  <span className={s.notify_string}>added to Staking</span>
-                </>
-              );
-            case "success_withdraw":
-              return (
-                <>
-                  <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
-                  successfully{" "}
-                  <span className={s.notify_string}>added to wallet</span>
-                </>
-              );
-            case "success_exit":
-              return (
-                <>
-                  <span className={s.notify_accent}>??? STRU </span>{" "}
-                  successfully{" "}
-                  <span className={s.notify_string}>added to wallet</span>
-                </>
-              );
-            case "success_claim":
-              return (
-                <>
-                  <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
-                  successfully{" "}
-                  <span className={s.notify_string}>added to wallet</span>
-                </>
-              );
-            case "error":
-              return (
-                <>
-                  <span className={s.notify_accent}>
-                    Connection Error<span className={s.notify_dot}>. </span>
-                  </span>
-                  <span className={s.notify_string}>Please try again</span>
-                </>
-              );
-            default:
-              return;
-          }
-        })()}
+        {status === "error" && (
+          <>
+            <span className={s.notify_accent}>
+              Connection Error<span className={s.notify_dot}>. </span>
+            </span>
+            <span className={s.notify_string}>Please try again</span>
+          </>
+        )}
+        {status === "success_approve" && (
+          <>
+            <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
+            successfully approved
+          </>
+        )}
+        {status === "success_stake" && (
+          <>
+            <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
+            successfully{" "}
+            <span className={s.notify_string}>added to Staking</span>
+          </>
+        )}
+        {status === "success_withdraw" && (
+          <>
+            <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
+            successfully{" "}
+            <span className={s.notify_string}>added to wallet</span>
+          </>
+        )}
+        {status === "success_exit" && (
+          <>
+            <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
+            successfully{" "}
+            <span className={s.notify_string}>added to wallet</span>
+          </>
+        )}
+        {status === "success_claim" && (
+          <>
+            <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
+            successfully{" "}
+            <span className={s.notify_string}>added to wallet</span>
+          </>
+        )}
       </p>
     </div>
   );

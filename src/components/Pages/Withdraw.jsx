@@ -2,7 +2,10 @@ import s from "./Pages.module.scss";
 import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { useAccount } from "wagmi";
-import { useGetStakedBalance } from "../../utils/contractRead";
+import {
+  useGetStakedBalance,
+  useGetUserRewards,
+} from "../../utils/contractRead";
 import { useEffect } from "react";
 import {
   useWithdraw,
@@ -19,6 +22,8 @@ export const Withdraw = () => {
   const { setIsLoadingTransaction, setPayload } = MyContext();
   const { address: userAddress } = useAccount();
   const available = fromWei(useGetStakedBalance(userAddress));
+  const userRewards = useGetUserRewards(userAddress);
+
   const { writeWithdraw, dataWithdraw, withdrawIsLoading } = useWithdraw();
   const { takeAllWrite, takeAllData, takeAllIsLoading } = useTakeAll();
   const { withdrawLoading } = useWaitForWithdraw(dataWithdraw);
@@ -33,6 +38,11 @@ export const Withdraw = () => {
     const payload = amount * decimalWei;
     setPayload(payload);
     writeWithdraw({ args: [payload] });
+  };
+
+  const handleTakeAll = () => {
+    setPayload(available * decimalWei + userRewards);
+    takeAllWrite();
   };
 
   return (
@@ -85,7 +95,7 @@ export const Withdraw = () => {
         <button
           className={s.page_form_btn + " " + s.withdraw_btn_all}
           type="button"
-          onClick={takeAllWrite}
+          onClick={handleTakeAll}
         >
           withdraw all & Claim rewards
         </button>
