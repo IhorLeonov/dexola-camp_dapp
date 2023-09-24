@@ -2,6 +2,7 @@ import s from "./Header.module.scss";
 import ethLogo from "../../assets/icons/eth-logo.svg";
 import struLogo from "../../assets/images/stru-logo.png";
 
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Icon } from "../../utils/selectorIcons";
 import { Loader } from "../Loader/Loader";
 import { useEffect } from "react";
@@ -62,9 +63,10 @@ export const Header = () => {
             </button>
           </div>
         ) : (
-          <button type="button" className={s.cnnct_btn} onClick={handleConnect}>
-            {isLoading ? <Loader width={24} /> : "Connect wallet"}
-          </button>
+          <ConnectButton />
+          // <button type="button" className={s.cnnct_btn} onClick={handleConnect}>
+          //   {isLoading ? <Loader width={24} /> : "Connect wallet"}
+          // </button>
         )}
         {/* {error && <div>{error.message}</div>} */}
       </div>

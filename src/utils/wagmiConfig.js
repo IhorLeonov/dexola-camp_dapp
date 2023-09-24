@@ -1,7 +1,9 @@
 import { createConfig, configureChains, mainnet, sepolia } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+// import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+
+import { getDefaultWallets } from "@rainbow-me/rainbowkit";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [sepolia, mainnet],
@@ -11,11 +13,18 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   ]
 );
 
+const { connectors } = getDefaultWallets({
+  appName: "Dexola camp",
+  projectId: "4725f96b1e25f67ca6fb15fe2325f8de",
+  chains,
+});
+
 const config = createConfig({
   autoConnect: true,
-  connectors: [new MetaMaskConnector({ chains })],
+  connectors,
+  // connectors: [new MetaMaskConnector({ chains })],
   publicClient,
   webSocketPublicClient,
 });
 
-export default config;
+export { config, chains };
