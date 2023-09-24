@@ -26,6 +26,25 @@ export const useApproveStaking = () => {
   return { writeApprove, apprData, apprWriteLoading };
 };
 
+// method for waitting useApproveStaking transaction, gets in approve writing hash, stake writing function and token amount in props
+export const useWaitForApprove = (data, writeStake, amount) => {
+  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { isLoading: apprLoading } = useWaitForTransaction({
+    hash: data?.hash,
+    onSuccess() {
+      setIsLoadingTransaction("");
+      setStatus("success_approve");
+      writeStake({ args: [amount] });
+    },
+    onError() {
+      setIsLoadingTransaction("");
+      setStatus("error");
+    },
+  });
+
+  return { apprLoading };
+};
+
 // send STRU token to stake, pass amount of staked token in args
 export const useStakeToken = () => {
   const { setStatus } = MyContext();
@@ -45,34 +64,15 @@ export const useStakeToken = () => {
   return { writeStake, stakeData, stakeWriteLoading };
 };
 
-// method for waitting approve transaction, gets in approve writing hash, stake writing function and token amount in props
-export const useWaitForApprove = (apprData, writeStake, payload) => {
-  const { setStatus, setIsLoadingTransaction } = MyContext();
-  const { isLoading: apprLoading } = useWaitForTransaction({
-    hash: apprData?.hash,
-    onSuccess() {
-      setIsLoadingTransaction("");
-      setStatus("success_approve");
-      writeStake({ args: [payload] });
-    },
-    onError() {
-      setIsLoadingTransaction("");
-      setStatus("error");
-    },
-  });
-
-  return { apprLoading };
-};
-
-// method for waitting stake transaction, gets in approve writing hash and token amount in props
-export const useWaitForStake = (stakeData) => {
+// method for waitting useStakeToken transaction, gets in approve writing hash in props
+export const useWaitForStake = (data) => {
   const { setStatus, setIsLoadingTransaction } = MyContext();
   const { isLoading: stakeLoading } = useWaitForTransaction({
-    hash: stakeData?.hash,
+    hash: data?.hash,
     onSuccess(data) {
       setIsLoadingTransaction("");
       setStatus("success_stake");
-      console.log("Success stake", data);
+      console.log("Successful stake", data);
     },
     onError() {
       setIsLoadingTransaction("");
@@ -85,30 +85,110 @@ export const useWaitForStake = (stakeData) => {
 
 // get STRU token from stake, pass desired amount of token in args
 export const useWithdraw = () => {
-  const { data, isLoading, write } = useContractWrite({
+  const { setStatus } = MyContext();
+  const {
+    data: dataWithdraw,
+    isLoading: withdrawIsLoading,
+    write: writeWithdraw,
+  } = useContractWrite({
     address: stakeAddress,
     abi: stakeABI,
     functionName: "withdraw",
+    onError() {
+      setStatus("error");
+    },
   });
-  return { write, data, isLoading };
+  return { writeWithdraw, dataWithdraw, withdrawIsLoading };
+};
+
+// method for waitting useWithdraw transaction
+export const useWaitForWithdraw = (data) => {
+  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { isLoading: withdrawLoading } = useWaitForTransaction({
+    hash: data?.hash,
+    onSuccess(data) {
+      setIsLoadingTransaction("");
+      setStatus("success_withdraw");
+      console.log("Successful withdraw", data);
+    },
+    onError() {
+      setIsLoadingTransaction("");
+      setStatus("error");
+    },
+  });
+
+  return { withdrawLoading };
 };
 
 // get rewards from stake
 export const useClaimRewards = () => {
-  const { data, isLoading, write } = useContractWrite({
+  const { setStatus } = MyContext();
+  const {
+    data: dataClaim,
+    isLoading: claimIsLoading,
+    write: writeClaim,
+  } = useContractWrite({
     address: stakeAddress,
     abi: stakeABI,
     functionName: "claimReward",
+    onError() {
+      setStatus("error");
+    },
   });
-  return { write, data, isLoading };
+  return { writeClaim, dataClaim, claimIsLoading };
 };
 
-// get rewards from stake
-export const useWithdrawAndClaimRewards = () => {
-  const { data, isLoading, write } = useContractWrite({
+// method for waitting useClaimRewards transaction
+export const useWaitClaimRewards = (data) => {
+  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { isLoading: claimLoading } = useWaitForTransaction({
+    hash: data?.hash,
+    onSuccess(data) {
+      setIsLoadingTransaction("");
+      setStatus("success_claim");
+      console.log("Successful getting claim rewards", data);
+    },
+    onError() {
+      setIsLoadingTransaction("");
+      setStatus("error");
+    },
+  });
+
+  return { claimLoading };
+};
+
+// take all (staked balance + rewards) from stake
+export const useTakeAll = () => {
+  const { setStatus } = MyContext();
+  const {
+    data: takeAllData,
+    isLoading: takeAllIsLoading,
+    write: takeAllWrite,
+  } = useContractWrite({
     address: stakeAddress,
     abi: stakeABI,
     functionName: "exit",
+    onError() {
+      setStatus("error");
+    },
   });
-  return { write, data, isLoading };
+  return { takeAllWrite, takeAllData, takeAllIsLoading };
+};
+
+// method for waitting useTakeAll transaction
+export const useWaitTakeAll = (data) => {
+  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { isLoading: takeAllLoading } = useWaitForTransaction({
+    hash: data?.hash,
+    onSuccess(data) {
+      setIsLoadingTransaction("");
+      setStatus("success_exit");
+      console.log("Successful getting all balance", data);
+    },
+    onError() {
+      setIsLoadingTransaction("");
+      setStatus("error");
+    },
+  });
+  return { takeAllLoading };
 };

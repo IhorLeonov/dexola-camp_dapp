@@ -2,9 +2,9 @@ import s from "./Notification.module.scss";
 import { MyContext } from "../../context/context";
 import { fromWei } from "../../utils/mathHelpers";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import crossIcon from "../../assets/icons/cross.svg";
 import tickIcon from "../../assets/icons/tick.svg";
-import { useLocation } from "react-router-dom";
 
 export const Notification = () => {
   const location = useLocation();
@@ -68,7 +68,25 @@ export const Notification = () => {
                   STRU to Staking
                 </>
               );
-
+            case "withdraw_loading":
+              return (
+                <>
+                  Adding <span className={s.notify_accent}>{tokenAmount}</span>{" "}
+                  STRU to wallet
+                </>
+              );
+            case "exit_loading":
+              return <>Adding all staked balance to wallet</>;
+            case "claim_loading":
+              return (
+                <>
+                  {" "}
+                  Adding <span className={s.notify_accent}>
+                    {tokenAmount}
+                  </span>{" "}
+                  STRU to wallet
+                </>
+              );
             default:
               return;
           }
@@ -87,8 +105,32 @@ export const Notification = () => {
               return (
                 <>
                   <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
-                  STRU successfully{" "}
+                  successfully{" "}
                   <span className={s.notify_string}>added to Staking</span>
+                </>
+              );
+            case "success_withdraw":
+              return (
+                <>
+                  <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
+                  successfully{" "}
+                  <span className={s.notify_string}>added to wallet</span>
+                </>
+              );
+            case "success_exit":
+              return (
+                <>
+                  <span className={s.notify_accent}>??? STRU </span>{" "}
+                  successfully{" "}
+                  <span className={s.notify_string}>added to wallet</span>
+                </>
+              );
+            case "success_claim":
+              return (
+                <>
+                  <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
+                  successfully{" "}
+                  <span className={s.notify_string}>added to wallet</span>
                 </>
               );
             case "error":

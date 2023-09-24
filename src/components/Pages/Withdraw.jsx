@@ -3,22 +3,36 @@ import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { useAccount } from "wagmi";
 import { useGetStakedBalance } from "../../utils/contractRead";
+import { useEffect } from "react";
 import {
   useWithdraw,
-  useWithdrawAndClaimRewards,
+  useWaitForWithdraw,
+  useTakeAll,
+  useWaitTakeAll,
 } from "../../utils/contractWrite";
 import { fromWei } from "../../utils/mathHelpers";
 import { decimalWei } from "../../utils/mathHelpers";
+import { MyContext } from "../../context/context";
+import { Loader } from "../Loader/Loader";
 
 export const Withdraw = () => {
+  const { setIsLoadingTransaction, setPayload } = MyContext();
   const { address: userAddress } = useAccount();
   const available = fromWei(useGetStakedBalance(userAddress));
-  const { write } = useWithdraw();
-  const { write: exit } = useWithdrawAndClaimRewards();
+  const { writeWithdraw, dataWithdraw, withdrawIsLoading } = useWithdraw();
+  const { takeAllWrite, takeAllData, takeAllIsLoading } = useTakeAll();
+  const { withdrawLoading } = useWaitForWithdraw(dataWithdraw);
+  const { takeAllLoading } = useWaitTakeAll(takeAllData);
+
+  useEffect(() => {
+    if (withdrawLoading) setIsLoadingTransaction("withdraw_loading");
+    if (takeAllLoading) setIsLoadingTransaction("exit_loading");
+  }, [withdrawLoading, takeAllLoading]);
 
   const handleSubmit = (amount) => {
     const payload = amount * decimalWei;
-    write({ args: [payload] });
+    setPayload(payload);
+    writeWithdraw({ args: [payload] });
   };
 
   return (
@@ -60,13 +74,18 @@ export const Withdraw = () => {
           form="form"
           className={s.page_form_btn + " " + s.withdraw_btn}
           type="submit"
+          disabled={withdrawIsLoading || takeAllIsLoading}
         >
-          Withdraw
+          {withdrawIsLoading || takeAllIsLoading ? (
+            <Loader width={24} />
+          ) : (
+            "Withdraw"
+          )}
         </button>
         <button
           className={s.page_form_btn + " " + s.withdraw_btn_all}
           type="button"
-          onClick={exit}
+          onClick={takeAllWrite}
         >
           withdraw all & Claim rewards
         </button>

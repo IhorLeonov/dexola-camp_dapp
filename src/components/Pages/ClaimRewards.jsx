@@ -1,13 +1,30 @@
 import s from "./Pages.module.scss";
 import { useAccount } from "wagmi";
 import { useGetUserRewards } from "../../utils/contractRead";
-import { useClaimRewards } from "../../utils/contractWrite";
-import { fromWei } from "../../utils/mathHelpers";
+import {
+  useClaimRewards,
+  useWaitClaimRewards,
+} from "../../utils/contractWrite";
+import { fromWei, decimalWei } from "../../utils/mathHelpers";
+import { useEffect } from "react";
+import { Loader } from "../Loader/Loader";
+import { MyContext } from "../../context/context";
 
 export const ClaimRewards = () => {
+  const { setIsLoadingTransaction, setPayload } = MyContext();
   const { address: userAddress } = useAccount();
   const userRewards = fromWei(useGetUserRewards(userAddress)).toFixed(2);
-  const { write } = useClaimRewards();
+  const { writeClaim, dataClaim, claimIsLoading } = useClaimRewards();
+  const { claimLoading } = useWaitClaimRewards(dataClaim);
+
+  useEffect(() => {
+    if (claimLoading) setIsLoadingTransaction("claim_loading");
+  }, [claimLoading]);
+
+  const handleClick = () => {
+    setPayload(userRewards * decimalWei);
+    writeClaim();
+  };
 
   return (
     <div className={s.page}>
@@ -24,9 +41,10 @@ export const ClaimRewards = () => {
       <button
         className={s.page_form_btn + " " + s.claim_btn}
         type="button"
-        onClick={write}
+        onClick={handleClick}
+        disabled={claimIsLoading}
       >
-        Claim rewards
+        {claimIsLoading ? <Loader width={24} /> : "Claim rewards"}
       </button>
     </div>
   );

@@ -6,7 +6,6 @@ import { useAccount } from "wagmi";
 import { fromWei, decimalWei } from "../../utils/mathHelpers";
 import { useEffect, useState } from "react";
 import { Loader } from "../Loader/Loader";
-
 import {
   useCheckAllowance,
   useGetTimeStampOfTheEnd,
@@ -14,7 +13,6 @@ import {
   useGetTotalSupply,
   useGetStakedBalance,
 } from "../../utils/contractRead";
-
 import {
   stakeAddress,
   useStakeToken,
@@ -25,10 +23,8 @@ import {
 
 export const Stake = () => {
   const [inputValue, setInputValue] = useState("");
-
   const { struBalance, setIsLoadingTransaction, payload, setPayload } =
     MyContext();
-
   const { address: userAddress } = useAccount();
 
   const allowance = useCheckAllowance(userAddress);
