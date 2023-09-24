@@ -8,7 +8,7 @@ export const ContextProvider = ({ children }) => {
   const [userAddress, setUserAddress] = useState("");
   const [struBalance, setStruBalance] = useState(0);
   const [status, setStatus] = useState("");
-  const [statusMessage, setStatusMessage] = useState("");
+  const [isLoadingTransaction, setIsLoadingTransaction] = useState("");
   const [payload, setPayload] = useState(0); // amount of token for transaction
 
   return (
@@ -20,8 +20,8 @@ export const ContextProvider = ({ children }) => {
         setStatus,
         userAddress,
         setUserAddress,
-        statusMessage,
-        setStatusMessage,
+        isLoadingTransaction,
+        setIsLoadingTransaction,
         payload,
         setPayload,
       }}

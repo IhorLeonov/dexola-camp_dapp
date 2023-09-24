@@ -28,14 +28,13 @@ export const Stake = () => {
   const [inputValue, setInputValue] = useState("");
 
   const {
-    // status,
-    // statusMessage,
-    // setStatusMessage,
     struBalance,
     setStatus,
+    setIsLoadingTransaction,
     payload,
     setPayload,
   } = MyContext();
+
   const { address: userAddress } = useAccount();
 
   const allowance = useCheckAllowance(userAddress);
@@ -58,8 +57,8 @@ export const Stake = () => {
 
   // hook for adding messages to notification
   useEffect(() => {
-    if (apprLoading) setStatus("approve_loading");
-    if (stakeLoading) setStatus("stake_loading");
+    if (apprLoading) setIsLoadingTransaction("approve_loading");
+    if (stakeLoading) setIsLoadingTransaction("stake_loading");
   }, [apprLoading, stakeLoading]);
 
   const handleSubmit = (amount) => {
@@ -114,7 +113,6 @@ export const Stake = () => {
             </span>
             <span> STRU</span>
           </p>
-          {/* {<p className={s.page_available}>{statusMessage}</p>} */}
         </Form>
       </Formik>
       <Notification />

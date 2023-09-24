@@ -22,18 +22,6 @@
   font-family: var(--font-family--roboto-mono-bold);
 }
 
-.notify_string {
-  @media screen and (max-width: $max-mobile) {
-    display: block;
-  }
-}
-
-.notify_dot {
-  @media screen and (max-width: $max-mobile) {
-    display: none;
-  }
-}
-
 .notify_loader {
   width: 32px;
   height: 32px;
@@ -64,4 +52,13 @@
   width: 32px;
   height: 32px;
   background-color: var(--color-error);
+}
+
+@media screen and (max-width: 480px) {
+  .notify_string {
+    display: block;
+  }
+  .notify_dot {
+    display: none;
+  }
 }
