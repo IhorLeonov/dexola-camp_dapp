@@ -51,13 +51,13 @@ export const useWaitForApprove = (apprData, writeStake, payload) => {
   const { isLoading: apprLoading } = useWaitForTransaction({
     hash: apprData?.hash,
     onSuccess() {
+      setIsLoadingTransaction("");
       setStatus("success_approve");
       writeStake({ args: [payload] });
-      setIsLoadingTransaction("");
     },
     onError() {
-      setStatus("error");
       setIsLoadingTransaction("");
+      setStatus("error");
     },
   });
 
@@ -70,13 +70,13 @@ export const useWaitForStake = (stakeData) => {
   const { isLoading: stakeLoading } = useWaitForTransaction({
     hash: stakeData?.hash,
     onSuccess(data) {
-      setStatus("success_stake");
       setIsLoadingTransaction("");
+      setStatus("success_stake");
       console.log("Success stake", data);
     },
     onError() {
-      setStatus("error");
       setIsLoadingTransaction("");
+      setStatus("error");
     },
   });
 
@@ -99,6 +99,16 @@ export const useClaimRewards = () => {
     address: stakeAddress,
     abi: stakeABI,
     functionName: "claimReward",
+  });
+  return { write, data, isLoading };
+};
+
+// get rewards from stake
+export const useWithdrawAndClaimRewards = () => {
+  const { data, isLoading, write } = useContractWrite({
+    address: stakeAddress,
+    abi: stakeABI,
+    functionName: "exit",
   });
   return { write, data, isLoading };
 };

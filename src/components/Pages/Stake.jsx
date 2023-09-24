@@ -26,13 +26,8 @@ import {
 export const Stake = () => {
   const [inputValue, setInputValue] = useState("");
 
-  const {
-    struBalance,
-    setStatus,
-    setIsLoadingTransaction,
-    payload,
-    setPayload,
-  } = MyContext();
+  const { struBalance, setIsLoadingTransaction, payload, setPayload } =
+    MyContext();
 
   const { address: userAddress } = useAccount();
 

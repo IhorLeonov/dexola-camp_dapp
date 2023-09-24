@@ -110,9 +110,28 @@
 
   .withdraw_btn {
     width: 160px;
+    margin-top: 0;
   }
 
   .claim_btn {
     width: 210px;
+  }
+}
+
+.withdrow_buttons_box {
+  display: flex;
+  margin-top: auto;
+}
+
+.withdraw_btn_all {
+  @media screen and (max-width: $max-tablet) {
+    display: none;
+  }
+  width: 358px;
+  background-color: transparent;
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    color: var(--color-accent);
   }
 }

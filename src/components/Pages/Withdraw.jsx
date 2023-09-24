@@ -3,15 +3,18 @@ import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { useAccount } from "wagmi";
 import { useGetStakedBalance } from "../../utils/contractRead";
-import { useWithdraw } from "../../utils/contractWrite";
+import {
+  useWithdraw,
+  useWithdrawAndClaimRewards,
+} from "../../utils/contractWrite";
 import { fromWei } from "../../utils/mathHelpers";
 import { decimalWei } from "../../utils/mathHelpers";
-import { Notification } from "../Notification/Notification";
 
 export const Withdraw = () => {
   const { address: userAddress } = useAccount();
   const available = fromWei(useGetStakedBalance(userAddress));
   const { write } = useWithdraw();
+  const { write: exit } = useWithdrawAndClaimRewards();
 
   const handleSubmit = (amount) => {
     const payload = amount * decimalWei;
@@ -52,13 +55,22 @@ export const Withdraw = () => {
           </p>
         </Form>
       </Formik>
-      <button
-        form="form"
-        className={s.page_form_btn + " " + s.withdraw_btn}
-        type="submit"
-      >
-        Withdraw
-      </button>
+      <div className={s.withdrow_buttons_box}>
+        <button
+          form="form"
+          className={s.page_form_btn + " " + s.withdraw_btn}
+          type="submit"
+        >
+          Withdraw
+        </button>
+        <button
+          className={s.page_form_btn + " " + s.withdraw_btn_all}
+          type="button"
+          onClick={exit}
+        >
+          withdraw all & Claim rewards
+        </button>
+      </div>
     </div>
   );
 };

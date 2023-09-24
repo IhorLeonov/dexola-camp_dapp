@@ -4,13 +4,21 @@ import { fromWei } from "../../utils/mathHelpers";
 import { useEffect } from "react";
 import crossIcon from "../../assets/icons/cross.svg";
 import tickIcon from "../../assets/icons/tick.svg";
+import { useLocation } from "react-router-dom";
 
 export const Notification = () => {
-  const { status, setStatus, isLoadingTransaction, payload } = MyContext();
+  const location = useLocation();
+  const {
+    status,
+    setStatus,
+    isLoadingTransaction,
+    setIsLoadingTransaction,
+    payload,
+  } = MyContext();
 
   const tokenAmount = fromWei(payload);
 
-  // hook for closing notification message
+  // close notification
   useEffect(() => {
     if (status.includes("success") || status.includes("error")) {
       setTimeout(() => {
@@ -18,6 +26,12 @@ export const Notification = () => {
       }, 5000);
     }
   }, [status]);
+
+  // close notification if user change route
+  useEffect(() => {
+    setStatus("");
+    setIsLoadingTransaction("");
+  }, [location]);
 
   return (
     <div className={s.notify}>
@@ -54,6 +68,7 @@ export const Notification = () => {
                   STRU to Staking
                 </>
               );
+
             default:
               return;
           }
