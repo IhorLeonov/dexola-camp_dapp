@@ -17,11 +17,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <RainbowKitProvider
           modalSize="compact"
           chains={chains}
-          theme={midnightTheme({
-            accentColor: "#204ffe",
-            borderRadius: "medium",
-            overlayBlur: "small",
-          })}
+          // theme={midnightTheme({
+          //   accentColor: "#204ffe",
+          //   borderRadius: "medium",
+          //   overlayBlur: "small",
+          // })}
         >
           <ContextProvider>
             <App />
