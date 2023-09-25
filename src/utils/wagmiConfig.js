@@ -22,7 +22,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 
 const { connectors } = getDefaultWallets({
   appName: "Dexola camp",
-  projectId: import.meta.env.VITE_DEXOLA_PROJECT_ID,
+  projectId: "4725f96b1e25f67ca6fb15fe2325f8de",
   chains,
 });
 
