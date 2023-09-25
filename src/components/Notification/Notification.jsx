@@ -1,6 +1,6 @@
 import s from "./Notification.module.scss";
 import { MyContext } from "../../context/context";
-import { fromWei } from "../../utils/mathHelpers";
+import { fromWei } from "../../helpers/mathHelpers";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import crossIcon from "../../assets/icons/cross.svg";

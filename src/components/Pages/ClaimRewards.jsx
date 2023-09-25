@@ -1,11 +1,11 @@
 import s from "./Pages.module.scss";
 import { useAccount } from "wagmi";
-import { useGetUserRewards } from "../../utils/contractRead";
+import { useGetUserRewards } from "../../helpers/contractRead";
 import {
   useClaimRewards,
   useWaitClaimRewards,
-} from "../../utils/contractWrite";
-import { fromWei, decimalWei } from "../../utils/mathHelpers";
+} from "../../helpers/contractWrite";
+import { fromWei, decimalWei } from "../../helpers/mathHelpers";
 import { useEffect } from "react";
 import { Loader } from "../Loader/Loader";
 import { MyContext } from "../../context/context";

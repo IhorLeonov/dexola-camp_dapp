@@ -10,7 +10,6 @@ export const ContextProvider = ({ children }) => {
   const [status, setStatus] = useState("");
   const [isLoadingTransaction, setIsLoadingTransaction] = useState("");
   const [payload, setPayload] = useState(0);
-  const [mess, setMess] = useState("");
 
   return (
     <Context.Provider
@@ -25,8 +24,6 @@ export const ContextProvider = ({ children }) => {
         setIsLoadingTransaction,
         payload,
         setPayload,
-        mess,
-        setMess,
       }}
     >
       {children}

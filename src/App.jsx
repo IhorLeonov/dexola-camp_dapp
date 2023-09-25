@@ -1,4 +1,3 @@
-// import { JoinUs } from "./components/JoinUs/JoinUs";
 import { Layout } from "./components/Layout/Layout";
 import { Routes, Route } from "react-router-dom";
 import { Stake } from "./components/Pages/Stake";

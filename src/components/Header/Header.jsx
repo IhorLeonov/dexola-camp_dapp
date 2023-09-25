@@ -2,11 +2,11 @@ import s from "./Header.module.scss";
 import ethLogo from "../../assets/icons/eth-logo.svg";
 import struLogo from "../../assets/images/stru-logo.png";
 
-import { Icon } from "../../utils/selectorIcons";
+import { Icon } from "../../helpers/selectorIcons";
 import { useEffect } from "react";
 import { useAccount, useBalance, useDisconnect } from "wagmi";
-import { useGetSTRUBalance } from "../../utils/contractRead";
-import { fromWei } from "../../utils/mathHelpers";
+import { useGetSTRUBalance } from "../../helpers/contractRead";
+import { fromWei } from "../../helpers/mathHelpers";
 import { MyContext } from "../../context/context";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 

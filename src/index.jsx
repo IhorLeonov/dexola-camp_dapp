@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "@rainbow-me/rainbowkit/styles.css";
 
-import { config, chains } from "./utils/wagmiConfig";
+import { config, chains } from "./helpers/wagmiConfig";
 import { WagmiConfig } from "wagmi";
 import { RainbowKitProvider, midnightTheme } from "@rainbow-me/rainbowkit";
 import { BrowserRouter } from "react-router-dom";

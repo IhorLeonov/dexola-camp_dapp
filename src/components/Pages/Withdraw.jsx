@@ -5,16 +5,16 @@ import { useAccount } from "wagmi";
 import {
   useGetStakedBalance,
   useGetUserRewards,
-} from "../../utils/contractRead";
+} from "../../helpers/contractRead";
 import { useEffect } from "react";
 import {
   useWithdraw,
   useWaitForWithdraw,
   useTakeAll,
   useWaitTakeAll,
-} from "../../utils/contractWrite";
-import { fromWei } from "../../utils/mathHelpers";
-import { decimalWei } from "../../utils/mathHelpers";
+} from "../../helpers/contractWrite";
+import { fromWei } from "../../helpers/mathHelpers";
+import { decimalWei } from "../../helpers/mathHelpers";
 import { MyContext } from "../../context/context";
 import { Loader } from "../Loader/Loader";
 

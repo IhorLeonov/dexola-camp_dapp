@@ -3,8 +3,8 @@ import { HelpBtn } from "../HelpBtn/HelpBtn";
 import { Prompt } from "../Prompt/Prompt";
 import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
-import { calcPercent, calcEndingTime } from "../../utils/mathHelpers";
-import { fromWei } from "../../utils/mathHelpers";
+import { calcPercent, calcEndingTime } from "../../helpers/mathHelpers";
+import { fromWei } from "../../helpers/mathHelpers";
 
 import {
   useGetStakedBalance,
@@ -12,7 +12,7 @@ import {
   useGetTotalAmountOfStakes,
   useGetTimeStampOfTheEnd,
   useGetUserRewards,
-} from "../../utils/contractRead";
+} from "../../helpers/contractRead";
 
 export const Hero = () => {
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =

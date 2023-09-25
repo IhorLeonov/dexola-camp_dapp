@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { MyContext } from "../../context/context";
 import { useAccount } from "wagmi";
-import { fromWei, decimalWei } from "../../utils/mathHelpers";
+import { fromWei, decimalWei } from "../../helpers/mathHelpers";
 import { useEffect, useState } from "react";
 import { Loader } from "../Loader/Loader";
 import {
@@ -12,18 +12,18 @@ import {
   useGetRewardRate,
   useGetTotalSupply,
   useGetStakedBalance,
-} from "../../utils/contractRead";
+} from "../../helpers/contractRead";
 import {
   stakeAddress,
   useStakeToken,
   useApproveStaking,
   useWaitForApprove,
   useWaitForStake,
-} from "../../utils/contractWrite";
+} from "../../helpers/contractWrite";
 
 export const Stake = () => {
   const [inputValue, setInputValue] = useState("");
-  const { struBalance, setIsLoadingTransaction, payload, setPayload, mess } =
+  const { struBalance, setIsLoadingTransaction, payload, setPayload } =
     MyContext();
   const { address: userAddress } = useAccount();
 
@@ -105,7 +105,6 @@ export const Stake = () => {
           </p>
         </Form>
       </Formik>
-      <div>Error: {mess}</div>
       <button
         form="form"
         className={s.page_form_btn + " " + s.stake_btn}
