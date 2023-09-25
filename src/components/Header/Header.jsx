@@ -10,9 +10,14 @@ import { useAccount, useConnect, useBalance, useDisconnect } from "wagmi";
 import { useGetSTRUBalance } from "../../utils/contractRead";
 import { fromWei } from "../../utils/mathHelpers";
 import { MyContext } from "../../context/context";
+import {
+  useConnectModal,
+  // useAccountModal,
+  // ConnectButton,
+} from "@rainbow-me/rainbowkit";
 
-const deepLinkUrl =
-  "https://metamask.app.link/dapp/dexola-camp-dapp.vercel.app/";
+// const deepLinkUrl =
+//   "https://metamask.app.link/dapp/dexola-camp-dapp.vercel.app/";
 
 export const Header = () => {
   const { connect, connectors, isLoading } = useConnect();
@@ -20,15 +25,17 @@ export const Header = () => {
   const { disconnect } = useDisconnect();
   const { data: balance } = useBalance({ address });
   const { setStruBalance, setUserAddress } = MyContext();
+  const { openConnectModal } = useConnectModal();
 
   const walletBalance = Number(balance?.formatted).toFixed(1);
   const struBalance = Math.round(fromWei(useGetSTRUBalance(address)));
   const formattedAddress = address?.slice(0, 17) + "...";
 
   const handleConnect = () => {
-    window.ethereum
-      ? connect({ connector: connectors[0] })
-      : window.open(deepLinkUrl);
+    // window.ethereum
+    //   ? connect({ connector: connectors[0] })
+    //   : window.open(deepLinkUrl);
+    openConnectModal();
   };
 
   useEffect(() => {
@@ -37,10 +44,6 @@ export const Header = () => {
       setUserAddress(address);
     }
   }, [struBalance, address]);
-
-  useEffect(() => {
-    if (window.ethereum) window.ethereum.on("accountsChanged", handleConnect);
-  }, [window.ethereum]);
 
   return (
     <header className={s.header}>
@@ -63,10 +66,10 @@ export const Header = () => {
             </button>
           </div>
         ) : (
-          <ConnectButton />
-          // <button type="button" className={s.cnnct_btn} onClick={handleConnect}>
-          //   {isLoading ? <Loader width={24} /> : "Connect wallet"}
-          // </button>
+          // <ConnectButton />
+          <button type="button" className={s.cnnct_btn} onClick={handleConnect}>
+            {isLoading ? <Loader width={24} /> : "Connect wallet"}
+          </button>
         )}
         {/* {error && <div>{error.message}</div>} */}
       </div>

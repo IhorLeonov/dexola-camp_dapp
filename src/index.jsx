@@ -6,7 +6,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import { config, chains } from "./utils/wagmiConfig";
 import { WagmiConfig } from "wagmi";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { RainbowKitProvider, midnightTheme } from "@rainbow-me/rainbowkit";
 import { BrowserRouter } from "react-router-dom";
 import { ContextProvider } from "./context/context";
 
@@ -14,7 +14,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <WagmiConfig config={config}>
-        <RainbowKitProvider modalSize="compact" chains={chains}>
+        <RainbowKitProvider
+          modalSize="compact"
+          chains={chains}
+          theme={midnightTheme({
+            accentColor: "#204ffe",
+            borderRadius: "medium",
+            overlayBlur: "small",
+          })}
+        >
           <ContextProvider>
             <App />
           </ContextProvider>

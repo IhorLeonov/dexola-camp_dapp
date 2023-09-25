@@ -26,18 +26,9 @@ body {
   }
 }
 
-main {
-  // background-color: var(--color-background);
-  // padding-top: 227px;
-
-  @media screen and (min-width: $tablet) {
-    // padding-top: 278px;
-  }
-  @media screen and (min-width: $desktop) {
-    // padding-top: 281px;
-    // padding-top: 0px; //
-  }
-}
+// main {
+// background-color: var(--color-background);
+// }
 
 button {
   display: flex;
@@ -50,6 +41,5 @@ button {
 }
 
 input {
-  // @include paragraph;
-  color: #ffffff;
+  color: var(--color-text-main);
 }
