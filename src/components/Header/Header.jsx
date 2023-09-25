@@ -66,10 +66,10 @@ export const Header = () => {
             </button>
           </div>
         ) : (
-          // <ConnectButton />
-          <button type="button" className={s.cnnct_btn} onClick={handleConnect}>
-            {isLoading ? <Loader width={24} /> : "Connect wallet"}
-          </button>
+          <ConnectButton />
+          // <button type="button" className={s.cnnct_btn} onClick={handleConnect}>
+          //   {isLoading ? <Loader width={24} /> : "Connect wallet"}
+          // </button>
         )}
         {/* {error && <div>{error.message}</div>} */}
       </div>
