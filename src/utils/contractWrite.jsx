@@ -8,7 +8,7 @@ export const struAddress = "0x59Ec26901B19fDE7a96f6f7f328f12d8f682CB83";
 
 // approving token amount before staking, gets stake address and token amount in args
 export const useApproveStaking = () => {
-  const { setStatus } = MyContext();
+  const { setStatus, setMess } = MyContext();
   const {
     data: apprData,
     isLoading: apprWriteLoading,
@@ -18,8 +18,9 @@ export const useApproveStaking = () => {
     abi: struABI,
     functionName: "approve",
 
-    onError() {
+    onError(error) {
       setStatus("error");
+      setMess(error.message);
     },
   });
 
@@ -28,7 +29,7 @@ export const useApproveStaking = () => {
 
 // method for waitting useApproveStaking transaction, gets in approve writing hash, stake writing function and token amount in props
 export const useWaitForApprove = (data, writeStake, amount) => {
-  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { setStatus, setIsLoadingTransaction, setMess } = MyContext();
   const { isLoading: apprLoading } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess() {
@@ -36,7 +37,8 @@ export const useWaitForApprove = (data, writeStake, amount) => {
       setStatus("success_approve");
       writeStake({ args: [amount] });
     },
-    onError() {
+    onError(error) {
+      setMess(error.message);
       setIsLoadingTransaction("");
       setStatus("error");
     },
@@ -47,7 +49,7 @@ export const useWaitForApprove = (data, writeStake, amount) => {
 
 // send STRU token to stake, pass amount of staked token in args
 export const useStakeToken = () => {
-  const { setStatus } = MyContext();
+  const { setStatus, setMess } = MyContext();
   const {
     data: stakeData,
     isLoading: stakeWriteLoading,
@@ -57,7 +59,8 @@ export const useStakeToken = () => {
     abi: stakeABI,
     functionName: "stake",
 
-    onError() {
+    onError(error) {
+      setMess(error.message);
       setStatus("error");
     },
   });
@@ -66,7 +69,7 @@ export const useStakeToken = () => {
 
 // method for waitting useStakeToken transaction, gets in approve writing hash in props
 export const useWaitForStake = (data) => {
-  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { setStatus, setIsLoadingTransaction, setMess } = MyContext();
   const { isLoading: stakeLoading } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess(data) {
@@ -74,7 +77,8 @@ export const useWaitForStake = (data) => {
       setStatus("success_stake");
       console.log("Successful stake", data);
     },
-    onError() {
+    onError(error) {
+      setMess(error.message);
       setIsLoadingTransaction("");
       setStatus("error");
     },

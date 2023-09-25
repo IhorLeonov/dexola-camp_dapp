@@ -23,7 +23,7 @@ import {
 
 export const Stake = () => {
   const [inputValue, setInputValue] = useState("");
-  const { struBalance, setIsLoadingTransaction, payload, setPayload } =
+  const { struBalance, setIsLoadingTransaction, payload, setPayload, mess } =
     MyContext();
   const { address: userAddress } = useAccount();
 
@@ -105,6 +105,7 @@ export const Stake = () => {
           </p>
         </Form>
       </Formik>
+      <div>Error: {mess}</div>
       <button
         form="form"
         className={s.page_form_btn + " " + s.stake_btn}

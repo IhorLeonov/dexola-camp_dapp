@@ -36,7 +36,7 @@ export const Notification = () => {
   return (
     <div className={s.notify}>
       {/*  showing loader  */}
-      {isLoadingTransaction && <div className={s.notify_loader} />}
+      {isLoadingTransaction && !status && <div className={s.notify_loader} />}
       {/*  showing success img  */}
       {status.includes("success") && (
         <div className={s.notify_circle_success}>
@@ -58,7 +58,7 @@ export const Notification = () => {
             <span className={s.notify_string}>before Staking</span>
           </>
         )}
-        {isLoadingTransaction === "stake_loading" && (
+        {isLoadingTransaction === "stake_loading" && !status && (
           <>
             Adding <span className={s.notify_accent}>{tokenAmount}</span> STRU
             to Staking
