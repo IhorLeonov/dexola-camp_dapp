@@ -6,7 +6,7 @@ import { useAccount } from "wagmi";
 import { fromWei, decimalWei } from "../../helpers/mathHelpers";
 import { useEffect, useState } from "react";
 import { Loader } from "../Loader/Loader";
-import { stakeSchema } from "../../schemas/schema";
+import { stakeSchema } from "../../helpers/yupSchema";
 
 import {
   useCheckAllowance,

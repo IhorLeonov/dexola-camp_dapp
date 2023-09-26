@@ -7,14 +7,14 @@ import { getDefaultWallets } from "@rainbow-me/rainbowkit";
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [sepolia, mainnet],
   [
-    alchemyProvider({ apiKey: "NfiZDC6bdVJ3L_js6h3pidOSrKDLfKAM" }),
+    alchemyProvider({ apiKey: import.meta.env.VITE_ALCHEMY_PROVIDER }),
     publicProvider(),
   ]
 );
 
 const { connectors } = getDefaultWallets({
   appName: "Dexola camp",
-  projectId: "4725f96b1e25f67ca6fb15fe2325f8de",
+  projectId: import.meta.env.VITE_DEXOLA_PROJECT_ID,
   chains,
 });
 
