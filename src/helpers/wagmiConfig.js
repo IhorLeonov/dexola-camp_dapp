@@ -1,4 +1,5 @@
-import { createConfig, configureChains, mainnet, sepolia } from "wagmi";
+import { createConfig, configureChains, mainnet } from "wagmi";
+import { sepolia } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { getDefaultWallets } from "@rainbow-me/rainbowkit";
