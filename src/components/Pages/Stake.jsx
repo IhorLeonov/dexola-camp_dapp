@@ -88,7 +88,10 @@ export const Stake = () => {
           actions.resetForm();
         }}
       >
-        {({ touched, errors }) => {
+        {({ errors }) => {
+          const warningStyles = () => {
+            return errors.amount ? s.page_form_input_warning : "";
+          };
           return (
             <Form
               id="form"
@@ -96,7 +99,7 @@ export const Stake = () => {
               onChange={handleInputChange}
             >
               <Input
-                className={s.page_form_input}
+                className={s.page_form_input + " " + warningStyles()}
                 type="number"
                 name="amount"
                 placeholder="Enter stake amount"
