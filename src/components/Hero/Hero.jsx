@@ -28,8 +28,6 @@ export const Hero = () => {
   const days = calcEndingTime(timeStamp);
   const userRewards = Math.round(fromWei(useGetUserRewards(address)));
 
-  console.log(days);
-
   return (
     <section className={s.hero}>
       <div className={s.hero_container}>
