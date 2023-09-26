@@ -6,7 +6,7 @@ import { useAccount } from "wagmi";
 import { fromWei, decimalWei } from "../../helpers/mathHelpers";
 import { useEffect, useState } from "react";
 import { Loader } from "../Loader/Loader";
-import { useStakeSchema } from "../../schemas/stake-schema";
+import { stakeSchema } from "../../schemas/schema";
 
 import {
   useCheckAllowance,
@@ -28,7 +28,7 @@ export const Stake = () => {
   const { struBalance, setIsLoadingTransaction, payload, setPayload } =
     MyContext();
   const { address: userAddress } = useAccount();
-  const { stakeSchema } = useStakeSchema();
+  const { schema } = stakeSchema(struBalance);
 
   const allowance = useCheckAllowance(userAddress);
   const periodFinish = useGetTimeStampOfTheEnd();
@@ -80,7 +80,7 @@ export const Stake = () => {
       </div>
       <Formik
         initialValues={{ amount: "" }}
-        validationSchema={stakeSchema}
+        validationSchema={schema}
         onSubmit={(values, actions) => {
           const { amount } = values;
           handleSubmit(amount);
@@ -88,9 +88,11 @@ export const Stake = () => {
           actions.resetForm();
         }}
       >
-        {({ errors }) => {
+        {({ touched, errors }) => {
           const warningStyles = () => {
-            return errors.amount ? s.page_form_input_warning : "";
+            return touched.amount && errors.amount
+              ? s.page_form_input_warning
+              : "";
           };
           return (
             <Form
@@ -108,7 +110,9 @@ export const Stake = () => {
                 step="0.000001"
               />
               <div className={s.page_form_error_box}>
-                <p className={s.page_form_error}>{errors.amount}</p>
+                {touched.amount && errors.amount && (
+                  <p className={s.page_form_error}>{errors.amount}</p>
+                )}
               </div>
               <p className={s.page_available}>
                 Available:{" "}

@@ -3,7 +3,6 @@ import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 const body = document.querySelector("body");
 
-// hook for showing prompt
 export const usePrompt = () => {
   const [promptName, setPromptName] = useState(null);
   const [promptClass, setPromptClass] = useState(null);
