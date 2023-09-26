@@ -23,7 +23,7 @@ export const Hero = () => {
   const totalAmount = useGetTotalAmountOfStakes();
   const timeStamp = useGetTimeStampOfTheEnd();
 
-  const stakedBalance = fromWei(useGetStakedBalance(address));
+  const stakedBalance = Math.round(fromWei(useGetStakedBalance(address)));
   const percent = calcPercent(numberOfRewards, totalAmount);
   const days = calcEndingTime(timeStamp);
   const userRewards = Math.round(fromWei(useGetUserRewards(address)));

@@ -72,6 +72,7 @@ export const useWaitForStake = (data) => {
     onSuccess(data) {
       setIsLoadingTransaction("");
       setStatus("success_stake");
+
       console.log("Successful stake", data);
     },
     onError() {
