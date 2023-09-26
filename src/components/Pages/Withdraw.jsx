@@ -21,7 +21,7 @@ import { Loader } from "../Loader/Loader";
 export const Withdraw = () => {
   const { setIsLoadingTransaction, setPayload } = MyContext();
   const { address: userAddress } = useAccount();
-  const available = fromWei(useGetStakedBalance(userAddress));
+  const stakedBalance = Math.round(fromWei(useGetStakedBalance(userAddress)));
   const userRewards = useGetUserRewards(userAddress);
 
   const { writeWithdraw, dataWithdraw, withdrawIsLoading } = useWithdraw();
@@ -41,7 +41,7 @@ export const Withdraw = () => {
   };
 
   const handleTakeAll = () => {
-    setPayload(available * decimalWei + userRewards);
+    setPayload(stakedBalance * decimalWei + userRewards);
     takeAllWrite();
   };
 
@@ -73,7 +73,7 @@ export const Withdraw = () => {
           <p className={s.page_available}>
             Available:{" "}
             <span className={s.page_available_value}>
-              {available ? available : "0"}
+              {stakedBalance ? stakedBalance : "0"}
             </span>
             <span> STRU</span>
           </p>

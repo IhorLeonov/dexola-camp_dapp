@@ -60,6 +60,7 @@
   &_form_input {
     padding: 8px 0;
     border-bottom: 1px solid #ffffff;
+    transition: all 0.2s ease-in-out;
 
     &:hover,
     &:focus {
