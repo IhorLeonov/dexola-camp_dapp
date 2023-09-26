@@ -6,14 +6,15 @@ export const useStakeSchema = () => {
 
   const stakeSchema = Yup.object().shape({
     amount: Yup.number()
-      .typeError("The value must be a number")
       .test(
         "inRange",
         `Must be in range 0.000001 to ${struBalance}`,
-        function valueInRange(value) {
-          return value >= 0.000001 && value <= struBalance;
-        }
+        (value) => value >= 0.000001 && value <= struBalance
       )
+      .test("isNumber", "The value must be a number", (value) =>
+        /^\d*.?\d{0,18}$/.test(value)
+      )
+      .max(20)
       .required("Please complete this field!"),
   });
   return { stakeSchema };
