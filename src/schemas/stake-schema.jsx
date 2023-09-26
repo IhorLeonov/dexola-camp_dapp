@@ -6,6 +6,7 @@ export const useStakeSchema = () => {
 
   const stakeSchema = Yup.object().shape({
     amount: Yup.number()
+      .typeError("The value must be a number")
       .test(
         "inRange",
         `Must be in range 0.000001 to ${struBalance}`,
