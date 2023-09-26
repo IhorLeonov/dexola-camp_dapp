@@ -25,8 +25,10 @@ export const Hero = () => {
 
   const stakedBalance = fromWei(useGetStakedBalance(address));
   const percent = calcPercent(numberOfRewards, totalAmount);
-  const completionTime = calcEndingTime(timeStamp);
+  const days = calcEndingTime(timeStamp);
   const userRewards = Math.round(fromWei(useGetUserRewards(address)));
+
+  console.log(days);
 
   return (
     <section className={s.hero}>
@@ -57,9 +59,7 @@ export const Hero = () => {
           </li>
 
           <li className={s.hero_info_days}>
-            <span className={s.hero_amount}>
-              {completionTime ? completionTime : "0"}
-            </span>{" "}
+            <span className={s.hero_amount}>{days ? days : "0"}</span>{" "}
             <span className={s.hero_info_desc}>Days</span>
           </li>
 

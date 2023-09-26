@@ -106,10 +106,17 @@
 
       @media screen and (min-width: $tablet) {
         width: 120px;
+
+        & > .hero_info_desc {
+          margin-right: 30px;
+        }
       }
 
       @media screen and (min-width: $desktop) {
         width: auto;
+        & > .hero_info_desc {
+          margin-right: 0px;
+        }
       }
     }
 
