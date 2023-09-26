@@ -9,6 +9,7 @@ export const ContextProvider = ({ children }) => {
   const [struBalance, setStruBalance] = useState(0);
   const [status, setStatus] = useState("");
   const [isLoadingTransaction, setIsLoadingTransaction] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [payload, setPayload] = useState(0);
 
   return (
@@ -24,6 +25,8 @@ export const ContextProvider = ({ children }) => {
         setIsLoadingTransaction,
         payload,
         setPayload,
+        inputValue,
+        setInputValue,
       }}
     >
       {children}

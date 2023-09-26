@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "@rainbow-me/rainbowkit/styles.css";
 
-import { config, chains } from "./helpers/wagmiConfig";
+import { config, chains, rainbowKitTheme } from "./helpers/wagmiConfig";
 import { WagmiConfig } from "wagmi";
 import { RainbowKitProvider, midnightTheme } from "@rainbow-me/rainbowkit";
 import { BrowserRouter } from "react-router-dom";
@@ -17,11 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <RainbowKitProvider
           modalSize="compact"
           chains={chains}
-          theme={midnightTheme({
-            accentColor: "#204ffe",
-            borderRadius: "medium",
-            overlayBlur: "small",
-          })}
+          theme={midnightTheme(rainbowKitTheme)}
         >
           <ContextProvider>
             <App />

@@ -1,5 +1,5 @@
-@import "../../sass/utils/variables";
-@import "../../sass/utils/mixins";
+@import "../sass/utils/variables";
+@import "../sass/utils/mixins";
 
 .page {
   display: flex;
@@ -48,69 +48,29 @@
     }
   }
 
-  &_form {
-    width: 100%;
-    margin-top: 24px;
-
-    @media screen and (min-width: $tablet) {
-      width: 391px;
-    }
-  }
-
-  &_form_input {
-    padding: 8px 0;
-    border-bottom: 1px solid #ffffff;
-    transition: all 0.2s ease-in-out;
-
-    &:hover,
-    &:focus {
-      border-color: var(--color-accent);
-    }
-
-    &_warning {
-      border-color: var(--color-warning) !important;
-    }
-  }
-
-  &_form_error_box {
-    padding-top: 2px;
-    height: 20px;
-  }
-
-  &_form_error {
-    font-size: 13px;
-    line-height: 1.8;
-    letter-spacing: 0.26px;
-    color: var(--color-warning);
-  }
-
-  &_available {
-    margin-top: 12px;
-    padding-top: 2px;
-    color: var(--color-text-desc);
-
-    @media screen and (min-width: $tablet) {
-      margin-top: 16px;
-    }
-
-    :last-child {
-      color: var(--color-text-main);
-    }
-  }
-
-  &_available_claim {
-    margin-top: 24px;
-  }
-
-  &_available_value {
-    font-family: var(--font-family--roboto-mono-bold);
-    color: var(--color-text-main);
-  }
-
   &_form_btn {
     @include button;
     margin-top: auto;
   }
+}
+
+.claim_available {
+  margin-top: 24px;
+  padding-top: 2px;
+  color: var(--color-text-desc);
+
+  @media screen and (min-width: $tablet) {
+    margin-top: 16px;
+  }
+
+  :last-child {
+    color: var(--color-text-main);
+  }
+}
+
+.claim_available_value {
+  font-family: var(--font-family--roboto-mono-bold);
+  color: var(--color-text-main);
 }
 
 @media screen and (min-width: $tablet) {
@@ -137,11 +97,18 @@
   @media screen and (max-width: $max-tablet) {
     display: none;
   }
+
   width: 358px;
   background-color: transparent;
+  transition: all 0.2s ease-in-out;
+
   &:hover,
   &:focus {
     background-color: transparent;
     color: var(--color-accent);
   }
+}
+
+.input_warning {
+  border-color: var(--color-warning) !important;
 }

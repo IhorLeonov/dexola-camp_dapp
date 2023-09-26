@@ -1,29 +1,28 @@
 import s from "./Pages.module.scss";
-import { Formik } from "formik";
-import { Form, Field as Input } from "formik";
 import { useAccount } from "wagmi";
+import { useEffect } from "react";
 import {
   useGetStakedBalance,
   useGetUserRewards,
-} from "../../helpers/contractRead";
-import { useEffect } from "react";
+} from "../helpers/contractRead";
+
 import {
   useWithdraw,
   useWaitForWithdraw,
   useTakeAll,
   useWaitTakeAll,
-} from "../../helpers/contractWrite";
-import { fromWei } from "../../helpers/mathHelpers";
-import { decimalWei } from "../../helpers/mathHelpers";
-import { MyContext } from "../../context/context";
-import { Loader } from "../Loader/Loader";
+} from "../helpers/contractWrite";
+
+import { fromWei, decimalWei } from "../helpers/mathHelpers";
+import { MyContext } from "../context/context";
+import { Loader } from "../components/Loader/Loader";
+import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
 
 export const Withdraw = () => {
   const { setIsLoadingTransaction, setPayload } = MyContext();
   const { address: userAddress } = useAccount();
   const stakedBalance = Math.round(fromWei(useGetStakedBalance(userAddress)));
   const userRewards = useGetUserRewards(userAddress);
-
   const { writeWithdraw, dataWithdraw, withdrawIsLoading } = useWithdraw();
   const { takeAllWrite, takeAllData, takeAllIsLoading } = useTakeAll();
   const { withdrawLoading } = useWaitForWithdraw(dataWithdraw);
@@ -45,52 +44,22 @@ export const Withdraw = () => {
     takeAllWrite();
   };
 
+  const isLoading = withdrawIsLoading || takeAllIsLoading;
+
   return (
     <div className={s.page}>
       <div className={s.page_header}>
         <h2 className={s.page_title}>Withdraw</h2>
       </div>
-      <Formik
-        initialValues={{ amount: "" }}
-        onSubmit={(values, actions) => {
-          const { amount } = values;
-          handleSubmit(amount);
-          actions.resetForm();
-        }}
-      >
-        <Form id="form" className={s.page_form}>
-          <Input
-            className={s.page_form_input}
-            type="number"
-            name="amount"
-            placeholder="Enter stake amount"
-            autoComplete="off"
-            min="0"
-          />
-          <div className={s.page_form_error_box}>
-            <p className={s.page_form_error}></p>
-          </div>
-          <p className={s.page_available}>
-            Available:{" "}
-            <span className={s.page_available_value}>
-              {stakedBalance ? stakedBalance : "0"}
-            </span>
-            <span> STRU</span>
-          </p>
-        </Form>
-      </Formik>
+      <TransactionsForm handleSubmit={handleSubmit} balance={stakedBalance} />
       <div className={s.withdrow_buttons_box}>
         <button
           form="form"
           className={s.page_form_btn + " " + s.withdraw_btn}
           type="submit"
-          disabled={withdrawIsLoading || takeAllIsLoading}
+          disabled={isLoading}
         >
-          {withdrawIsLoading || takeAllIsLoading ? (
-            <Loader width={24} />
-          ) : (
-            "Withdraw"
-          )}
+          {isLoading ? <Loader width={24} /> : "Withdraw"}
         </button>
         <button
           className={s.page_form_btn + " " + s.withdraw_btn_all}

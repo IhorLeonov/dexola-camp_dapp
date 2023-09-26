@@ -1,14 +1,11 @@
 import s from "./Pages.module.scss";
 import { useAccount } from "wagmi";
-import { useGetUserRewards } from "../../helpers/contractRead";
-import {
-  useClaimRewards,
-  useWaitClaimRewards,
-} from "../../helpers/contractWrite";
-import { fromWei, decimalWei } from "../../helpers/mathHelpers";
 import { useEffect } from "react";
-import { Loader } from "../Loader/Loader";
-import { MyContext } from "../../context/context";
+import { useGetUserRewards } from "../helpers/contractRead";
+import { useClaimRewards, useWaitClaimRewards } from "../helpers/contractWrite";
+import { fromWei, decimalWei } from "../helpers/mathHelpers";
+import { Loader } from "../components/Loader/Loader";
+import { MyContext } from "../context/context";
 
 export const ClaimRewards = () => {
   const { setIsLoadingTransaction, setPayload } = MyContext();
@@ -31,9 +28,9 @@ export const ClaimRewards = () => {
       <div className={s.page_header}>
         <h2 className={s.page_title}>Claim rewards</h2>
       </div>
-      <p className={s.page_available + " " + s.page_available_claim}>
+      <p className={s.claim_available}>
         Available:{" "}
-        <span className={s.page_available_value}>
+        <span className={s.claim_available_value}>
           {!isNaN(userRewards) ? userRewards : "0"}
         </span>
         <span> STRU</span>

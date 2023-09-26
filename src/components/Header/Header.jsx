@@ -2,7 +2,7 @@ import s from "./Header.module.scss";
 import ethLogo from "../../assets/icons/eth-logo.svg";
 import struLogo from "../../assets/images/stru-logo.png";
 
-import { Icon } from "../../helpers/selectorIcons";
+import { Icon } from "../SelectIcons/SelectIcons";
 import { useEffect } from "react";
 import { useAccount, useBalance, useDisconnect } from "wagmi";
 import { useGetSTRUBalance } from "../../helpers/contractRead";

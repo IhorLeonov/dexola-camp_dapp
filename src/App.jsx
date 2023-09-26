@@ -1,8 +1,8 @@
 import { Layout } from "./components/Layout/Layout";
 import { Routes, Route } from "react-router-dom";
-import { Stake } from "./components/Pages/Stake";
-import { Withdraw } from "./components/Pages/Withdraw";
-import { ClaimRewards } from "./components/Pages/ClaimRewards";
+import { Stake } from "./pages/Stake";
+import { Withdraw } from "./pages/Withdraw";
+import { ClaimRewards } from "./pages/ClaimRewards";
 
 function App() {
   return (
