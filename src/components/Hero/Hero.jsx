@@ -4,7 +4,6 @@ import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
 import { calcPercent, calcEndingTime } from "../../helpers/mathHelpers";
 import { fromWei } from "../../helpers/mathHelpers";
-// import { MyContext } from "../../context/context";
 
 import {
   useGetStakedBalance,
@@ -15,7 +14,6 @@ import {
 } from "../../helpers/contractRead";
 
 export const Hero = () => {
-  // const { promptName, promptClass } = MyContext();
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
     usePrompt();
 

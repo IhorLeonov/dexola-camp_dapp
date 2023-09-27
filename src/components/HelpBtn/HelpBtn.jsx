@@ -11,14 +11,6 @@ export const HelpBtn = ({
 }) => {
   const [open, setOpen] = useState(false);
 
-  // const hendleOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const hendleClose = () => {
-  //   setOpen(false);
-  // };
-
   const handleShow = () => {
     if (!open) {
       handleShowPrompt(name);
@@ -35,7 +27,7 @@ export const HelpBtn = ({
       type="button"
       className={s.help_btn}
       onMouseEnter={() => handleShowPrompt(name)}
-      onTouchStart={handleShow}
+      // onTouchStart={handleShow}
       onClick={handleShow}
       onMouseLeave={handleHidePrompt}
     >
