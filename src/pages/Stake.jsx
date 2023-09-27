@@ -2,7 +2,7 @@ import s from "./Pages.module.scss";
 import { MyContext } from "../context/context";
 import { useAccount } from "wagmi";
 import { fromWei, decimalWei } from "../helpers/mathHelpers";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Loader } from "../components/Loader/Loader";
 import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
 
@@ -42,14 +42,17 @@ export const Stake = () => {
   const totalAvailble = remaining * rewardRate;
   const totalSupply = useGetTotalSupply();
   const userInput = inputValue * decimalWei;
-  const totalRate = Math.round(
-    fromWei((stakedBalance * totalAvailble) / totalSupply + userInput)
-  );
 
   const { writeApprove, apprWriteLoading, apprData } = useApproveStaking();
   const { writeStake, stakeWriteLoading, stakeData } = useStakeToken();
   const { apprLoading } = useWaitForApprove(apprData, writeStake, payload);
   const { stakeLoading } = useWaitForStake(stakeData);
+
+  const totalRate = useMemo(() => {
+    return Math.round(
+      fromWei((stakedBalance * totalAvailble) / totalSupply + userInput)
+    );
+  }, [stakedBalance, totalAvailble, totalSupply, userInput]);
 
   useEffect(() => {
     if (apprLoading) setIsLoadingTransaction("approve_loading");
