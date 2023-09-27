@@ -8,14 +8,13 @@ import { useAccount, useBalance, useDisconnect } from "wagmi";
 import { useGetSTRUBalance } from "../../helpers/contractRead";
 import { fromWei } from "../../helpers/mathHelpers";
 import { MyContext } from "../../context/context";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { ConnectBtn } from "../ConnectBtn/ConnectBtn";
 
 export const Header = () => {
   const { setStruBalance } = MyContext();
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: balance } = useBalance({ address });
-  const { openConnectModal } = useConnectModal();
 
   const walletBalance = Number(balance?.formatted).toFixed(1);
   const struBalance = Math.round(fromWei(useGetSTRUBalance(address)));
@@ -48,13 +47,9 @@ export const Header = () => {
             </button>
           </div>
         ) : (
-          <button
-            type="button"
-            className={s.cnnct_btn}
-            onClick={openConnectModal}
-          >
-            Connect wallet
-          </button>
+          <div className={s.connect_btn_box}>
+            <ConnectBtn />
+          </div>
         )}
       </div>
     </header>

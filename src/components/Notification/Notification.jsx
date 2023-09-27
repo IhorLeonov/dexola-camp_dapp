@@ -125,6 +125,7 @@ export const Notification = () => {
             <span className={s.notify_string}>added to wallet</span>
           </>
         )}
+        {status === "success_connect" && <>Successfully connecting</>}
       </p>
     </div>
   );
