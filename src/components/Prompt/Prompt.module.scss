@@ -2,7 +2,8 @@
 
 .prompt {
   position: absolute;
-  display: none;
+  // display: none;
+
   top: 0;
   z-index: 10;
 
@@ -44,7 +45,7 @@
   }
 
   @media screen and (min-width: $desktop) {
-    top: 60px;
+    top: -56px;
     padding: 8px 12px;
     font-family: Inter;
 
@@ -67,3 +68,5 @@
     }
   }
 }
+
+// классы под разные сообщения находятся в sass/base/common

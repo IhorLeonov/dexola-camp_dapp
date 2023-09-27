@@ -3,6 +3,7 @@
 .help_btn {
   cursor: pointer;
   @media screen and (min-width: $desktop) {
+    position: relative;
     order: 1;
   }
 }

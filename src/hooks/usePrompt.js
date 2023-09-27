@@ -19,5 +19,10 @@ export const usePrompt = () => {
     enableBodyScroll(body);
   };
 
-  return { promptName, promptClass, handleShowPrompt, handleHidePrompt };
+  return {
+    promptName,
+    promptClass,
+    handleShowPrompt,
+    handleHidePrompt,
+  };
 };

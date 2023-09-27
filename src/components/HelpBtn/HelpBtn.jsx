@@ -1,6 +1,13 @@
 import s from "./HelpBtn.module.scss";
+import { Prompt } from "../Prompt/Prompt";
 
-export const HelpBtn = ({ name, onShowPrompt, onHidePrompt }) => {
+export const HelpBtn = ({
+  name,
+  onShowPrompt,
+  onHidePrompt,
+  promptName,
+  promptClass,
+}) => {
   return (
     <div
       type="button"
@@ -24,6 +31,13 @@ export const HelpBtn = ({ name, onShowPrompt, onHidePrompt }) => {
           strokeLinejoin="round"
         />
       </svg>
+      {promptName === name && (
+        <Prompt
+          promptClass={promptClass}
+          name={promptName}
+          onHidePrompt={onHidePrompt}
+        />
+      )}
     </div>
   );
 };

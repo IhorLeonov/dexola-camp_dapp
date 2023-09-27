@@ -1,6 +1,5 @@
 import s from "./Hero.module.scss";
 import { HelpBtn } from "../HelpBtn/HelpBtn";
-import { Prompt } from "../Prompt/Prompt";
 import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
 import { calcPercent, calcEndingTime } from "../../helpers/mathHelpers";
@@ -42,6 +41,8 @@ export const Hero = () => {
               name="balance"
               onShowPrompt={handleShowPrompt}
               onHidePrompt={handleHidePrompt}
+              promptName={promptName}
+              promptClass={promptClass}
             />
             <span className={s.hero_info_desc}>Staked balance</span>
           </li>
@@ -52,6 +53,8 @@ export const Hero = () => {
               name="apr"
               onShowPrompt={handleShowPrompt}
               onHidePrompt={handleHidePrompt}
+              promptName={promptName}
+              promptClass={promptClass}
             />
             <span className={s.hero_info_desc}>APR</span>
           </li>
@@ -70,15 +73,12 @@ export const Hero = () => {
               name="rewards"
               onShowPrompt={handleShowPrompt}
               onHidePrompt={handleHidePrompt}
+              promptName={promptName}
+              promptClass={promptClass}
             />
             <span className={s.hero_info_desc}>Rewards</span>
           </li>
         </ul>
-        <Prompt
-          promptClass={promptClass}
-          name={promptName}
-          onHidePrompt={handleHidePrompt}
-        />
       </div>
     </section>
   );
