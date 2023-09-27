@@ -4,6 +4,13 @@ import { Form, Field as Input } from "formik";
 import { yupSchema } from "../../helpers/yupSchema";
 import { MyContext } from "../../context/context";
 
+// disable change input value on scroll
+document.addEventListener("wheel", function () {
+  if (document.activeElement.type === "number") {
+    document.activeElement.blur();
+  }
+});
+
 export const TransactionsForm = ({ handleSubmit, balance, handleInput }) => {
   const { setInputValue } = MyContext();
   const { schema } = yupSchema(balance);
