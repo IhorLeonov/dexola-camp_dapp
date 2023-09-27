@@ -11,6 +11,8 @@ export const ContextProvider = ({ children }) => {
   const [isLoadingTransaction, setIsLoadingTransaction] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [payload, setPayload] = useState(0);
+  const [promptName, setPromptName] = useState(null);
+  const [promptClass, setPromptClass] = useState(null);
 
   return (
     <Context.Provider
@@ -27,6 +29,10 @@ export const ContextProvider = ({ children }) => {
         setPayload,
         inputValue,
         setInputValue,
+        promptName,
+        setPromptName,
+        promptClass,
+        setPromptClass,
       }}
     >
       {children}

@@ -4,6 +4,7 @@ import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
 import { calcPercent, calcEndingTime } from "../../helpers/mathHelpers";
 import { fromWei } from "../../helpers/mathHelpers";
+// import { MyContext } from "../../context/context";
 
 import {
   useGetStakedBalance,
@@ -14,6 +15,7 @@ import {
 } from "../../helpers/contractRead";
 
 export const Hero = () => {
+  // const { promptName, promptClass } = MyContext();
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
     usePrompt();
 
@@ -39,8 +41,8 @@ export const Hero = () => {
             <span className={s.hero_stru}>STRU</span>{" "}
             <HelpBtn
               name="balance"
-              onShowPrompt={handleShowPrompt}
-              onHidePrompt={handleHidePrompt}
+              handleShowPrompt={handleShowPrompt}
+              handleHidePrompt={handleHidePrompt}
               promptName={promptName}
               promptClass={promptClass}
             />
@@ -51,8 +53,8 @@ export const Hero = () => {
             <span className={s.hero_amount}>≈{percent ? percent : "0"}%</span>{" "}
             <HelpBtn
               name="apr"
-              onShowPrompt={handleShowPrompt}
-              onHidePrompt={handleHidePrompt}
+              handleShowPrompt={handleShowPrompt}
+              handleHidePrompt={handleHidePrompt}
               promptName={promptName}
               promptClass={promptClass}
             />
@@ -71,8 +73,8 @@ export const Hero = () => {
             <span className={s.hero_stru}>STRU</span>{" "}
             <HelpBtn
               name="rewards"
-              onShowPrompt={handleShowPrompt}
-              onHidePrompt={handleHidePrompt}
+              handleShowPrompt={handleShowPrompt}
+              handleHidePrompt={handleHidePrompt}
               promptName={promptName}
               promptClass={promptClass}
             />

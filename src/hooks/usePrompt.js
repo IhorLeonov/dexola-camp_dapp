@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+// import { MyContext } from "../context/context";
 
 const body = document.querySelector("body");
 
 export const usePrompt = () => {
+  // const { setPromptName, setPromptClass } = MyContext();
   const [promptName, setPromptName] = useState(null);
   const [promptClass, setPromptClass] = useState(null);
 

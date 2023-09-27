@@ -1,21 +1,43 @@
 import s from "./HelpBtn.module.scss";
 import { Prompt } from "../Prompt/Prompt";
+import { useState } from "react";
 
 export const HelpBtn = ({
   name,
-  onShowPrompt,
-  onHidePrompt,
+  handleShowPrompt,
+  handleHidePrompt,
   promptName,
   promptClass,
 }) => {
+  const [open, setOpen] = useState(false);
+
+  // const hendleOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const hendleClose = () => {
+  //   setOpen(false);
+  // };
+
+  const handleShow = () => {
+    if (!open) {
+      handleShowPrompt(name);
+      setOpen(true);
+    }
+    if (open) {
+      handleHidePrompt();
+      setOpen(false);
+    }
+  };
+
   return (
     <div
       type="button"
       className={s.help_btn}
-      onMouseEnter={() => onShowPrompt(name)}
-      onTouchStart={() => onShowPrompt(name)}
-      onClick={() => onShowPrompt(name)}
-      onMouseLeave={onHidePrompt}
+      onMouseEnter={() => handleShowPrompt(name)}
+      onTouchStart={handleShow}
+      onClick={handleShow}
+      onMouseLeave={handleHidePrompt}
     >
       <svg
         className={s.question_icon}
@@ -35,7 +57,7 @@ export const HelpBtn = ({
         <Prompt
           promptClass={promptClass}
           name={promptName}
-          onHidePrompt={onHidePrompt}
+          // handleHidePrompt={handleHidePrompt}
         />
       )}
     </div>
