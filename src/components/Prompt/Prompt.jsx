@@ -8,12 +8,7 @@ const rewardsString = "Rewards get allocated every second";
 
 export const Prompt = ({ name, promptClass }) => {
   return (
-    <div
-      id="prompt"
-      // onTouchStart={handleHidePrompt}
-      // onClick={handleHidePrompt}
-      className={s.prompt + " " + promptClass}
-    >
+    <div className={s.prompt + " " + promptClass}>
       <h3 className={s.prompt_title}>{name}</h3>
       <p>
         <span>

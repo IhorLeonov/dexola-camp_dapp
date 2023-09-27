@@ -4,7 +4,7 @@
 .operations {
   width: 100vw;
   min-height: 486px;
-
+  height: 100%;
   background-color: var(--color-background);
 
   @media screen and (min-width: $tablet) {
@@ -15,7 +15,7 @@
   }
 
   @media screen and (min-width: $desktop) {
-    min-height: calc(100vh - 278px);
+    min-height: calc(100vh - 372px);
 
     padding-left: 120px;
     padding-right: 120px;

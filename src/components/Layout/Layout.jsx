@@ -8,8 +8,8 @@ export const Layout = () => {
   return (
     <>
       <Header />
+      <Hero />
       <main>
-        <Hero />
         <NavBar />
         <Operations />
       </main>

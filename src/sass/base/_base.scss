@@ -16,25 +16,35 @@ body {
   position: relative;
   color: var(--color-text-main);
 
-  background-color: var(--color-hero-bg);
   font-family: var(--font-family--roboto-mono);
   font-size: var(--font-size--body-mob);
   letter-spacing: -0.28px;
 
+  background: radial-gradient(
+    650px,
+    var(--color-accent) 20%,
+    var(--color-background) 80%
+  );
+
   @media screen and (min-width: $tablet) {
     font-size: var(--font-size--body-tab);
     letter-spacing: -0.32px;
+
+    background: radial-gradient(
+      1000px,
+      var(--color-accent) 20%,
+      var(--color-background) 80%
+    );
+  }
+
+  @media screen and (min-width: $desktop) {
+    background: radial-gradient(
+      1150px,
+      var(--color-accent) 20%,
+      var(--color-background) 80%
+    );
   }
 }
-
-// main {
-// background-color: var(--color-background);
-// background-color: radial-gradient(
-//   42.93% 42.93% at 50% 50%,
-//   #2f4bc9 0%,
-//   #080808 100%
-// );
-// }
 
 button {
   display: flex;
@@ -47,5 +57,5 @@ button {
 }
 
 input {
-  color: var(--color-text-main);
+  color: inherit;
 }

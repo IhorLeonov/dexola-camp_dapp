@@ -5,7 +5,7 @@ export const yupSchema = (balance) => {
     amount: Yup.number()
       .test(
         "inRange",
-        `Must be in range between 0.000001 and ${balance} STRU`,
+        `Must be in range 0.000001 to ${balance} STRU`,
         (value) => value >= 0.000001 && value <= balance
       )
       .required("Please complete this field"),

@@ -27,7 +27,6 @@ export const HelpBtn = ({
       type="button"
       className={s.help_btn}
       onMouseEnter={() => handleShowPrompt(name)}
-      // onTouchStart={handleShow}
       onClick={handleShow}
       onMouseLeave={handleHidePrompt}
     >
@@ -46,11 +45,7 @@ export const HelpBtn = ({
         />
       </svg>
       {promptName === name && (
-        <Prompt
-          promptClass={promptClass}
-          name={promptName}
-          // handleHidePrompt={handleHidePrompt}
-        />
+        <Prompt promptClass={promptClass} name={promptName} />
       )}
     </div>
   );
