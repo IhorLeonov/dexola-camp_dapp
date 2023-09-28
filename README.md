@@ -7,7 +7,7 @@ This application was built with HTML, CSS, Sass, React and Vite.
 
 ### 1. Start development server:
 
-- git clone [https://github.com/IhorLeonov/dexola-camp_project](https://github.com/IhorLeonov/dexola-camp_project.git)
+- git clone [https://github.com/IhorLeonov/dexola-camp_dapp](https://github.com/IhorLeonov/dexola-camp_dapp.git)
 
 - cd dexola-camp_project
 
