@@ -7,7 +7,7 @@ This application was built with HTML, CSS, Sass, React and Vite.
 
 ### Connecting Your Wallet
 
-1. Visit the StarRunner Token DApp website [https://dexola-camp-dapp.vercel.app](https://dexola-camp-dapp.vercel.app).
+1. Visit the StarRunner Staking website [https://dexola-camp-dapp.vercel.app](https://dexola-camp-dapp.vercel.app).
 
 2. Click the "Connect Wallet" button.
 
