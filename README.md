@@ -19,7 +19,7 @@ After that, you will get 1000 stru to your wallet.
 
 1. Visit the StarRunner Staking website [https://dexola-camp-dapp.vercel.app](https://dexola-camp-dapp.vercel.app).
 
-2. Click the "Connect Wallet" button.
+2. Click "Connect Wallet" button.
 
 3. Select your preferred wallet and follow the on-screen instructions to connect your wallet.
 
@@ -27,29 +27,31 @@ After that, you will get 1000 stru to your wallet.
    
 1. Ensure your wallet is connected.
 
-2. Enter the amount of StarRunner tokens you want to stake in the provided input field.
+2. Enter amount of StarRunner tokens you want to stake in the provided input field.
 
-3. Click the "Stake" button to initiate the staking process.
+3. Click "Stake" button to initiate the staking process.
 
-4. Confirm the transaction in your wallet.
+4. Confirm transaction in your wallet.
 
 Once the transaction is confirmed on the blockchain, your tokens will be staked, and you will start earning rewards.
 
 ### Withdraw
 
-Ensure your wallet is connected.
+1. Ensure your wallet is connected.
 
-Enter the amount of staked StarRunner tokens you want to withdraw in the provided input field.
+2. Enter amount of staked StarRunner tokens you want to withdraw in the provided input field.
 
-Click the "Withdraw" button.
+3. Click "Withdraw" button.
 
-Confirm the transaction in your wallet.
+4. Confirm transaction in your wallet.
 
 ### Claim Rewards
 
-Click the "Claim Rewards" button.
+1. Ensure your wallet is connected.
 
-Confirm the transaction in your wallet.
+2. Click "Claim Rewards" button.
+
+3. Confirm transaction in your wallet.
 
 ## For dev
 
