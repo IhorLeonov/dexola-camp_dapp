@@ -5,6 +5,16 @@ This application was built with HTML, CSS, Sass, React and Vite.
 
 ## Usage
 
+### Preparing
+
+1. Token for staking you can get here [https://sepolia.etherscan.io/address/0x59Ec26901B19fDE7a96f6f7f328f12d8f682CB83#writeContract](https://sepolia.etherscan.io/address/0x59Ec26901B19fDE7a96f6f7f328f12d8f682CB83#writeContract).
+
+2. Connect your wallet to scanner and use method "mint".
+
+3. Press button "write" and confirm transaction in your wallet.
+
+After that, you will get 1000 stru to your wallet.
+
 ### Connecting Your Wallet
 
 1. Visit the StarRunner Staking website [https://dexola-camp-dapp.vercel.app](https://dexola-camp-dapp.vercel.app).
