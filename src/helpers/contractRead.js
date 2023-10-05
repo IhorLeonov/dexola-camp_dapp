@@ -14,7 +14,8 @@ export const useGetSTRUBalance = (address) => {
     args: [`${address}`],
     watch: true,
   });
-  return Number(data);
+  // return Number(data);
+  return data;
 };
 
 // reading staked balance, takes user address in args

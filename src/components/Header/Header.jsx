@@ -6,9 +6,9 @@ import { Icon } from "../SelectIcons/SelectIcons";
 import { useEffect } from "react";
 import { useAccount, useBalance, useDisconnect } from "wagmi";
 import { useGetSTRUBalance } from "../../helpers/contractRead";
-import { fromWei } from "../../helpers/mathHelpers";
 import { MyContext } from "../../context/context";
 import { ConnectBtn } from "../ConnectBtn/ConnectBtn";
+import { formatEther } from "viem";
 
 export const Header = () => {
   const { setStruBalance } = MyContext();
@@ -17,12 +17,14 @@ export const Header = () => {
   const { data: balance } = useBalance({ address });
 
   const walletBalance = Number(balance?.formatted).toFixed(1);
-  const struBalance = Math.round(fromWei(useGetSTRUBalance(address)));
+  const struBalance = useGetSTRUBalance(address);
+
+  const formattedStruBalance = Math.round(formatEther(struBalance));
   const formattedAddress = address?.slice(0, 17) + "...";
 
   useEffect(() => {
     if (isConnected) {
-      setStruBalance(struBalance);
+      setStruBalance(formattedStruBalance);
     }
   }, [struBalance]);
 
@@ -35,7 +37,7 @@ export const Header = () => {
         {isConnected ? (
           <div className={s.wallet_info}>
             <img className={s.stru_logo} src={struLogo} alt="STRU logo" />
-            {struBalance ? struBalance : "0.00"} STRU
+            {formattedStruBalance ? formattedStruBalance : "0.00"} STRU
             <img className={s.eth_logo} src={ethLogo} alt="Ethereum logo" />
             {balance ? walletBalance : "0.00"} {balance?.symbol}
             <span className={s.wallet_adress}>|</span>

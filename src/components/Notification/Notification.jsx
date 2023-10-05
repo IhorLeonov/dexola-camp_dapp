@@ -16,7 +16,7 @@ export const Notification = () => {
     payload,
   } = MyContext();
 
-  const tokenAmount = formatEther(payload);
+  const tokenAmount = Math.round(formatEther(payload)).toFixed(3);
 
   // close notification
   useEffect(() => {

@@ -1,5 +1,11 @@
 const oneDay = 86400;
 
+export const decimalWei = 10 ** 18;
+
+export const fromWei = (numb) => {
+  return numb / 10 ** 18;
+};
+
 export const currentStamp = Date.now() / 1000;
 
 export const calcPercent = (numberOfRewards, totalAmount) => {
@@ -10,8 +16,15 @@ export const calcEndingTime = (timeStamp) => {
   return Math.round((Number(timeStamp) - currentStamp) / oneDay);
 };
 
-export const fromWei = (numb) => {
-  return numb / 10 ** 18;
+export const calcTotalRate = (
+  stakedBalance,
+  totalAvailble,
+  totalSupply,
+  inputValue
+) => {
+  return Math.round(
+    fromWei(
+      (Number(stakedBalance) * totalAvailble) / totalSupply + Number(inputValue)
+    )
+  );
 };
-
-export const decimalWei = 10 ** 18;

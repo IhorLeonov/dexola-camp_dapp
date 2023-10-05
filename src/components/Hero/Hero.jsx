@@ -3,8 +3,9 @@ import { HelpBtn } from "../HelpBtn/HelpBtn";
 import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
 import { calcPercent, calcEndingTime } from "../../helpers/mathHelpers";
-// import { fromWei } from "../../helpers/mathHelpers";
 import { formatEther } from "viem";
+import { useEffect } from "react";
+import { MyContext } from "../../context/context";
 
 import {
   useGetStakedBalance,
@@ -15,6 +16,7 @@ import {
 } from "../../helpers/contractRead";
 
 export const Hero = () => {
+  const { setStakedBalance, setRewards } = MyContext();
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
     usePrompt();
 
@@ -22,15 +24,18 @@ export const Hero = () => {
   const numberOfRewards = useGetNumberOfRewards();
   const totalAmount = useGetTotalAmountOfStakes();
   const timeStamp = useGetTimeStampOfTheEnd();
+  const stakedBalance = useGetStakedBalance(address);
+  const userRewards = useGetUserRewards(address);
 
-  const stakedBalance = Math.round(
-    Number(formatEther(useGetStakedBalance(address)))
-  );
+  const formattedStakedBalance = Math.round(formatEther(stakedBalance));
+  const formattedUserRewards = Math.round(formatEther(userRewards));
   const percent = calcPercent(numberOfRewards, totalAmount);
   const days = calcEndingTime(timeStamp);
-  const userRewards = Math.round(
-    Number(formatEther(useGetUserRewards(address)))
-  );
+
+  useEffect(() => {
+    setStakedBalance(stakedBalance);
+    setRewards(userRewards);
+  }, [stakedBalance, userRewards]);
 
   return (
     <section className={s.hero}>
@@ -39,7 +44,7 @@ export const Hero = () => {
         <ul className={s.hero_info}>
           <li className={s.hero_info_balance}>
             <span className={s.hero_amount}>
-              {stakedBalance ? stakedBalance : "0.00"}
+              {formattedStakedBalance ? formattedStakedBalance : "0.00"}
             </span>
             <span className={s.hero_stru}>STRU</span>{" "}
             <HelpBtn
@@ -71,7 +76,7 @@ export const Hero = () => {
 
           <li className={s.hero_info_rewards}>
             <span className={s.hero_amount}>
-              {!isNaN(userRewards) ? userRewards : "0"}
+              {formattedUserRewards ? formattedUserRewards : "0"}
             </span>{" "}
             <span className={s.hero_stru}>STRU</span>{" "}
             <HelpBtn

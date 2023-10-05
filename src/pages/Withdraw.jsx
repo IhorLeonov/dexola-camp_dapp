@@ -1,10 +1,5 @@
 import s from "./Pages.module.scss";
-import { useAccount } from "wagmi";
 import { useEffect } from "react";
-import {
-  useGetStakedBalance,
-  // useGetUserRewards,
-} from "../helpers/contractRead";
 
 import {
   useWithdraw,
@@ -19,11 +14,8 @@ import { TransactionsForm } from "../components/TransactionsForm/TransactionsFor
 import { formatEther, parseEther } from "viem";
 
 export const Withdraw = () => {
-  const { setIsLoadingTransaction, setPayload } = MyContext();
-  const { address } = useAccount();
-  const stakedBalance = useGetStakedBalance(address);
+  const { setIsLoadingTransaction, setPayload, stakedBalance } = MyContext();
   const formattedStakedBalance = Math.round(Number(formatEther(stakedBalance)));
-  // const userRewards = useGetUserRewards(address);
 
   const { writeWithdraw, dataWithdraw, withdrawIsLoading } = useWithdraw();
   const { takeAllWrite, takeAllData, takeAllIsLoading } = useTakeAll();

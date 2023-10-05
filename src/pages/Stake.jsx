@@ -1,7 +1,7 @@
 import s from "./Pages.module.scss";
 import { MyContext } from "../context/context";
 import { useAccount } from "wagmi";
-import { currentStamp, fromWei } from "../helpers/mathHelpers";
+import { currentStamp, calcTotalRate } from "../helpers/mathHelpers";
 import { useEffect, useMemo } from "react";
 import { Loader } from "../components/Loader/Loader";
 import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
@@ -12,7 +12,6 @@ import {
   useGetTimeStampOfTheEnd,
   useGetRewardRate,
   useGetTotalSupply,
-  useGetStakedBalance,
 } from "../helpers/contractRead";
 
 import {
@@ -26,15 +25,16 @@ import {
 export const Stake = () => {
   const {
     struBalance,
+    stakedBalance,
     setIsLoadingTransaction,
     payload,
     setPayload,
     inputValue,
   } = MyContext();
-  const { address: userAddress } = useAccount();
 
-  const allowance = useCheckAllowance(userAddress);
-  const stakedBalance = Number(useGetStakedBalance(userAddress));
+  const { address } = useAccount();
+
+  const allowance = useCheckAllowance(address);
   const periodFinish = Number(useGetTimeStampOfTheEnd());
   const remaining = periodFinish - currentStamp;
   const rewardRate = Number(useGetRewardRate());
@@ -48,11 +48,7 @@ export const Stake = () => {
   const { stakeLoading } = useWaitForStake(stakeData);
 
   const totalRate = useMemo(() => {
-    return Math.round(
-      fromWei(
-        (stakedBalance * totalAvailble) / totalSupply + Number(inputValue)
-      )
-    );
+    return calcTotalRate(stakedBalance, totalAvailble, totalSupply, inputValue);
   }, [stakedBalance, totalAvailble, totalSupply, inputValue]);
 
   useEffect(() => {
@@ -62,8 +58,6 @@ export const Stake = () => {
 
   const handleSubmit = (amount) => {
     const payload = parseEther(amount);
-
-    // 0.999999999999999999
     setPayload(payload);
 
     if (allowance < payload) {
