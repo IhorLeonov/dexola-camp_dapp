@@ -1,10 +1,10 @@
 import s from "./Notification.module.scss";
 import { MyContext } from "../../context/context";
-import { fromWei } from "../../helpers/mathHelpers";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import crossIcon from "../../assets/icons/cross.svg";
 import tickIcon from "../../assets/icons/tick.svg";
+import { formatEther } from "viem";
 
 export const Notification = () => {
   const location = useLocation();
@@ -16,7 +16,7 @@ export const Notification = () => {
     payload,
   } = MyContext();
 
-  const tokenAmount = fromWei(payload);
+  const tokenAmount = formatEther(payload);
 
   // close notification
   useEffect(() => {
@@ -66,14 +66,14 @@ export const Notification = () => {
         )}
         {isLoadingTransaction === "withdraw_loading" && (
           <>
-            Adding <span className={s.notify_accent}>{tokenAmount}</span> STRU
-            to wallet
+            Withdrawing <span className={s.notify_accent}>{tokenAmount}</span>{" "}
+            STRU
           </>
         )}
         {isLoadingTransaction === "exit_loading" && (
           <>
-            Adding <span className={s.notify_accent}>{tokenAmount}</span> STRU
-            to wallet
+            Withdrawing <span className={s.notify_accent}>{tokenAmount}</span>{" "}
+            STRU
           </>
         )}
         {isLoadingTransaction === "claim_loading" && (
@@ -106,7 +106,7 @@ export const Notification = () => {
         )}
         {status === "success_withdraw" && (
           <>
-            <span className={s.notify_accent}>{tokenAmount} STRU </span>{" "}
+            <span className={s.notify_accent}>{tokenAmount} STRU </span>
             successfully{" "}
             <span className={s.notify_string}>added to wallet</span>
           </>
@@ -125,7 +125,6 @@ export const Notification = () => {
             <span className={s.notify_string}>added to wallet</span>
           </>
         )}
-        {status === "success_connect" && <>Successfully connecting</>}
       </p>
     </div>
   );

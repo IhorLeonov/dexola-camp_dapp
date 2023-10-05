@@ -3,14 +3,15 @@ import { useAccount } from "wagmi";
 import { useEffect } from "react";
 import { useGetUserRewards } from "../helpers/contractRead";
 import { useClaimRewards, useWaitClaimRewards } from "../helpers/contractWrite";
-import { fromWei, decimalWei } from "../helpers/mathHelpers";
 import { Loader } from "../components/Loader/Loader";
 import { MyContext } from "../context/context";
 
 export const ClaimRewards = () => {
   const { setIsLoadingTransaction, setPayload } = MyContext();
-  const { address: userAddress } = useAccount();
-  const userRewards = fromWei(useGetUserRewards(userAddress)).toFixed(2);
+  const { address } = useAccount();
+
+  const userRewards = useGetUserRewards(address);
+
   const { writeClaim, dataClaim, claimIsLoading } = useClaimRewards();
   const { claimLoading } = useWaitClaimRewards(dataClaim);
 
@@ -19,7 +20,7 @@ export const ClaimRewards = () => {
   }, [claimLoading]);
 
   const handleClick = () => {
-    setPayload(userRewards * decimalWei);
+    setPayload(userRewards);
     writeClaim();
   };
 
@@ -31,7 +32,7 @@ export const ClaimRewards = () => {
       <p className={s.claim_available}>
         Available:{" "}
         <span className={s.claim_available_value}>
-          {!isNaN(userRewards) ? userRewards : "0"}
+          {userRewards ? userRewards : "0"}
         </span>
         <span> STRU</span>
       </p>
@@ -39,7 +40,7 @@ export const ClaimRewards = () => {
         className={s.page_form_btn + " " + s.claim_btn}
         type="button"
         onClick={handleClick}
-        disabled={claimIsLoading}
+        disabled={claimIsLoading || userRewards === 0n}
       >
         {claimIsLoading ? <Loader width={24} /> : "Claim rewards"}
       </button>

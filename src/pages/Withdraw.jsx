@@ -3,7 +3,7 @@ import { useAccount } from "wagmi";
 import { useEffect } from "react";
 import {
   useGetStakedBalance,
-  useGetUserRewards,
+  // useGetUserRewards,
 } from "../helpers/contractRead";
 
 import {
@@ -13,18 +13,21 @@ import {
   useWaitTakeAll,
 } from "../helpers/contractWrite";
 
-import { fromWei, decimalWei } from "../helpers/mathHelpers";
 import { MyContext } from "../context/context";
 import { Loader } from "../components/Loader/Loader";
 import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
+import { formatEther, parseEther } from "viem";
 
 export const Withdraw = () => {
   const { setIsLoadingTransaction, setPayload } = MyContext();
-  const { address: userAddress } = useAccount();
-  const stakedBalance = Math.round(fromWei(useGetStakedBalance(userAddress)));
-  const userRewards = useGetUserRewards(userAddress);
+  const { address } = useAccount();
+  const stakedBalance = useGetStakedBalance(address);
+  const formattedStakedBalance = Math.round(Number(formatEther(stakedBalance)));
+  // const userRewards = useGetUserRewards(address);
+
   const { writeWithdraw, dataWithdraw, withdrawIsLoading } = useWithdraw();
   const { takeAllWrite, takeAllData, takeAllIsLoading } = useTakeAll();
+
   const { withdrawLoading } = useWaitForWithdraw(dataWithdraw);
   const { takeAllLoading } = useWaitTakeAll(takeAllData);
 
@@ -34,13 +37,14 @@ export const Withdraw = () => {
   }, [withdrawLoading, takeAllLoading]);
 
   const handleSubmit = (amount) => {
-    const payload = amount * decimalWei;
+    const payload = parseEther(amount);
+
     setPayload(payload);
     writeWithdraw({ args: [payload] });
   };
 
   const handleTakeAll = () => {
-    setPayload(stakedBalance * decimalWei + userRewards);
+    // setPayload(stakedBalance + userRewards);
     takeAllWrite();
   };
 
@@ -51,7 +55,10 @@ export const Withdraw = () => {
       <div className={s.page_header}>
         <h2 className={s.page_title}>Withdraw</h2>
       </div>
-      <TransactionsForm handleSubmit={handleSubmit} balance={stakedBalance} />
+      <TransactionsForm
+        handleSubmit={handleSubmit}
+        balance={formattedStakedBalance}
+      />
       <div className={s.withdrow_buttons_box}>
         <button
           form="form"

@@ -1,12 +1,13 @@
-const dateNow = Date.now() / 1000;
 const oneDay = 86400;
 
+export const currentStamp = Date.now() / 1000;
+
 export const calcPercent = (numberOfRewards, totalAmount) => {
-  return Math.round((numberOfRewards * 100) / totalAmount);
+  return Math.round((Number(numberOfRewards) * 100) / Number(totalAmount));
 };
 
 export const calcEndingTime = (timeStamp) => {
-  return Math.round((timeStamp - dateNow) / oneDay);
+  return Math.round((Number(timeStamp) - currentStamp) / oneDay);
 };
 
 export const fromWei = (numb) => {

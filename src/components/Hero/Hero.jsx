@@ -3,7 +3,8 @@ import { HelpBtn } from "../HelpBtn/HelpBtn";
 import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
 import { calcPercent, calcEndingTime } from "../../helpers/mathHelpers";
-import { fromWei } from "../../helpers/mathHelpers";
+// import { fromWei } from "../../helpers/mathHelpers";
+import { formatEther } from "viem";
 
 import {
   useGetStakedBalance,
@@ -22,10 +23,14 @@ export const Hero = () => {
   const totalAmount = useGetTotalAmountOfStakes();
   const timeStamp = useGetTimeStampOfTheEnd();
 
-  const stakedBalance = Math.round(fromWei(useGetStakedBalance(address)));
+  const stakedBalance = Math.round(
+    Number(formatEther(useGetStakedBalance(address)))
+  );
   const percent = calcPercent(numberOfRewards, totalAmount);
   const days = calcEndingTime(timeStamp);
-  const userRewards = Math.round(fromWei(useGetUserRewards(address)));
+  const userRewards = Math.round(
+    Number(formatEther(useGetUserRewards(address)))
+  );
 
   return (
     <section className={s.hero}>
