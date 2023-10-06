@@ -3,21 +3,26 @@ import { useEffect } from "react";
 import { useClaimRewards, useWaitClaimRewards } from "../helpers/contractWrite";
 import { Loader } from "../components/Loader/Loader";
 import { MyContext } from "../context/context";
+import { formatEther } from "viem";
+import { toFixedDigits } from "../helpers/mathHelpers";
 
 export const ClaimRewards = () => {
-  const { setIsLoadingTransaction, rewards } = MyContext();
-
+  const { setPayload, setIsLoadingTransaction, rewards } = MyContext();
   const { writeClaim, dataClaim, claimIsLoading } = useClaimRewards();
   const { claimLoading } = useWaitClaimRewards(dataClaim);
+
+  const formattedRewards = toFixedDigits(Number(formatEther(rewards)));
 
   useEffect(() => {
     if (claimLoading) setIsLoadingTransaction("claim_loading");
   }, [claimLoading]);
 
   const handleClick = () => {
-    // setPayload(rewards);
+    setPayload(rewards);
     writeClaim();
   };
+
+  console.log(formattedRewards);
 
   return (
     <div className={s.page}>
@@ -27,7 +32,7 @@ export const ClaimRewards = () => {
       <p className={s.claim_available}>
         Available:{" "}
         <span className={s.claim_available_value}>
-          {rewards ? rewards : "0"}
+          {rewards ? formattedRewards : "0.00"}
         </span>
         <span> STRU</span>
       </p>

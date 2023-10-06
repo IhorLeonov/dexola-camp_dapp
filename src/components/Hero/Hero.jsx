@@ -2,7 +2,12 @@ import s from "./Hero.module.scss";
 import { HelpBtn } from "../HelpBtn/HelpBtn";
 import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
-import { calcPercent, calcEndingTime } from "../../helpers/mathHelpers";
+import {
+  calcPercent,
+  calcEndingTime,
+  toFixedDigits,
+} from "../../helpers/mathHelpers";
+
 import { formatEther } from "viem";
 import { useEffect } from "react";
 import { MyContext } from "../../context/context";
@@ -27,8 +32,10 @@ export const Hero = () => {
   const stakedBalance = useGetStakedBalance(address);
   const userRewards = useGetUserRewards(address);
 
-  const formattedStakedBalance = Math.round(formatEther(stakedBalance));
-  const formattedUserRewards = Math.round(formatEther(userRewards));
+  const formattedStakedBalance = toFixedDigits(
+    Number(formatEther(stakedBalance))
+  );
+  const formattedUserRewards = toFixedDigits(Number(formatEther(userRewards)));
   const percent = calcPercent(numberOfRewards, totalAmount);
   const days = calcEndingTime(timeStamp);
 

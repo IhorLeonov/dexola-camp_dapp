@@ -1,7 +1,5 @@
 const oneDay = 86400;
 
-export const decimalWei = 10 ** 18;
-
 export const fromWei = (numb) => {
   return numb / 10 ** 18;
 };
@@ -27,4 +25,12 @@ export const calcTotalRate = (
       (Number(stakedBalance) * totalAvailble) / totalSupply + Number(inputValue)
     )
   );
+};
+
+export const toFixedDigits = (value) => {
+  if (value >= 10) {
+    return value.toFixed();
+  } else if ((value < 10) & (value >= 1)) {
+    return value.toFixed(1);
+  } else return value.toFixed(2);
 };

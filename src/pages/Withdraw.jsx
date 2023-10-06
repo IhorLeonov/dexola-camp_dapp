@@ -12,10 +12,15 @@ import { MyContext } from "../context/context";
 import { Loader } from "../components/Loader/Loader";
 import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
 import { formatEther, parseEther } from "viem";
+import { toFixedDigits } from "../helpers/mathHelpers";
 
 export const Withdraw = () => {
-  const { setIsLoadingTransaction, setPayload, stakedBalance } = MyContext();
-  const formattedStakedBalance = Math.round(Number(formatEther(stakedBalance)));
+  const { setIsLoadingTransaction, setPayload, stakedBalance, rewards } =
+    MyContext();
+
+  const formattedStakedBalance = toFixedDigits(
+    Number(formatEther(stakedBalance))
+  );
 
   const { writeWithdraw, dataWithdraw, withdrawIsLoading } = useWithdraw();
   const { takeAllWrite, takeAllData, takeAllIsLoading } = useTakeAll();
@@ -36,7 +41,7 @@ export const Withdraw = () => {
   };
 
   const handleTakeAll = () => {
-    // setPayload(stakedBalance + userRewards);
+    setPayload(stakedBalance + rewards);
     takeAllWrite();
   };
 

@@ -9,18 +9,20 @@ import { useGetSTRUBalance } from "../../helpers/contractRead";
 import { MyContext } from "../../context/context";
 import { ConnectBtn } from "../ConnectBtn/ConnectBtn";
 import { formatEther } from "viem";
+import { toFixedDigits } from "../../helpers/mathHelpers";
 
 export const Header = () => {
   const { setStruBalance } = MyContext();
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
-  const { data: balance } = useBalance({ address });
-
-  const walletBalance = Number(balance?.formatted).toFixed(1);
+  const { data: walletBalance } = useBalance({ address });
   const struBalance = useGetSTRUBalance(address);
 
-  const formattedStruBalance = Math.round(formatEther(struBalance));
   const formattedAddress = address?.slice(0, 17) + "...";
+  const formattedStruBalance = toFixedDigits(Number(formatEther(struBalance)));
+  const formattedWalletBalance = toFixedDigits(
+    Number(walletBalance?.formatted)
+  );
 
   useEffect(() => {
     if (isConnected) {
@@ -39,7 +41,8 @@ export const Header = () => {
             <img className={s.stru_logo} src={struLogo} alt="STRU logo" />
             {formattedStruBalance ? formattedStruBalance : "0.00"} STRU
             <img className={s.eth_logo} src={ethLogo} alt="Ethereum logo" />
-            {balance ? walletBalance : "0.00"} {balance?.symbol}
+            {walletBalance ? formattedWalletBalance : "0.00"}{" "}
+            {walletBalance?.symbol}
             <span className={s.wallet_adress}>|</span>
             <span className={s.wallet_adress}>
               {address ? formattedAddress : "unknown"}
