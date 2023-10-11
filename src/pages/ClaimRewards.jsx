@@ -7,11 +7,14 @@ import { formatEther } from "viem";
 import { toFixedDigits } from "../helpers/mathHelpers";
 
 export const ClaimRewards = () => {
-  const { setPayload, setIsLoadingTransaction, rewards } = MyContext();
+  const { setPayload, setIsLoadingTransaction, rewards, isWalletConnect } =
+    MyContext();
   const { writeClaim, dataClaim, claimIsLoading } = useClaimRewards();
   const { claimLoading } = useWaitClaimRewards(dataClaim);
 
-  const formattedRewards = toFixedDigits(Number(formatEther(rewards)));
+  const formattedRewards = isWalletConnect
+    ? toFixedDigits(Number(formatEther(rewards)))
+    : 0;
 
   useEffect(() => {
     if (claimLoading) setIsLoadingTransaction("claim_loading");
@@ -21,8 +24,6 @@ export const ClaimRewards = () => {
     setPayload(rewards);
     writeClaim();
   };
-
-  console.log(formattedRewards);
 
   return (
     <div className={s.page}>

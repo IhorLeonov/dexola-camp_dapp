@@ -15,12 +15,17 @@ import { formatEther, parseEther } from "viem";
 import { toFixedDigits } from "../helpers/mathHelpers";
 
 export const Withdraw = () => {
-  const { setIsLoadingTransaction, setPayload, stakedBalance, rewards } =
-    MyContext();
+  const {
+    setIsLoadingTransaction,
+    setPayload,
+    stakedBalance,
+    rewards,
+    isWalletConnect,
+  } = MyContext();
 
-  const formattedStakedBalance = toFixedDigits(
-    Number(formatEther(stakedBalance))
-  );
+  const formattedStakedBalance = isWalletConnect
+    ? toFixedDigits(Number(formatEther(stakedBalance)))
+    : 0;
 
   const { writeWithdraw, dataWithdraw, withdrawIsLoading } = useWithdraw();
   const { takeAllWrite, takeAllData, takeAllIsLoading } = useTakeAll();

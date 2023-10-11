@@ -12,14 +12,16 @@ import { formatEther } from "viem";
 import { toFixedDigits } from "../../helpers/mathHelpers";
 
 export const Header = () => {
-  const { setStruBalance } = MyContext();
+  const { setStruBalance, setIsWalletConnect } = MyContext();
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: walletBalance } = useBalance({ address });
   const struBalance = useGetSTRUBalance(address);
 
   const formattedAddress = address?.slice(0, 17) + "...";
-  const formattedStruBalance = toFixedDigits(Number(formatEther(struBalance)));
+  const formattedStruBalance = isConnected
+    ? toFixedDigits(Number(formatEther(struBalance)))
+    : 0;
   const formattedWalletBalance = toFixedDigits(
     Number(walletBalance?.formatted)
   );
@@ -27,8 +29,14 @@ export const Header = () => {
   useEffect(() => {
     if (isConnected) {
       setStruBalance(formattedStruBalance);
+      setIsWalletConnect(true);
     }
   }, [struBalance]);
+
+  const handleDisconnect = () => {
+    disconnect();
+    setIsWalletConnect(false);
+  };
 
   return (
     <header className={s.header}>
@@ -47,7 +55,11 @@ export const Header = () => {
             <span className={s.wallet_adress}>
               {address ? formattedAddress : "unknown"}
             </span>
-            <button type="button" className={s.dcnnct_btn} onClick={disconnect}>
+            <button
+              type="button"
+              className={s.dcnnct_btn}
+              onClick={handleDisconnect}
+            >
               <Icon name="logout" width={18} height={18} />
             </button>
           </div>

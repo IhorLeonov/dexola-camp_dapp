@@ -16,6 +16,17 @@ export const TransactionsForm = ({ handleSubmit, balance }) => {
   const { setInputValue } = MyContext();
   const { schema } = yupSchema(balance);
 
+  // const input = document.querySelector("input");
+  // const REGEXP = /[0-9/]+/;
+
+  // if (input) {
+  //   input.addEventListener("keydown", (event) => {
+  //     if (!REGEXP.test(event.key)) {
+  //       event.preventDefault();
+  //     }
+  //   });
+  // }
+
   return (
     <Formik
       initialValues={{ amount: "" }}
@@ -23,6 +34,7 @@ export const TransactionsForm = ({ handleSubmit, balance }) => {
       onSubmit={(values, actions) => {
         const { amount } = values;
         handleSubmit(amount);
+        setInputValue(0);
         actions.resetForm();
       }}
     >
@@ -35,9 +47,8 @@ export const TransactionsForm = ({ handleSubmit, balance }) => {
             id="form"
             className={s.form}
             onChange={(e) => {
-              setInputValue(parseEther(e.target.value)); //
+              setInputValue(parseEther(e.target.value));
             }}
-            onBlur={() => setInputValue(0)}
           >
             <Input
               className={s.form_input + " " + warningStyles()}

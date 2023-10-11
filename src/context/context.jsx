@@ -5,6 +5,7 @@ const Context = createContext();
 export const MyContext = () => useContext(Context);
 
 export const ContextProvider = ({ children }) => {
+  const [isWalletConnect, setIsWalletConnect] = useState(false);
   const [userAddress, setUserAddress] = useState("");
   const [struBalance, setStruBalance] = useState(0);
   const [stakedBalance, setStakedBalance] = useState(0);
@@ -18,6 +19,8 @@ export const ContextProvider = ({ children }) => {
   return (
     <Context.Provider
       value={{
+        isWalletConnect,
+        setIsWalletConnect,
         struBalance,
         setStruBalance,
         stakedBalance,
