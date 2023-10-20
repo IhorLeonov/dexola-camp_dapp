@@ -15,12 +15,13 @@ import {
 } from "../helpers/contractRead";
 
 import {
-  stakeAddress,
   useStakeToken,
   useApproveStaking,
   useWaitForApprove,
   useWaitForStake,
 } from "../helpers/contractWrite";
+
+const { VITE_STAKE_ADDRESS } = import.meta.env;
 
 export const Stake = () => {
   const {
@@ -64,7 +65,7 @@ export const Stake = () => {
     setPayload(payload);
 
     if (allowance < payload) {
-      writeApprove({ args: [stakeAddress, payload] });
+      writeApprove({ args: [VITE_STAKE_ADDRESS, payload] });
     } else writeStake({ args: [payload] });
   };
 

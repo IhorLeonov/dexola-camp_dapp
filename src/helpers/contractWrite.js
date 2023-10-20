@@ -3,8 +3,7 @@ import struABI from "./abis/struABI.json";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
 import { useAppContext } from "../context/context";
 
-export const stakeAddress = "0x2F112ED8A96327747565f4d4b4615be8fb89459d";
-export const struAddress = "0x59Ec26901B19fDE7a96f6f7f328f12d8f682CB83";
+const { VITE_STAKE_ADDRESS, VITE_STRU_ADDRESS } = import.meta.env;
 
 // approving token amount before staking, gets stake address and token amount in args
 export const useApproveStaking = () => {
@@ -14,7 +13,7 @@ export const useApproveStaking = () => {
     isLoading: apprWriteLoading,
     write: writeApprove,
   } = useContractWrite({
-    address: struAddress,
+    address: VITE_STRU_ADDRESS,
     abi: struABI,
     functionName: "approve",
 
@@ -53,7 +52,7 @@ export const useStakeToken = () => {
     isLoading: stakeWriteLoading,
     write: writeStake,
   } = useContractWrite({
-    address: stakeAddress,
+    address: VITE_STAKE_ADDRESS,
     abi: stakeABI,
     functionName: "stake",
 
@@ -91,7 +90,7 @@ export const useWithdraw = () => {
     isLoading: withdrawIsLoading,
     write: writeWithdraw,
   } = useContractWrite({
-    address: stakeAddress,
+    address: VITE_STAKE_ADDRESS,
     abi: stakeABI,
     functionName: "withdraw",
     onError() {
@@ -128,7 +127,7 @@ export const useClaimRewards = () => {
     isLoading: claimIsLoading,
     write: writeClaim,
   } = useContractWrite({
-    address: stakeAddress,
+    address: VITE_STAKE_ADDRESS,
     abi: stakeABI,
     functionName: "claimReward",
     onError() {
@@ -165,7 +164,7 @@ export const useTakeAll = () => {
     isLoading: takeAllIsLoading,
     write: takeAllWrite,
   } = useContractWrite({
-    address: stakeAddress,
+    address: VITE_STAKE_ADDRESS,
     abi: stakeABI,
     functionName: "exit",
     onError() {
