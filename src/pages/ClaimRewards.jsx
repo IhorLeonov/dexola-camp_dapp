@@ -9,6 +9,7 @@ import { toFixedDigits } from "../helpers/mathHelpers";
 export const ClaimRewards = () => {
   const { setPayload, setIsLoadingTransaction, rewards, isWalletConnect } =
     useAppContext();
+
   const { writeClaim, dataClaim, claimIsLoading } = useClaimRewards();
   const { claimLoading } = useWaitClaimRewards(dataClaim);
 

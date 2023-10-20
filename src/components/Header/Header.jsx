@@ -12,6 +12,7 @@ import { formatEther } from "viem";
 import { toFixedDigits } from "../../helpers/mathHelpers";
 
 export const Header = () => {
+
   const { setStruBalance, setIsWalletConnect } = useAppContext();
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
