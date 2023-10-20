@@ -6,25 +6,38 @@ import { Icon } from "../SelectIcons/SelectIcons";
 import { useEffect } from "react";
 import { useAccount, useBalance, useDisconnect } from "wagmi";
 import { useGetSTRUBalance } from "../../helpers/contractRead";
-import { fromWei } from "../../helpers/mathHelpers";
 import { useAppContext } from "../../context/context";
 import { ConnectBtn } from "../ConnectBtn/ConnectBtn";
+import { formatEther } from "viem";
+import { toFixedDigits } from "../../helpers/mathHelpers";
 
 export const Header = () => {
-  const { setStruBalance } = useAppContext();
+
+  const { setStruBalance, setIsWalletConnect } = useAppContext();
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
-  const { data: balance } = useBalance({ address });
+  const { data: walletBalance } = useBalance({ address });
+  const struBalance = useGetSTRUBalance(address);
 
-  const walletBalance = Number(balance?.formatted).toFixed(1);
-  const struBalance = Math.round(fromWei(useGetSTRUBalance(address)));
   const formattedAddress = address?.slice(0, 17) + "...";
+  const formattedStruBalance = isConnected
+    ? toFixedDigits(Number(formatEther(struBalance)))
+    : 0;
+  const formattedWalletBalance = toFixedDigits(
+    Number(walletBalance?.formatted)
+  );
 
   useEffect(() => {
     if (isConnected) {
-      setStruBalance(struBalance);
+      setStruBalance(formattedStruBalance);
+      setIsWalletConnect(true);
     }
   }, [struBalance]);
+
+  const handleDisconnect = () => {
+    disconnect();
+    setIsWalletConnect(false);
+  };
 
   return (
     <header className={s.header}>
@@ -35,14 +48,19 @@ export const Header = () => {
         {isConnected ? (
           <div className={s.wallet_info}>
             <img className={s.stru_logo} src={struLogo} alt="STRU logo" />
-            {struBalance ? struBalance : "0.00"} STRU
+            {formattedStruBalance ? formattedStruBalance : "0.00"} STRU
             <img className={s.eth_logo} src={ethLogo} alt="Ethereum logo" />
-            {balance ? walletBalance : "0.00"} {balance?.symbol}
+            {walletBalance ? formattedWalletBalance : "0.00"}{" "}
+            {walletBalance?.symbol}
             <span className={s.wallet_adress}>|</span>
             <span className={s.wallet_adress}>
               {address ? formattedAddress : "unknown"}
             </span>
-            <button type="button" className={s.dcnnct_btn} onClick={disconnect}>
+            <button
+              type="button"
+              className={s.dcnnct_btn}
+              onClick={handleDisconnect}
+            >
               <Icon name="logout" width={18} height={18} />
             </button>
           </div>

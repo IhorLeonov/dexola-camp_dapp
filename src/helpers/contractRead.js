@@ -13,7 +13,8 @@ export const useGetSTRUBalance = (address) => {
     args: [`${address}`],
     watch: true,
   });
-  return Number(data);
+  // return Number(data);
+  return data;
 };
 
 // reading staked balance, takes user address in args
@@ -25,7 +26,7 @@ export const useGetStakedBalance = (address) => {
     args: [`${address}`],
     watch: true,
   });
-  return Number(data);
+  return data;
 };
 
 // reading total number of rewards for the period
@@ -35,7 +36,7 @@ export const useGetNumberOfRewards = () => {
     abi: stakeABI,
     functionName: "getRewardForDuration",
   });
-  return Number(data);
+  return data;
 };
 
 // reading the total amount of stakes made by all users
@@ -45,7 +46,7 @@ export const useGetTotalAmountOfStakes = () => {
     abi: stakeABI,
     functionName: "totalSupply",
   });
-  return Number(data);
+  return data;
 };
 
 // reading the timestamp of the end of the reward distribution period
@@ -55,7 +56,7 @@ export const useGetTimeStampOfTheEnd = () => {
     abi: stakeABI,
     functionName: "periodFinish",
   });
-  return Number(data);
+  return data;
 };
 
 // reading awailable amount rewards for user, takes user address in args
@@ -67,7 +68,7 @@ export const useGetUserRewards = (address) => {
     args: [`${address}`],
     watch: true,
   });
-  return Number(data);
+  return data;
 };
 
 // reading reward rate
@@ -77,7 +78,7 @@ export const useGetRewardRate = () => {
     abi: stakeABI,
     functionName: "rewardRate",
   });
-  return Number(data);
+  return data;
 };
 
 // reading reward rate
@@ -87,7 +88,7 @@ export const useGetTotalSupply = () => {
     abi: stakeABI,
     functionName: "totalSupply",
   });
-  return Number(data);
+  return data;
 };
 
 // checking allowance before staking, gets owner and spender address in args
@@ -99,5 +100,5 @@ export const useCheckAllowance = (userAddress) => {
     args: [userAddress, VITE_STAKE_ADDRESS],
     watch: true,
   });
-  return Number(data);
+  return data;
 };

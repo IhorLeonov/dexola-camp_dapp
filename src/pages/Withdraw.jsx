@@ -1,10 +1,5 @@
 import s from "./Pages.module.scss";
-import { useAccount } from "wagmi";
 import { useEffect } from "react";
-import {
-  useGetStakedBalance,
-  useGetUserRewards,
-} from "../helpers/contractRead";
 
 import {
   useWithdraw,
@@ -13,18 +8,28 @@ import {
   useWaitTakeAll,
 } from "../helpers/contractWrite";
 
-import { fromWei, decimalWei } from "../helpers/mathHelpers";
 import { useAppContext } from "../context/context";
 import { Loader } from "../components/Loader/Loader";
 import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
+import { formatEther, parseEther } from "viem";
+import { toFixedDigits } from "../helpers/mathHelpers";
 
 export const Withdraw = () => {
-  const { setIsLoadingTransaction, setPayload } = useAppContext();
-  const { address: userAddress } = useAccount();
-  const stakedBalance = Math.round(fromWei(useGetStakedBalance(userAddress)));
-  const userRewards = useGetUserRewards(userAddress);
+  const {
+    setIsLoadingTransaction,
+    setPayload,
+    stakedBalance,
+    rewards,
+    isWalletConnect,
+  } = useAppContext();
+
+  const formattedStakedBalance = isWalletConnect
+    ? toFixedDigits(Number(formatEther(stakedBalance)))
+    : 0;
+
   const { writeWithdraw, dataWithdraw, withdrawIsLoading } = useWithdraw();
   const { takeAllWrite, takeAllData, takeAllIsLoading } = useTakeAll();
+
   const { withdrawLoading } = useWaitForWithdraw(dataWithdraw);
   const { takeAllLoading } = useWaitTakeAll(takeAllData);
 
@@ -34,13 +39,14 @@ export const Withdraw = () => {
   }, [withdrawLoading, takeAllLoading]);
 
   const handleSubmit = (amount) => {
-    const payload = amount * decimalWei;
+    const payload = parseEther(amount);
+
     setPayload(payload);
     writeWithdraw({ args: [payload] });
   };
 
   const handleTakeAll = () => {
-    setPayload(stakedBalance * decimalWei + userRewards);
+    setPayload(stakedBalance + rewards);
     takeAllWrite();
   };
 
@@ -51,7 +57,10 @@ export const Withdraw = () => {
       <div className={s.page_header}>
         <h2 className={s.page_title}>Withdraw</h2>
       </div>
-      <TransactionsForm handleSubmit={handleSubmit} balance={stakedBalance} />
+      <TransactionsForm
+        handleSubmit={handleSubmit}
+        balance={formattedStakedBalance}
+      />
       <div className={s.withdrow_buttons_box}>
         <button
           form="form"
