@@ -14,12 +14,12 @@ import {
 } from "../helpers/contractWrite";
 
 import { fromWei, decimalWei } from "../helpers/mathHelpers";
-import { MyContext } from "../context/context";
+import { useAppContext } from "../context/context";
 import { Loader } from "../components/Loader/Loader";
 import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
 
 export const Withdraw = () => {
-  const { setIsLoadingTransaction, setPayload } = MyContext();
+  const { setIsLoadingTransaction, setPayload } = useAppContext();
   const { address: userAddress } = useAccount();
   const stakedBalance = Math.round(fromWei(useGetStakedBalance(userAddress)));
   const userRewards = useGetUserRewards(userAddress);

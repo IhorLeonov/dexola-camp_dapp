@@ -5,10 +5,10 @@ import { useGetUserRewards } from "../helpers/contractRead";
 import { useClaimRewards, useWaitClaimRewards } from "../helpers/contractWrite";
 import { fromWei, decimalWei } from "../helpers/mathHelpers";
 import { Loader } from "../components/Loader/Loader";
-import { MyContext } from "../context/context";
+import { useAppContext } from "../context/context";
 
 export const ClaimRewards = () => {
-  const { setIsLoadingTransaction, setPayload } = MyContext();
+  const { setIsLoadingTransaction, setPayload } = useAppContext();
   const { address: userAddress } = useAccount();
   const userRewards = fromWei(useGetUserRewards(userAddress)).toFixed(2);
   const { writeClaim, dataClaim, claimIsLoading } = useClaimRewards();

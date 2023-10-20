@@ -1,5 +1,5 @@
 import s from "./Pages.module.scss";
-import { MyContext } from "../context/context";
+import { useAppContext } from "../context/context";
 import { useAccount } from "wagmi";
 import { fromWei, decimalWei } from "../helpers/mathHelpers";
 import { useEffect, useMemo } from "react";
@@ -29,7 +29,7 @@ export const Stake = () => {
     payload,
     setPayload,
     inputValue,
-  } = MyContext();
+  } = useAppContext();
   const { address: userAddress } = useAccount();
 
   const allowance = useCheckAllowance(userAddress);

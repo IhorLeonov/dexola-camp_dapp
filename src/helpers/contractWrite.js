@@ -1,14 +1,14 @@
 import stakeABI from "./abis/stakeABI.json";
 import struABI from "./abis/struABI.json";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
-import { MyContext } from "../context/context";
+import { useAppContext } from "../context/context";
 
 export const stakeAddress = "0x2F112ED8A96327747565f4d4b4615be8fb89459d";
 export const struAddress = "0x59Ec26901B19fDE7a96f6f7f328f12d8f682CB83";
 
 // approving token amount before staking, gets stake address and token amount in args
 export const useApproveStaking = () => {
-  const { setStatus } = MyContext();
+  const { setStatus } = useAppContext();
   const {
     data: apprData,
     isLoading: apprWriteLoading,
@@ -28,7 +28,7 @@ export const useApproveStaking = () => {
 
 // method for waitting useApproveStaking transaction, gets in approve writing hash, stake writing function and token amount in props
 export const useWaitForApprove = (data, writeStake, amount) => {
-  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { setStatus, setIsLoadingTransaction } = useAppContext();
   const { isLoading: apprLoading } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess() {
@@ -47,7 +47,7 @@ export const useWaitForApprove = (data, writeStake, amount) => {
 
 // send STRU token to stake, pass amount of staked token in args
 export const useStakeToken = () => {
-  const { setStatus } = MyContext();
+  const { setStatus } = useAppContext();
   const {
     data: stakeData,
     isLoading: stakeWriteLoading,
@@ -66,7 +66,7 @@ export const useStakeToken = () => {
 
 // method for waitting useStakeToken transaction, gets in approve writing hash in props
 export const useWaitForStake = (data) => {
-  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { setStatus, setIsLoadingTransaction } = useAppContext();
   const { isLoading: stakeLoading } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess(data) {
@@ -85,7 +85,7 @@ export const useWaitForStake = (data) => {
 
 // get STRU token from stake, pass desired amount of token in args
 export const useWithdraw = () => {
-  const { setStatus } = MyContext();
+  const { setStatus } = useAppContext();
   const {
     data: dataWithdraw,
     isLoading: withdrawIsLoading,
@@ -103,7 +103,7 @@ export const useWithdraw = () => {
 
 // method for waitting useWithdraw transaction
 export const useWaitForWithdraw = (data) => {
-  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { setStatus, setIsLoadingTransaction } = useAppContext();
   const { isLoading: withdrawLoading } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess(data) {
@@ -122,7 +122,7 @@ export const useWaitForWithdraw = (data) => {
 
 // get rewards from stake
 export const useClaimRewards = () => {
-  const { setStatus } = MyContext();
+  const { setStatus } = useAppContext();
   const {
     data: dataClaim,
     isLoading: claimIsLoading,
@@ -140,7 +140,7 @@ export const useClaimRewards = () => {
 
 // method for waitting useClaimRewards transaction
 export const useWaitClaimRewards = (data) => {
-  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { setStatus, setIsLoadingTransaction } = useAppContext();
   const { isLoading: claimLoading } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess(data) {
@@ -159,7 +159,7 @@ export const useWaitClaimRewards = (data) => {
 
 // take all (staked balance + rewards) from stake
 export const useTakeAll = () => {
-  const { setStatus } = MyContext();
+  const { setStatus } = useAppContext();
   const {
     data: takeAllData,
     isLoading: takeAllIsLoading,
@@ -177,7 +177,7 @@ export const useTakeAll = () => {
 
 // method for waitting useTakeAll transaction
 export const useWaitTakeAll = (data) => {
-  const { setStatus, setIsLoadingTransaction } = MyContext();
+  const { setStatus, setIsLoadingTransaction } = useAppContext();
   const { isLoading: takeAllLoading } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess(data) {

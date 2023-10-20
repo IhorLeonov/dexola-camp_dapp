@@ -7,11 +7,11 @@ import { useEffect } from "react";
 import { useAccount, useBalance, useDisconnect } from "wagmi";
 import { useGetSTRUBalance } from "../../helpers/contractRead";
 import { fromWei } from "../../helpers/mathHelpers";
-import { MyContext } from "../../context/context";
+import { useAppContext } from "../../context/context";
 import { ConnectBtn } from "../ConnectBtn/ConnectBtn";
 
 export const Header = () => {
-  const { setStruBalance } = MyContext();
+  const { setStruBalance } = useAppContext();
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: balance } = useBalance({ address });
