@@ -3,6 +3,8 @@ import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { yupSchema } from "../../helpers/yupSchema";
 import { useAppContext } from "../../context/context";
+import { parseEther } from "viem";
+
 
 // disable change input value on scroll
 document.addEventListener("wheel", function () {
@@ -11,9 +13,22 @@ document.addEventListener("wheel", function () {
   }
 });
 
-export const TransactionsForm = ({ handleSubmit, balance, handleInput }) => {
+
+export const TransactionsForm = ({ handleSubmit, balance }) => {
+
   const { setInputValue } = useAppContext();
   const { schema } = yupSchema(balance);
+
+  // const input = document.querySelector("input");
+  // const REGEXP = /[0-9/]+/;
+
+  // if (input) {
+  //   input.addEventListener("keydown", (event) => {
+  //     if (!REGEXP.test(event.key)) {
+  //       event.preventDefault();
+  //     }
+  //   });
+  // }
 
   return (
     <Formik
@@ -22,6 +37,7 @@ export const TransactionsForm = ({ handleSubmit, balance, handleInput }) => {
       onSubmit={(values, actions) => {
         const { amount } = values;
         handleSubmit(amount);
+        setInputValue(0);
         actions.resetForm();
       }}
     >
@@ -33,17 +49,16 @@ export const TransactionsForm = ({ handleSubmit, balance, handleInput }) => {
           <Form
             id="form"
             className={s.form}
-            onChange={(e) => setInputValue(e.target.value)}
-            onBlur={() => setInputValue(0)}
+            onChange={(e) => {
+              setInputValue(parseEther(e.target.value));
+            }}
           >
             <Input
               className={s.form_input + " " + warningStyles()}
-              type="number"
+              type="text"
               name="amount"
               placeholder="Enter stake amount"
               autoComplete="off"
-              min="0.000001"
-              step="0.000001"
             />
             <div className={s.form_error_box}>
               {touched.amount && errors.amount && (

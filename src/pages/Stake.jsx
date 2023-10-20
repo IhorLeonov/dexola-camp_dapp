@@ -1,17 +1,17 @@
 import s from "./Pages.module.scss";
 import { useAppContext } from "../context/context";
 import { useAccount } from "wagmi";
-import { fromWei, decimalWei } from "../helpers/mathHelpers";
+import { currentStamp, calcTotalRate } from "../helpers/mathHelpers";
 import { useEffect, useMemo } from "react";
 import { Loader } from "../components/Loader/Loader";
 import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
+import { parseEther } from "viem";
 
 import {
   useCheckAllowance,
   useGetTimeStampOfTheEnd,
   useGetRewardRate,
   useGetTotalSupply,
-  useGetStakedBalance,
 } from "../helpers/contractRead";
 
 import {
@@ -25,34 +25,31 @@ import {
 export const Stake = () => {
   const {
     struBalance,
+    stakedBalance,
     setIsLoadingTransaction,
     payload,
     setPayload,
     inputValue,
   } = useAppContext();
-  const { address: userAddress } = useAccount();
 
-  const allowance = useCheckAllowance(userAddress);
-  const stakedBalance = useGetStakedBalance(userAddress);
+  const { address } = useAccount();
 
-  const periodFinish = useGetTimeStampOfTheEnd();
-  const currentStamp = Date.now() / 1000;
+  const allowance = useCheckAllowance(address);
+  const periodFinish = Number(useGetTimeStampOfTheEnd());
   const remaining = periodFinish - currentStamp;
-  const rewardRate = useGetRewardRate();
+  const rewardRate = Number(useGetRewardRate());
   const totalAvailble = remaining * rewardRate;
-  const totalSupply = useGetTotalSupply();
-  const userInput = inputValue * decimalWei;
+  const totalSupply = Number(useGetTotalSupply());
 
   const { writeApprove, apprWriteLoading, apprData } = useApproveStaking();
   const { writeStake, stakeWriteLoading, stakeData } = useStakeToken();
+
   const { apprLoading } = useWaitForApprove(apprData, writeStake, payload);
   const { stakeLoading } = useWaitForStake(stakeData);
 
   const totalRate = useMemo(() => {
-    return Math.round(
-      fromWei((stakedBalance * totalAvailble) / totalSupply + userInput)
-    );
-  }, [stakedBalance, totalAvailble, totalSupply, userInput]);
+    return calcTotalRate(stakedBalance, totalAvailble, totalSupply, inputValue);
+  }, [stakedBalance, totalAvailble, totalSupply, inputValue]);
 
   useEffect(() => {
     if (apprLoading) setIsLoadingTransaction("approve_loading");
@@ -60,7 +57,7 @@ export const Stake = () => {
   }, [apprLoading, stakeLoading]);
 
   const handleSubmit = (amount) => {
-    const payload = amount * decimalWei;
+    const payload = parseEther(amount);
     setPayload(payload);
 
     if (allowance < payload) {
