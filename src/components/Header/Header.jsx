@@ -6,13 +6,13 @@ import { Icon } from "../SelectIcons/SelectIcons";
 import { useEffect } from "react";
 import { useAccount, useBalance, useDisconnect } from "wagmi";
 import { useGetSTRUBalance } from "../../helpers/contractRead";
-import { MyContext } from "../../context/context";
+import { useAppContext } from "../../context/context";
 import { ConnectBtn } from "../ConnectBtn/ConnectBtn";
 import { formatEther } from "viem";
 import { toFixedDigits } from "../../helpers/mathHelpers";
 
 export const Header = () => {
-  const { setStruBalance, setIsWalletConnect } = MyContext();
+  const { setStruBalance, setIsWalletConnect } = useAppContext();
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: walletBalance } = useBalance({ address });

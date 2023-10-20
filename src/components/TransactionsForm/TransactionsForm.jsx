@@ -2,7 +2,7 @@ import s from "./TransactionsForm.module.scss";
 import { Formik } from "formik";
 import { Form, Field as Input } from "formik";
 import { yupSchema } from "../../helpers/yupSchema";
-import { MyContext } from "../../context/context";
+import { useAppContext } from "../../context/context";
 import { parseEther } from "viem";
 
 // disable change input value on scroll
@@ -13,7 +13,7 @@ document.addEventListener("wheel", function () {
 });
 
 export const TransactionsForm = ({ handleSubmit, balance }) => {
-  const { setInputValue } = MyContext();
+  const { setInputValue } = useAppContext();
   const { schema } = yupSchema(balance);
 
   // const input = document.querySelector("input");

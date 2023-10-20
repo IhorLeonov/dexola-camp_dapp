@@ -8,7 +8,7 @@ import {
   useWaitTakeAll,
 } from "../helpers/contractWrite";
 
-import { MyContext } from "../context/context";
+import { useAppContext } from "../context/context";
 import { Loader } from "../components/Loader/Loader";
 import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
 import { formatEther, parseEther } from "viem";
@@ -21,7 +21,7 @@ export const Withdraw = () => {
     stakedBalance,
     rewards,
     isWalletConnect,
-  } = MyContext();
+  } = useAppContext();
 
   const formattedStakedBalance = isWalletConnect
     ? toFixedDigits(Number(formatEther(stakedBalance)))

@@ -10,7 +10,7 @@ import {
 
 import { formatEther } from "viem";
 import { useEffect } from "react";
-import { MyContext } from "../../context/context";
+import { useAppContext } from "../../context/context";
 
 import {
   useGetStakedBalance,
@@ -21,7 +21,7 @@ import {
 } from "../../helpers/contractRead";
 
 export const Hero = () => {
-  const { setStakedBalance, setRewards, isWalletConnect } = MyContext();
+  const { setStakedBalance, setRewards, isWalletConnect } = useAppContext();
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
     usePrompt();
 

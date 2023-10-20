@@ -1,5 +1,5 @@
 import s from "./Notification.module.scss";
-import { MyContext } from "../../context/context";
+import { useAppContext } from "../../context/context";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import crossIcon from "../../assets/icons/cross.svg";
@@ -14,7 +14,7 @@ export const Notification = () => {
     isLoadingTransaction,
     setIsLoadingTransaction,
     payload,
-  } = MyContext();
+  } = useAppContext();
 
   const tokenAmount = Number(formatEther(payload)).toFixed(2);
 

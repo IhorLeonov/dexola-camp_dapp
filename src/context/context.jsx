@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 const Context = createContext();
 
-export const MyContext = () => useContext(Context);
+export const useAppContext = () => useContext(Context);
 
 export const ContextProvider = ({ children }) => {
   const [isWalletConnect, setIsWalletConnect] = useState(false);

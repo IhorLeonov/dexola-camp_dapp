@@ -2,13 +2,13 @@ import s from "./Pages.module.scss";
 import { useEffect } from "react";
 import { useClaimRewards, useWaitClaimRewards } from "../helpers/contractWrite";
 import { Loader } from "../components/Loader/Loader";
-import { MyContext } from "../context/context";
+import { useAppContext } from "../context/context";
 import { formatEther } from "viem";
 import { toFixedDigits } from "../helpers/mathHelpers";
 
 export const ClaimRewards = () => {
   const { setPayload, setIsLoadingTransaction, rewards, isWalletConnect } =
-    MyContext();
+    useAppContext();
   const { writeClaim, dataClaim, claimIsLoading } = useClaimRewards();
   const { claimLoading } = useWaitClaimRewards(dataClaim);
 
