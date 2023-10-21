@@ -42,9 +42,11 @@ export const MainInfo = () => {
   const days = calcEndingTime(timeStamp);
 
   useEffect(() => {
-    setStakedBalance(stakedBalance);
-    setRewards(userRewards);
-  }, [stakedBalance, userRewards]);
+    if ((stakedBalance !== undefined) & (userRewards !== undefined)) {
+      setStakedBalance(stakedBalance);
+      setRewards(userRewards);
+    }
+  }, [stakedBalance, userRewards, setStakedBalance, setRewards]);
 
   return (
     <section className={s.hero}>
