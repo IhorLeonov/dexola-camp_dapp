@@ -19,10 +19,9 @@ export const Header = () => {
 
   const struBalance = useGetSTRUBalance(address);
   const formattedAddress = formattAddress(address);
-  const formattedStruBalance =
-    isConnected & struBalance
-      ? toFixedDigits(Number(formatEther(struBalance)))
-      : 0;
+  const formattedStruBalance = struBalance
+    ? toFixedDigits(Number(formatEther(struBalance)))
+    : 0;
   const formattedWalletBalance = toFixedDigits(
     Number(walletBalance?.formatted)
   );
