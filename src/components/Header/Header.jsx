@@ -19,21 +19,20 @@ export const Header = () => {
 
   const struBalance = useGetSTRUBalance(address);
   const formattedAddress = formattAddress(address);
-  const formattedStruBalance = isConnected
-    ? toFixedDigits(Number(formatEther(struBalance)))
-    : 0;
+  const formattedStruBalance =
+    isConnected & struBalance
+      ? toFixedDigits(Number(formatEther(struBalance)))
+      : 0;
   const formattedWalletBalance = toFixedDigits(
     Number(walletBalance?.formatted)
   );
-  //
-  // console.log("isConnected", isConnected);
 
   useEffect(() => {
     if (isConnected) {
       setStruBalance(formattedStruBalance);
       setIsWalletConnect(true);
     }
-  }, [formattedStruBalance, isConnected]);
+  }, [formattedStruBalance, setIsWalletConnect, setStruBalance, isConnected]);
 
   return (
     <header className={s.header}>
