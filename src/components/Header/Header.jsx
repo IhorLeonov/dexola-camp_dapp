@@ -31,7 +31,7 @@ export const Header = () => {
       setStruBalance(formattedStruBalance);
       setIsWalletConnect(true);
     }
-  }, [struBalance]);
+  }, [formattedStruBalance]);
 
   return (
     <header className={s.header}>
