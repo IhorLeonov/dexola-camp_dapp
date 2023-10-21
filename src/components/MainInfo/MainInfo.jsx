@@ -21,7 +21,7 @@ import {
 } from "../../helpers/contractRead";
 
 export const MainInfo = () => {
-  const { setStakedBalance, setRewards, isWalletConnect } = useAppContext();
+  const { setStakedBalance, setRewards } = useAppContext();
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
     usePrompt();
 
@@ -32,10 +32,10 @@ export const MainInfo = () => {
   const stakedBalance = useGetStakedBalance(address);
   const userRewards = useGetUserRewards(address);
 
-  const formattedStakedBalance = isWalletConnect
+  const formattedStakedBalance = stakedBalance
     ? toFixedDigits(Number(formatEther(stakedBalance)))
     : 0;
-  const formattedUserRewards = isWalletConnect
+  const formattedUserRewards = userRewards
     ? toFixedDigits(Number(formatEther(userRewards)))
     : 0;
   const percent = calcPercent(numberOfRewards, totalAmount);

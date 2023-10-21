@@ -25,13 +25,15 @@ export const Header = () => {
   const formattedWalletBalance = toFixedDigits(
     Number(walletBalance?.formatted)
   );
+  //
+  // console.log("isConnected", isConnected);
 
   useEffect(() => {
     if (isConnected) {
       setStruBalance(formattedStruBalance);
       setIsWalletConnect(true);
     }
-  }, [formattedStruBalance]);
+  }, [formattedStruBalance, isConnected]);
 
   return (
     <header className={s.header}>
