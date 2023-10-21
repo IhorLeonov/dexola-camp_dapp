@@ -1,10 +1,13 @@
-import s from "./Pages.module.scss";
+import s from "../Pages.module.scss";
 import { useEffect } from "react";
-import { useClaimRewards, useWaitClaimRewards } from "../helpers/contractWrite";
-import { Loader } from "../components/Loader/Loader";
-import { useAppContext } from "../context/context";
+import {
+  useClaimRewards,
+  useWaitClaimRewards,
+} from "../../helpers/contractWrite";
+import { Loader } from "../../components/Loader/Loader";
+import { useAppContext } from "../../context/context";
 import { formatEther } from "viem";
-import { toFixedDigits } from "../helpers/mathHelpers";
+import { toFixedDigits } from "../../helpers/mathHelpers";
 
 export const ClaimRewards = () => {
   const { setPayload, setIsLoadingTransaction, rewards, isWalletConnect } =

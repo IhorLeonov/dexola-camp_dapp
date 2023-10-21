@@ -1,4 +1,4 @@
-import s from "./Hero.module.scss";
+import s from "./MainInfo.module.scss";
 import { HelpBtn } from "../HelpBtn/HelpBtn";
 import { usePrompt } from "../../hooks/usePrompt";
 import { useAccount } from "wagmi";
@@ -20,7 +20,7 @@ import {
   useGetUserRewards,
 } from "../../helpers/contractRead";
 
-export const Hero = () => {
+export const MainInfo = () => {
   const { setStakedBalance, setRewards, isWalletConnect } = useAppContext();
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
     usePrompt();

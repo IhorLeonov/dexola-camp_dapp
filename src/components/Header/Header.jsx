@@ -4,22 +4,21 @@ import struLogo from "../../assets/images/stru-logo.png";
 
 import { Icon } from "../SelectIcons/SelectIcons";
 import { useEffect } from "react";
-import { useAccount, useBalance, useDisconnect } from "wagmi";
+import { useAccount, useBalance } from "wagmi";
 import { useGetSTRUBalance } from "../../helpers/contractRead";
 import { useAppContext } from "../../context/context";
-import { ConnectBtn } from "../ConnectBtn/ConnectBtn";
+import { ConnectionBtn } from "../ConnectionBtn/ConnectionBtn";
 import { formatEther } from "viem";
-import { toFixedDigits } from "../../helpers/mathHelpers";
+import { toFixedDigits, formattAddress } from "../../helpers/mathHelpers";
+import { DisconnectBtn } from "../DisconnectBtn/DisconnectBtn";
 
 export const Header = () => {
-
   const { setStruBalance, setIsWalletConnect } = useAppContext();
   const { isConnected, address } = useAccount();
-  const { disconnect } = useDisconnect();
   const { data: walletBalance } = useBalance({ address });
-  const struBalance = useGetSTRUBalance(address);
 
-  const formattedAddress = address?.slice(0, 17) + "...";
+  const struBalance = useGetSTRUBalance(address);
+  const formattedAddress = formattAddress(address);
   const formattedStruBalance = isConnected
     ? toFixedDigits(Number(formatEther(struBalance)))
     : 0;
@@ -33,11 +32,6 @@ export const Header = () => {
       setIsWalletConnect(true);
     }
   }, [struBalance]);
-
-  const handleDisconnect = () => {
-    disconnect();
-    setIsWalletConnect(false);
-  };
 
   return (
     <header className={s.header}>
@@ -56,17 +50,11 @@ export const Header = () => {
             <span className={s.wallet_adress}>
               {address ? formattedAddress : "unknown"}
             </span>
-            <button
-              type="button"
-              className={s.dcnnct_btn}
-              onClick={handleDisconnect}
-            >
-              <Icon name="logout" width={18} height={18} />
-            </button>
+            <DisconnectBtn />
           </div>
         ) : (
           <div className={s.connect_btn_box}>
-            <ConnectBtn />
+            <ConnectionBtn />
           </div>
         )}
       </div>

@@ -1,5 +1,5 @@
 import { Header } from "../Header/Header";
-import { Hero } from "../Hero/Hero";
+import { MainInfo } from "../MainInfo/MainInfo";
 import { Footer } from "../Footer/Footer";
 import { Operations } from "../Operations/Operations";
 import { NavBar } from "../NavBar/NavBar";
@@ -9,7 +9,7 @@ export const Layout = () => {
     <>
       <Header />
       <main>
-        <Hero />
+        <MainInfo />
         <NavBar />
         <Operations />
       </main>

@@ -1,7 +1,7 @@
-import s from "./ConnectBtn.module.scss";
+import s from "./ConnectionBtn.module.scss";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 
-export const ConnectBtn = () => {
+export const ConnectionBtn = () => {
   const { openConnectModal } = useConnectModal();
 
   return (

@@ -34,3 +34,5 @@ export const toFixedDigits = (value) => {
     return value.toFixed(1);
   } else return value.toFixed(2);
 };
+
+export const formattAddress = (address) => address?.slice(0, 17) + "...";

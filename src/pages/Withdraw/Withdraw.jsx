@@ -1,4 +1,4 @@
-import s from "./Pages.module.scss";
+import s from "../Pages.module.scss";
 import { useEffect } from "react";
 
 import {
@@ -6,13 +6,13 @@ import {
   useWaitForWithdraw,
   useTakeAll,
   useWaitTakeAll,
-} from "../helpers/contractWrite";
+} from "../../helpers/contractWrite";
 
-import { useAppContext } from "../context/context";
-import { Loader } from "../components/Loader/Loader";
-import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
+import { useAppContext } from "../../context/context";
+import { Loader } from "../../components/Loader/Loader";
+import { TransactionsForm } from "../../components/TransactionsForm/TransactionsForm";
 import { formatEther, parseEther } from "viem";
-import { toFixedDigits } from "../helpers/mathHelpers";
+import { toFixedDigits } from "../../helpers/mathHelpers";
 
 export const Withdraw = () => {
   const {

@@ -1,10 +1,10 @@
-import s from "./Pages.module.scss";
-import { useAppContext } from "../context/context";
+import s from "../Pages.module.scss";
+import { useAppContext } from "../../context/context";
 import { useAccount } from "wagmi";
-import { currentStamp, calcTotalRate } from "../helpers/mathHelpers";
+import { currentStamp, calcTotalRate } from "../../helpers/mathHelpers";
 import { useEffect, useMemo } from "react";
-import { Loader } from "../components/Loader/Loader";
-import { TransactionsForm } from "../components/TransactionsForm/TransactionsForm";
+import { Loader } from "../../components/Loader/Loader";
+import { TransactionsForm } from "../../components/TransactionsForm/TransactionsForm";
 import { parseEther } from "viem";
 
 import {
@@ -12,14 +12,14 @@ import {
   useGetTimeStampOfTheEnd,
   useGetRewardRate,
   useGetTotalSupply,
-} from "../helpers/contractRead";
+} from "../../helpers/contractRead";
 
 import {
   useStakeToken,
   useApproveStaking,
   useWaitForApprove,
   useWaitForStake,
-} from "../helpers/contractWrite";
+} from "../../helpers/contractWrite";
 
 const { VITE_STAKE_ADDRESS } = import.meta.env;
 
