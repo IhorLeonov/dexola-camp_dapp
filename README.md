@@ -24,7 +24,7 @@ After that, you will get 1000 stru to your wallet.
 3. Select your preferred wallet and follow the on-screen instructions to connect your wallet.
 
 ### Stake
-   
+
 1. Ensure your wallet is connected.
 
 2. Enter amount of StarRunner tokens you want to stake in the provided input field.
@@ -63,5 +63,4 @@ Once the transaction is confirmed on the blockchain, your tokens will be staked,
 
 - npm install
 
-- npm start
-
+- npm run dev
