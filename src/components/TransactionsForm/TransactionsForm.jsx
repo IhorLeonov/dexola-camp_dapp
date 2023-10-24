@@ -36,7 +36,7 @@ export const TransactionsForm = ({ handleSubmit, balance }) => {
       validationSchema={schema}
       onSubmit={(values, actions) => {
         const { amount } = values;
-        handleSubmit(amount);
+        handleSubmit(String(amount));
         setInputValue(0);
         actions.resetForm();
       }}
@@ -55,7 +55,7 @@ export const TransactionsForm = ({ handleSubmit, balance }) => {
           >
             <Input
               className={s.form_input + " " + warningStyles()}
-              type="text"
+              type="number"
               name="amount"
               placeholder="Enter stake amount"
               autoComplete="off"
