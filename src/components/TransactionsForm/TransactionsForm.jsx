@@ -5,7 +5,6 @@ import { yupSchema } from "../../helpers/yupSchema";
 import { useAppContext } from "../../context/context";
 import { parseEther } from "viem";
 
-
 // disable change input value on scroll
 document.addEventListener("wheel", function () {
   if (document.activeElement.type === "number") {
@@ -13,9 +12,7 @@ document.addEventListener("wheel", function () {
   }
 });
 
-
 export const TransactionsForm = ({ handleSubmit, balance }) => {
-
   const { setInputValue } = useAppContext();
   const { schema } = yupSchema(balance);
 
@@ -36,7 +33,7 @@ export const TransactionsForm = ({ handleSubmit, balance }) => {
       validationSchema={schema}
       onSubmit={(values, actions) => {
         const { amount } = values;
-        handleSubmit(String(amount));
+        handleSubmit(amount);
         setInputValue(0);
         actions.resetForm();
       }}
@@ -55,7 +52,7 @@ export const TransactionsForm = ({ handleSubmit, balance }) => {
           >
             <Input
               className={s.form_input + " " + warningStyles()}
-              type="number"
+              type="text"
               name="amount"
               placeholder="Enter stake amount"
               autoComplete="off"
