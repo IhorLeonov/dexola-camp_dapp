@@ -21,7 +21,7 @@ import {
 } from "../../helpers/contractRead";
 
 export const MainInfo = () => {
-  const { setStakedBalance, setRewards } = useAppContext();
+  const { setStakedBalance, setRewards, setDays } = useAppContext();
   const { promptName, promptClass, handleShowPrompt, handleHidePrompt } =
     usePrompt();
 
@@ -42,9 +42,10 @@ export const MainInfo = () => {
   const days = calcEndingTime(timeStamp);
 
   useEffect(() => {
-    if ((stakedBalance !== undefined) & (userRewards !== undefined)) {
+    if (stakedBalance && userRewards) {
       setStakedBalance(stakedBalance);
       setRewards(userRewards);
+      setDays(days);
     }
   }, [stakedBalance, userRewards, setStakedBalance, setRewards]);
 
@@ -81,7 +82,7 @@ export const MainInfo = () => {
           </li>
 
           <li className={s.hero_info_days}>
-            <span className={s.hero_amount}>{days ? days : "0"}</span>{" "}
+            <span className={s.hero_amount}>{days > 0 ? days : "0"}</span>{" "}
             <span className={s.hero_info_desc}>Days</span>
           </li>
 

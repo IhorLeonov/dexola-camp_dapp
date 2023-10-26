@@ -10,6 +10,7 @@ export const ContextProvider = ({ children }) => {
   const [struBalance, setStruBalance] = useState(0);
   const [stakedBalance, setStakedBalance] = useState(0);
   const [rewards, setRewards] = useState(0);
+  const [days, setDays] = useState(0);
 
   const [status, setStatus] = useState("");
   const [isLoadingTransaction, setIsLoadingTransaction] = useState("");
@@ -27,6 +28,8 @@ export const ContextProvider = ({ children }) => {
         setStakedBalance,
         rewards,
         setRewards,
+        days,
+        setDays,
         status,
         setStatus,
         userAddress,

@@ -11,20 +11,27 @@ export const calcPercent = (numberOfRewards, totalAmount) => {
 };
 
 export const calcEndingTime = (timeStamp) => {
-  return Math.round((Number(timeStamp) - currentStamp) / oneDay);
+  const days = Math.round((Number(timeStamp) - currentStamp) / oneDay);
+  if (days > 0) {
+    return days;
+  } else return 0;
 };
 
 export const calcTotalRate = (
   stakedBalance,
   totalAvailble,
   totalSupply,
-  inputValue
+  inputValue,
+  days
 ) => {
-  return Math.round(
-    fromWei(
-      (Number(stakedBalance) * totalAvailble) / totalSupply + Number(inputValue)
-    )
-  );
+  if (days > 0) {
+    return Math.round(
+      fromWei(
+        (Number(stakedBalance) * totalAvailble) / totalSupply +
+          Number(inputValue)
+      )
+    );
+  } else return 0;
 };
 
 export const toFixedDigits = (value) => {

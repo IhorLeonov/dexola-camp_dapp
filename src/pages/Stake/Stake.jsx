@@ -31,6 +31,7 @@ export const Stake = () => {
     payload,
     setPayload,
     inputValue,
+    days,
   } = useAppContext();
 
   const { address } = useAccount();
@@ -49,7 +50,13 @@ export const Stake = () => {
   const { stakeLoading } = useWaitForStake(stakeData);
 
   const totalRate = useMemo(() => {
-    return calcTotalRate(stakedBalance, totalAvailble, totalSupply, inputValue);
+    return calcTotalRate(
+      stakedBalance,
+      totalAvailble,
+      totalSupply,
+      inputValue,
+      days
+    );
   }, [stakedBalance, totalAvailble, totalSupply, inputValue]);
 
   useEffect(() => {
