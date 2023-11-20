@@ -58,15 +58,10 @@ export const TransactionsForm = ({ handleSubmit, balance }) => {
               autoComplete="off"
             />
             <div className={s.form_error_box}>
-              {touched.amount && errors.amount && (
-                <p className={s.form_error}>{errors.amount}</p>
-              )}
+              {touched.amount && errors.amount && <p className={s.form_error}>{errors.amount}</p>}
             </div>
             <p className={s.form_available}>
-              Available:{" "}
-              <span className={s.form_available_value}>
-                {balance ? balance : "0"}{" "}
-              </span>
+              Available: <span className={s.form_available_value}>{balance ? balance : "0"} </span>
               <span> STRU</span>
             </p>
           </Form>
